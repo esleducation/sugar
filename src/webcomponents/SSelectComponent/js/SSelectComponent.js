@@ -531,6 +531,9 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 * Set selected elements
 	 */
 	 _setSelected() {
+		// Initialize selection dom node
+		let selection = null;
+
 	 	// loop on selected option to activate them
 	 	let areSomeSelectedItems = false;
 	 	[].forEach.call(this.options, (option) => {
@@ -581,7 +584,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 		let selected_idx = this.options.selectedIndex;
 	 		if (selected_idx != -1) {
 	 			// set the selected
-	 			let selection = document.createElement('div');
+	 			selection = document.createElement('div');
 				this.addComponentClass(selection, 'selection');
 	 			selection.innerHTML = this.options[selected_idx].innerHTML;
 	 			this.selectionContainerElm.appendChild(selection);
@@ -591,8 +594,10 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 	if ( ! areSomeSelectedItems) {
 	 		let placeholder = this.getAttribute('placeholder');
 	 		if (placeholder) {
-	 			let selection = document.createElement('div');
-				this.addComponentClass(selection, 'selection');
+				if(selection == null) {		
+					selection = document.createElement('div');
+					this.addComponentClass(selection, 'selection');
+				}
 	 			selection.classList.add('input--placeholder');
 	 			selection.innerHTML = placeholder;
 				this.addComponentClass(this._containerElm, null, 'placeholder');
