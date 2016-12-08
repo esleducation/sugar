@@ -68,11 +68,11 @@ Name | Type | Description | Status | Default
 duration | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number" target="_blank" title="Number">Number</a> }** | Set the duration | optional | null
 
 
-### onTick({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function" target="_blank" title="Function">Function</a> } A function to call on tick) : { [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }
+### onTick({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function" target="_blank" title="Function">Function</a> } A function to call on tick) : { [STimer](/data/web/sugar/src/js/classes/STimer.js) }
 Register a function called on tick
 - Privacy : **Public**
 
-- Return : **{ [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }** : The timer instance
+- Return : **{ [STimer](/data/web/sugar/src/js/classes/STimer.js) }** : The timer instance
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
@@ -90,36 +90,43 @@ Name | Type | Description | Status | Default
 A function to call on complete | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function" target="_blank" title="Function">Function</a> }** | undefined | required | 
 
 
-### reset({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean" target="_blank" title="Boolean">Boolean</a> } start) : { [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }
+### reset({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean" target="_blank" title="Boolean">Boolean</a> } start) : { [STimer](/data/web/sugar/src/js/classes/STimer.js) }
 Reset the timer
 - Privacy : **Public**
 
-- Return : **{ [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }** : undefined
+- Return : **{ [STimer](/data/web/sugar/src/js/classes/STimer.js) }** : undefined
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
 start | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean" target="_blank" title="Boolean">Boolean</a> }** | If the timer has to start after reseting or not | required | 
 
 
-### start() : { [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }
+### start() : { [STimer](/data/web/sugar/src/js/classes/STimer.js) }
 Start the timer
 - Privacy : **Public**
 
-- Return : **{ [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }** : undefined
+- Return : **{ [STimer](/data/web/sugar/src/js/classes/STimer.js) }** : undefined
 
 
-### pause() : { [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }
+### pause() : { [STimer](/data/web/sugar/src/js/classes/STimer.js) }
 Pause the timer
 - Privacy : **Public**
 
-- Return : **{ [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }** : undefined
+- Return : **{ [STimer](/data/web/sugar/src/js/classes/STimer.js) }** : undefined
 
 
-### stop() : { [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }
+### stop() : { [STimer](/data/web/sugar/src/js/classes/STimer.js) }
 Stop the timer
 - Privacy : **Public**
 
-- Return : **{ [STimer](/data/web/sugar/repo/src/js/classes/STimer.js) }** : undefined
+- Return : **{ [STimer](/data/web/sugar/src/js/classes/STimer.js) }** : undefined
+
+
+### destroy()
+Destroy the timer
+- Privacy : **Public**
+
+
 
 
 

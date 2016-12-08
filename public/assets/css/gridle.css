@@ -24,8 +24,6 @@ For the documentation check : http://gridle.org/
 
 .row, .row-reverse {
   height: inherit;
-  min-height: inherit;
-  max-height: inherit;
 }
 
 .row:before, .row-reverse:before, .row:after, .row-reverse:after {
@@ -44,8 +42,6 @@ For the documentation check : http://gridle.org/
 .gr-1-5, .gr-0, .gr-1, .gr-2, .gr-3, .gr-4, .gr-5, .gr-6, .gr-7, .gr-8, .gr-9, .gr-10, .gr-11, .gr-12 {
   display: inline-block;
   height: inherit;
-  min-height: inherit;
-  max-height: inherit;
   line-height: 1;
   float: left;
   -webkit-box-sizing: border-box;
@@ -118,8 +114,6 @@ For the documentation check : http://gridle.org/
 @media screen and (max-width: 620px) {
   .row\@mobile, .row-reverse\@mobile {
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
   }
   .row\@mobile:before, .row-reverse\@mobile:before, .row\@mobile:after, .row-reverse\@mobile:after {
     content: "";
@@ -137,8 +131,6 @@ For the documentation check : http://gridle.org/
   .gr-1-5\@mobile, .gr-0\@mobile, .gr-1\@mobile, .gr-2\@mobile, .gr-3\@mobile, .gr-4\@mobile, .gr-5\@mobile, .gr-6\@mobile, .gr-7\@mobile, .gr-8\@mobile, .gr-9\@mobile, .gr-10\@mobile, .gr-11\@mobile, .gr-12\@mobile {
     display: inline-block;
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
     line-height: 1;
     float: left;
     -webkit-box-sizing: border-box;
@@ -225,8 +217,6 @@ For the documentation check : http://gridle.org/
 @media screen and (min-width: 621px) and (max-width: 1023px) {
   .row\@tablet, .row-reverse\@tablet {
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
   }
   .row\@tablet:before, .row-reverse\@tablet:before, .row\@tablet:after, .row-reverse\@tablet:after {
     content: "";
@@ -244,8 +234,6 @@ For the documentation check : http://gridle.org/
   .gr-1-5\@tablet, .gr-0\@tablet, .gr-1\@tablet, .gr-2\@tablet, .gr-3\@tablet, .gr-4\@tablet, .gr-5\@tablet, .gr-6\@tablet, .gr-7\@tablet, .gr-8\@tablet, .gr-9\@tablet, .gr-10\@tablet, .gr-11\@tablet, .gr-12\@tablet {
     display: inline-block;
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
     line-height: 1;
     float: left;
     -webkit-box-sizing: border-box;
@@ -332,8 +320,6 @@ For the documentation check : http://gridle.org/
 @media screen and (max-width: 1023px) {
   .row\@moblet, .row-reverse\@moblet {
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
   }
   .row\@moblet:before, .row-reverse\@moblet:before, .row\@moblet:after, .row-reverse\@moblet:after {
     content: "";
@@ -351,8 +337,6 @@ For the documentation check : http://gridle.org/
   .gr-1-5\@moblet, .gr-0\@moblet, .gr-1\@moblet, .gr-2\@moblet, .gr-3\@moblet, .gr-4\@moblet, .gr-5\@moblet, .gr-6\@moblet, .gr-7\@moblet, .gr-8\@moblet, .gr-9\@moblet, .gr-10\@moblet, .gr-11\@moblet, .gr-12\@moblet {
     display: inline-block;
     height: inherit;
-    min-height: inherit;
-    max-height: inherit;
     line-height: 1;
     float: left;
     -webkit-box-sizing: border-box;

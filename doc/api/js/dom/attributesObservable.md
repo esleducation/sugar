@@ -1,4 +1,10 @@
 
+-----------------------------
+## Settings
+-----------------------------
+
+### { <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array" target="_blank" title="Array">Array</a> } attributes = null
+List of attributes to observe
 
 
 -----------------------------

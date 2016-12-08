@@ -1,4 +1,4 @@
-# SElement <span class="s-smaller-rel">extends { [SObject](/data/web/sugar/repo/src/js/core/SObject.js) }</span>
+# SElement <span class="s-smaller-rel">extends { [SObject](/data/web/sugar/src/js/core/SObject.js) }</span>
 This class allows to wrap an HTMLElement with a lot of useful features like:
 - Keep in sync element attributes with this.attr property
 - Complete and powerfull lifecycle management
@@ -21,7 +21,7 @@ Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
 elm | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> }** | The HTMLElement to handle | required | 
 
-- Extends **{ [SObject](/data/web/sugar/repo/src/js/core/SObject.js) }**
+- Extends **{ [SObject](/data/web/sugar/src/js/core/SObject.js) }**
 - Author **Olivier Bossel <olivier.bossel@gmail.com>**
 
 #### Sample
@@ -68,6 +68,31 @@ Original HTMLElement before any SElement manipulation
 ## API
 -----------------------------
 
+### static initDependencies()
+Init dependencies at class level
+- Privacy : **Public**
+- **Static**
+
+
+
+### static registerInitDependency({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function" target="_blank" title="Function">Function</a> } fn)
+Register an init dependency at class level
+- Privacy : **Public**
+- **Static**
+
+
+Name | Type | Description | Status | Default
+------------ | ------------ | ------------ | ------------ | ------------
+fn | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Function" target="_blank" title="Function">Function</a> }** | A function that return a new promise | required | 
+
+
+### //()
+Listen changes on element
+- Privacy : **Public**
+
+
+
+
 ### _onRemoved()
 When the element has been removed from the dom
 - Privacy : **Protected**
@@ -106,22 +131,22 @@ Destroy element routine
 
 
 
-### remove({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } elm = this.elm) : { [SElement](/data/web/sugar/repo/src/js/core/SElement.js) }
+### remove({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } elm = this.elm) : { [SElement](/data/web/sugar/src/js/core/SElement.js) }
 Remove the element from the dom
 - Privacy : **Public**
 
-- Return : **{ [SElement](/data/web/sugar/repo/src/js/core/SElement.js) }** : The SElement instance itself to maintain chainability
+- Return : **{ [SElement](/data/web/sugar/src/js/core/SElement.js) }** : The SElement instance itself to maintain chainability
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
 elm | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> }** | The element to remove | optional | this.elm
 
 
-### append({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } elm = this.elm, { <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } to = null) : { [SElement](/data/web/sugar/repo/src/js/core/SElement.js) }
+### append({ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } elm = this.elm, { <a class="link" href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement" target="_blank" title="HTMLElement">HTMLElement</a> } to = null) : { [SElement](/data/web/sugar/src/js/core/SElement.js) }
 Append the element into the dom
 - Privacy : **Public**
 
-- Return : **{ [SElement](/data/web/sugar/repo/src/js/core/SElement.js) }** : The instance itself to maintain chainability
+- Return : **{ [SElement](/data/web/sugar/src/js/core/SElement.js) }** : The instance itself to maintain chainability
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------

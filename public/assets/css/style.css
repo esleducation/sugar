@@ -20,6 +20,154 @@
 Load compass and all files of level : 01_setup folder (variables, colors vars, griddle conf vars, ...)
 ---------------------------------------*/
 /**
+ * Parse and return the Map respresentation of a border property
+ * The $border argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
+ *
+ * @param 		{List} 			$border 			The border property to parse
+ * @return 		{Map} 								The Map represenration of the border
+ *
+ * @example
+ * s-border(1px solid white);
+ * // return
+ * // (
+ * // 	width : 1px,
+ * // 	color : white,
+ * // 	style : solid
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the Map representation of a columns properties
+ * @param  		{Interger} 			[$count=null] 			The number of columns
+ * @param 		{Number} 			[$gap=null] 			The gap width between each columns
+ * @param 		{String} 			[$fill=null] 			The fill property (balance,auto,initial,inherit)
+ * @param 		{Number} 			[$width=null] 			The width of the columns
+ * @param 		{Integer}{String} 	[$span=null] 			The column-span property (1,all,initial,inherit)
+ * @param 		{List} 				[$rule=null] 			The column-rule property
+ * @param 		{String} 			[$rule-style=null]  	The column-rule-style property
+ * @param 		{Color} 			[$rule-color=null] 		The column-rule-color property
+ * @param 		{Number} 			[$rule-width=null] 		The column-rule-width property
+ * @return 		{Map} 										The map representation or the columns properties
+ *
+ * @example
+ * s-columns(2, 20px);
+ * // return
+ * // (
+ * // 	column-count : 2,
+ * // 	column-gap : 20px
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Parse and return the Map respresentation of a margin property
+ * The $margin argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
+ *
+ * @param 			{List}{Number} 			$margin 			The margin property to parse
+ * @return 			{Map} 										The map representation
+ *
+ * @example
+ * s-margin(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )
+ * s-margin(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )
+ * s-margin(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the representation of a position styling like position:absolute; top:0; left:100%; etc...
+ * This function gives you some shortcuts to align your element top, bottom, middle, center, etc...
+ *
+ * @param 		{String} 			[$position=absolute] 			The position css property
+ * @param 		{String} 			[$vertical-align=top] 			The vertical alignement wanted (top,middle,bottom)
+ * @param 		{String} 			[$align=left] 					The horizontal alignement wanted (left,center,right)
+ * @param 		{Number} 			[$top=null] 					The top property wanted
+ * @param 		{Number} 			[$right=null] 					The right property wanted
+ * @param 		{Number} 			[$bottom=null] 					The bottom property wanted
+ * @param 		{Number} 			[$left=null] 					The left property wanted
+ * @return 		{Map} 												The map representation of the position wanted
+ *
+ * @example
+ * s-position(absolute, top, right);
+ * s-position(absolute, middle, center);
+ * s-position(relative, bottom, right);
+ * s-position(absolute, bottom, center);
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the Map properties representation for the rhythme width
+ * The rhythme width is the width of an element that target a certain number of letters by line
+ *
+ * @param 			{Integer} 			[$letters-count=settings.typo.line-letters-count] 		The number of letters to target by line
+ * @return 			{Map} 																		The Map properties representation
+ *
+ * @example
+ * s-rhythme-width(50);
+ * // return
+ * // (
+ * // 	display : block,
+ * // 	max-width : 50ex
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the Map properties representation of a translate x,y and z
+ *
+ * @param 			{Number} 			[$x=0] 			The x translate value
+ * @param 			{Number} 			[$y=0] 			The y translate value
+ * @param 			{Number} 			[$z=0] 			The z translate value
+ * @return 			{Map} 								The translate Map representation
+ *
+ * @example
+ * s-translate(10px,20px);
+ * // return
+ * // (
+ * // 	transform: translateX(10px) translateY(20px) translateZ(0)
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the settings.vertical-rhythme.scope-class value
+ *
+ * @return 			{String} 			The settings.vertical-rhythme.scope-class value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Helper mixin to set a background image
+ *
+ * @param 			{String} 				[$repeat=null] 				The background-repeat property
+ * @param 			{String} 				[$size=null] 				The background-size property
+ * @param 			{String} 				[$attachment=null] 			The background-attachment property
+ * @param 			{String} 				[$blend-mode=null] 			The background-blend-mode property
+ * @param 			{String} 				[$clip=null] 				The background-clip property
+ * @param 			{String} 				[$url=null] 				The background-image url property
+ * @param 			{Number} 				[$width=null] 				The background-size width property
+ * @param 			{Number} 				[$height=null] 				The background-size height property
+ * @param 			{Number} 				[$top=null] 				The background-position top property
+ * @param 			{Number} 				[$left=null] 				The background-position left property
+ * @param 			{String} 				[$suffix2x=@2x] 			The suffix to add the the url if the 2x resolution if wanted
+ * @param 			{String} 				[$suffix3x=@3x] 			The suffix to add the the url if the 3x resolution if wanted
+ * @param 			{String} 				[$suffix4x=@4x] 			The suffix to add the the url if the 4x resolution if wanted
+ * @param 			{List} 					[$resolution=null] 			The resolution wanted like 2x, 3x and 4x
+ * @param 			{List} 					[$position=null] 			The background-position property
+ *
+ * @example
+ * .my-cool-element {
+ * 		\@include s-background(
+ * 			$url : 'img/my-cool-image.jpg',
+ * 			$size : cover,
+ * 			resolution : 2x 3x 4x
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
  * Center block
  */
 /* # CLEARFIX
@@ -33,7 +181,7 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
 
 	$clearfix-method sets default method
 */
-.btn-group, .clearfix-overflow {
+.clearfix-overflow {
   overflow: hidden;
 }
 
@@ -102,13 +250,25 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 /**
+ * Return the color in a modifier list
+ * @param 			{List} 			$modifiers 		The modifiers list
+ * @return 			{String} 						The color name
+ *
+ * @example
+ * $my-color : s-color-modifier(outline primary); // => primary
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
  * Return the css class selector for the current component setted by the [core/mixins/_s-component.scss] mixin
  * and build with the passed arguments.
- * This function generate the class selector depending of the settings.selector.method setting
+ * This function generate the class selector depending of the settings.selector.method setting or the selector method setted by the [s-selector-method mixin](../mixins/_s-selector-method.scss)
  *
- * @param 			{String} 			[$element=null] 		The element name of the class selector
+ * @param 			{String} 			[$element=null] 		The element name of the class selector | '&' if target the same element like `&s-component-selector("&", ) {}`
  * @param 			{String} 			[$modifier=null] 		The modifier name of the class selector
  * @param 			{String} 			[$state=null] 			The state name of the class selector
+ * @param 			{String} 			[$modifierName=null] 	The modifier name that will be used for webcomponent method like [$modifierName="$modifier"]
+ * @param 			{String} 			[$method=null] 			The method wanted to generate the selector. [See here](../_selector-methods.scss)
  * @return 			{String} 									The generated class selector
  *
  * @example
@@ -121,6 +281,15 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
  * 		s-component-selector('item') // => '.my-component-item'
  * 		s-component-selector(null, 'red') // => '.my-component-red'
  * 		s-component-selector('coco',null,'active') // => '.my-component-coco.is-active'
+ * }
+ *
+ * // if target the same element with & :
+ * \@include s-component('my-component') {
+ * 		s-component-selector(, red, , "color") {
+ * 			&s-component-selector("&", , "active") {
+ * 				// something here...
+ * 			}
+ * 		}
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>
@@ -143,7 +312,1092 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>;
  */
 /**
- * Transform -var value -var value value to map
+ * Convert a passed value to the wanted unit
+ * The conversion between some units that depends on a font-size will take the settings.typo.font-size value as reference.
+ *
+ * Available conversions
+ * - from px
+ * 	- to em
+ * 	- to rem
+ * 	- to pt
+ * 	- to %
+ *
+ * - from em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from pt
+ * 	- to em
+ * 	- to rem
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * - from rem
+ * 	- to em
+ * 	- to px
+ * 	- to pt
+ * 	- to %
+ *
+ * @param 			{Number} 		$value 			The value to convert
+ * @param 			{String} 		$unit 			The unit in which to convert the value
+ * @return 			{Number} 						The converted value
+ *
+ * @example
+ * // if the settings.typo.font-size === 16px
+ * s-convert(24px, rem) // 1.5rem
+ * s-convert(3rem, pt) // 36pt
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Transform a dash notation value into a map
+ * Dash notation value is : -key1 value1 -key2 value2
+ *
+ * @param 			{List} 			$dash 			The dash list notation to transform
+ * @return 			{Map} 							The map generated
+ *
+ * @example
+ * $dash : -hello world -coco universe
+ * s-dash-to-map($dash);
+ * // (
+ * // 	hello : world,
+ * // 	coco : universe
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to em
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The em converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to the closest even value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest even converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Take a filter as parameter and parse it to return the {Map} corresponding
+ * The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`
+ *
+ * @param 			{List}<String> 			$filter 			The registered filter name or the filter string to transform into map
+ * @return 			{Map} 										The corresponding filter map properties
+ *
+ * @example
+ * // register a filter
+ * \@include s-setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * s-filter-map(myCoolFilter);
+ * // {
+ * // 	box-shadow : #000 0 0 10px,
+ * // 	blur : 30px
+ * // }
+ *
+ * // custom filter
+ * s-filter-map(blur(10px));
+ * // {
+ * // 	blur : 10px
+ * // }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return a list with all the filters that are passed as argument
+ * This will use the [./_s-filter-map.scss] function to parse the filters
+ *
+ * @param 	 	{List}<String> 			$filters 			The registered filter(s) name(s) or the filter(s) string(s) to transform into list
+ * @return 		{List} 										The converted filters list to use as css property
+ *
+ * @example
+ * // register a filter
+ * \@include s-setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * .my-cool-elememt {
+ * 		filter : s-filter(myCoolFilter);
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px);
+ * }
+ *
+ * // custom filter
+ * .my-cool-element {
+ * 		filter : s-filter(myCoolFilter invert(100%));
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the font-family string or a registered font
+ *
+ * @param 			{String} 		$name 		The name of the registered font
+ * @return 			{String} 					The corresponding font-family property to set in your css
+ *
+ * @example
+ * // register a font
+ * \@include s-setup((
+ * 		fonts : (
+ * 			myCoolFont : (
+ * 				font-family : 'Helvetica Neue',
+ * 				font-weight : 'bold',
+ * 				// etc...
+ * 			),
+ * 			// other fonts...
+ * 		)
+ * ));
+ *
+ * // apply the font
+ * .my-cool-element {
+ * 		font-family : s-font-family(myCoolFont);
+ * 		// font-family : 'Helvetica Neue';
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the font {Map} that correspond to the passed arguments
+ *
+ * @param 		{String} 			[$family=null] 			The font family wanted (can be a registered font name)
+ * @param 		{Color} 			[$color=null] 			The color wanted (can be a registered color name)
+ * @param 		{Number} 			[$size=null] 			The font-size wanted
+ * @param 		{String} 			[$style=null] 			The font-style wanted
+ * @param 		{String} 			[$variant=null] 		The font-variant wanted
+ * @param 		{String}{Number} 	[$weight=null] 			The font-weight wanted
+ * @param 		{String} 			[$decoration=null] 		The text-decoration wanted
+ * @param 		{String} 			[$align=null] 			The text-align wanted
+ * @param 		{String} 			[$transform=null] 		The text-transform wanted
+ * @param 		{String} 			[$stretch=null] 		The font-stretch wanted
+ * @param 		{String} 			[$white-space=null] 	The white-space wanted
+ * @param 		{Number} 			[$height=null] 			The line-height wanted
+ * @param 		{Number} 			[$spacing=null] 		The letter-spacing wanted
+ * @param 		{Number} 			[$indent=null] 			The text-indent wanted
+ * @param 		{String} 			[$break=null] 			The line-break wanted
+ * @param 		{String} 			[$wrap=null] 			The word-wrap wanted
+ * @return 		{Map} 										The corresponding font map
+ *
+ * @example
+ * s-font(
+ * 		$family : 'Helvetica Neue',
+ * 		$size : 12px,
+ * 		$wrap : norwap
+ * );
+ * // (
+ * 		font-family : 'Helvetica Neue',
+ * 		font-size : 12px,
+ * 		word-wrap : nowrap
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the specified or calculated value of the given stack and size
+ * depending on the settings.sizes ratios stack
+ *
+ * @param 		{Map} 			$stack 			The stack from which to interpolate the value
+ * @param 		{String} 		$size 			The size wanted (has to exist in the settings.sizes stack)
+ * @return 		{Number} 						The $stack.$size value or the interpolated one depending on the settings.sizes ratios
+ *
+ * @example
+ *
+ * // settings.sizes
+ * \@include s-setup((
+ * 		sizes : (
+ * 			small : 0.5,
+ * 			default : 1, // default is ALWAYS 1
+ * 			big : 1.5
+ * 		)
+ * ));
+ *
+ * $myStack : (
+ * 		default : 3rem,
+ * 		big : 6rem
+ * )
+ *
+ * s-interpolate($myStack, big) // 6rem cause specified in the $myStack value
+ * s-interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Check if the passed value is of a certain type
+ *
+ * Here's the available types that you can check
+ * - mixed => mean anything
+ * - null
+ * - url
+ * - px
+ * - pt
+ * - rem
+ * - em
+ * - percent | %
+ * - vw
+ * - vh
+ * - ex
+ * - ch
+ * - cm
+ * - mm
+ * - in
+ * - pc
+ * - s | second
+ * - boolean | bool
+ * - function
+ * - number
+ * - int | integer
+ * - string
+ * - color
+ * - list
+ * - map
+ * - deg | degree
+ * - list-{type} => check if is a list of the specified type
+ * - map-{type} => check if is a map of the specified type
+ *
+ * @param 			{Mixed} 			$value 			The value to check
+ * @param 			{String} 			$type 			The type to check
+ * @return 			{Boolean} 							true if match the type, false if not
+ *
+ * @example
+ * s-is(hello, string) // => true
+ * s-is('hello', string) // => true
+ * s-is(#fff, color) // => true
+ * s-is(hello #fff, list-color) // => false
+ * s-is(#fff #ddd, list-color) // => true
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Alias to the [./_s-look-and-feel.scss] function
+ *
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @param 		{String} 		[$size=default] 		The size wanted.
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : s-lnf(padding-horizontal) s-lnf(padding-vertical);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @param 		{String} 		[$size=default] 		The size wanted.
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : s-look-and-feel(padding-horizontal) s-look-and-feel(padding-vertical);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to the closest odd value
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The closest odd converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Parse a given string/list properties and return the Map corresponding to the Map description
+ *
+ * @param 				{List} 				$properties 			The properties to parse
+ * @param 				{Map} 				$descriptor 			The descriptor map to use to parse the properties
+ * @return 				{Map} 										The properties in map format
+ *
+ * @example
+ * s-parse-properties(10px hello -delay 20s, (
+ *  	myNumber : Number,
+ *  	myOtherNumber : Number,
+ *  	myString : String,
+ *  	myCoolVar : String,
+ *  	delay : second
+ * ));
+ * // => (
+ * //  	myNumber : 10px,
+ * // 	myString : hello,
+ * // 	delay : 20s
+ * // )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to %
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The % converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to pt
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The pt converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to px
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The px converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Convert the passed value to rem
+ *
+ * @param 			{Number} 		$value 		The value to convert
+ * @return 			{Number} 					The rem converted value
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the passed values in the same unit but that has been even rounded on the corresponding px value
+ * This ensure that your passed value will be a round px value for final rander in the viewport
+ *
+ * @param 		{Number} 		$value 			The value to process
+ * @return 		{Number} 						The rounded value in same input unit but px rounded
+ *
+ * @example
+ * // if settings.typo.font-size == 16px
+ * s-render-round-even(5.2rem);
+ * // 1. transform to px values : 5.2 * 16px = 83.2px
+ * // 2. round even the px value : 84px
+ * // 3. transform to passed unit value : 84px / 16px = 5.25rem
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the passed values in the same unit but that has been odd rounded on the corresponding px value
+ * This ensure that your passed value will be a round px value for final rander in the viewport
+ *
+ * @param 		{Number} 		$value 			The value to process
+ * @return 		{Number} 						The rounded value in same input unit but px rounded
+ *
+ * @example
+ * // if settings.typo.font-size == 16px
+ * s-render-round-odd(5.2rem);
+ * // 1. transform to px values : 5.2 * 16px = 83.2px
+ * // 2. round odd the px value : 83px
+ * // 3. transform to passed unit value : 84px / 16px = 5.1875rem
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the passed values in the same unit but that has been rounded on the corresponding px value
+ * This ensure that your passed value will be a round px value for final rander in the viewport
+ *
+ * @param 		{Number} 		$value 			The value to process
+ * @return 		{Number} 						The rounded value in same input unit but px rounded
+ *
+ * @example
+ * // if settings.typo.font-size == 16px
+ * s-render-round(5.2rem);
+ * // 1. transform to px values : 5.2 * 16px = 83.2px
+ * // 2. round even the px value : 83px
+ * // 3. transform to passed unit value : 84px / 16px = 5.1875rem
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Search and replace tokens like colors #primary in a passed string, list or map
+ * Supported tokens types :
+ * 1. Colors : colorName
+ *
+ * @example
+ * s-replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return a selector builded with the params passed, depending on the settings.selector.method base setting.
+ *
+ * @param 			{String} 			$block 						The block part of the selector
+ * @param 			{String} 			[$element=null] 			The element part of the selector
+ * @param 			{String} 			[$modifier=null] 			The modifier part of the selector
+ * @param 			{String} 			[$state=null] 				The state part of the selector
+ * @param 			{String} 			[$modifierName=null] 		The modifier name that will be used for webcomponent method like [$modifierName="$modifier"]
+ * @param 			{String} 			[$method=BEM] 				The method used to build the selector (BEM or SMACCS)
+ * @return 			{String} 										The generated class selector
+ *
+ * @example
+ * s-selector(my-component, item, null, active, null, BEM); // => .my-component__item--active
+ * s-selector(my-component, item, null, active, null, SMACCS); // => .my-component-item.is-active
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the selector method define at the top level with the the [../mixins/_s-selector-method.scss] mixin
+ *
+ * @param 			{String} 			[$default=settings.selector.method] 		The selector method to return if no top selector method exist
+ * @return 			{String} 														The selector method
+ *
+ * @example
+ * s-selector-method() // => settings.selector.method
+ * s-selector-method(BEM) // => BEM
+ * \@include s-selector-method(SMACCS) {
+ * 		s-selector-method(BEM) // => SMACCS
+ * 		\@include s-selector-method(WEBCOMPONENT) {
+ * 			s-selector-method() // => SMACCS
+ * 		}
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>;
+ */
+/**
+ * Get a settings from the global settings stack
+ *
+ * @param 				{String} 			$path 						The setting path wanted separated by dots
+ * @param 				{String} 			[$context=s-context()] 		The context name to get the setting
+ * @return 				{Mixed} 										The setting value¨
+ *
+ * @example
+ * $font-size : s-setting('typo.font-size');
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return a value interpolated from the settings.spaces stack
+ *
+ * @param 			{String} 			$size 			The space size wanted. Must exist in the settings.sizes stack
+ * @return 			{Number} 							The actual space value
+ *
+ * @example
+ * .my-cool-section {
+ * 		padding : s-pace(big);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return a number without any units
+ *
+ * @param 			{Number} 		$number 		The number to process
+ * @return 			{Number} 						The number without units
+ *
+ * @example
+ * s-strip-units(12px); // => 12
+ * s-strip-units(30rem); // => 30
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Test an argument passed to a function or a mixin to ensure his type, value, etc...
+ * If the argument does not pass the test, an error will be thrown, unless the $check-only argument is true
+ *
+ * @param 				{String} 				$method 				The function/mixin name (debug purpose)
+ * @param 				{String} 				$argument 				The argument name to test (debug purpose)
+ * @param 				{List}{String} 			$type-or-values 		If string, the type(s) that the argument must match, if list, the possible values that the argument can take
+ * @param 				{Mixed} 				$value 					The actual argument value
+ * @param 				{Boolean} 				[$check-only=false]		If this is true, will not thrown any error
+ * @return 				{Mixed} 										The value if ok, false if not
+ *
+ * @example
+ * \@mixin my-cool-mixin($argument1, $argument2) {
+ *        $argument1 : s-test-argument(my-cool-mixin, argument1, string, $argument1);
+ *        $argument2 : s-test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);
+ * }
+ * \@mixin my-cool-mixin(hello, world); // ok
+ * \@mixin my-cool-mixin(hello, universe); // throw an error
+ * \@mixin my-cool-mixin(12, world); // throw an error
+ *
+ * @author 				Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Take a transition as parameter and parse it to return the {Map} corresponding
+ * The $transition parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transition argument will be parsed with the [./_s-parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transition 			The registered transition name or the transition string to transform into map
+ * @return 			{Map} 										The corresponding transition map properties
+ *
+ * @example
+ * // register a transition
+ * \@include s-setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * s-transition-map(fast);
+ * // {
+ * // 	property : all,
+ * // 	duration : .2s,
+ * // 	ease : ease-in-out
+ * // }
+ *
+ * // custom transition
+ * s-transition-map(fast -delay .5s);
+ * // {
+ * // 	property : all,
+ * // 	duration : .2s,
+ * // 	ease : ease-in-out,
+ * // 	delay : .5s
+ * // }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Take a transition as parameter and parse it to return the {List} corresponding
+ * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transitions argument will be parsed with the [./_s-parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
+ * @return 			{List} 										The corresponding transition list properties
+ *
+ * @example
+ * // register a transition
+ * \@include s-setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out 0s,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * .my-cool-element {
+ * 		transition : s-transition(fast);
+ * 		// transition : all .2s ease-in-out 0s;
+ * }
+ *
+ * // custom transition
+ * .my-cool-element {
+ *  	transition : s-transition(fast -delay .5s, fast width ease-in);
+ *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the unit context if has been set by the [../mixins/_s-unit-context.scss] mixin
+ *
+ * @return 		{String} 				The unit context setted
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Return the generated vertical rhythme properties map calculated depending on the passed arguments
+ *
+ * @param 			{Number} 				[$font-size=settings.typo.font-size] 			The font size wanted
+ * @param 			{String} 				[$font-family=settings.typo.font-family] 		The font family to use
+ * @param 			{Number} 				[$line-height=null] 							The line height to use
+ * @param 			{Number} 				[$margin-top=0] 								The targeted margin-top
+ * @param 			{Number} 				[$margin-bottom=0] 								The targeted margin-bottom
+ * @param 			{Number} 				[$padding-top=0] 								The targeted padding-top
+ * @param 			{Number} 				[$padding-bottom=0] 							The targeted padding-bottom
+ * @param 			{List} 					[$margin=null] 									The targeted margin property
+ * @param 			{List} 					[$padding=null] 								The targeted padding property
+ * @param 			{List} 					[$border-top=null] 								The targeted border-top property
+ * @param 			{List} 					[$border-bottom=null] 							The targeted border-bottom property
+ * @param 			{Number} 				[$border-top-width=0] 							The targeted border-top-width property
+ * @param 			{Number} 				[$border-bottom-width=0] 						The targeted border-bottom-width property
+ * @param 			{Number} 				[$border=null] 									The targeted border property
+ * @param 			{Number} 				[$cap-height=null] 								The font cap-height used to calculate the vertical ryhthme
+ * @param 			{Boolean}{String} 		[$calculate-height=false] 						If true|min-height|max-height|height, will return the corresponding absolute height value in the map
+ *
+ * @TODO example
+ *
+ * @see 			https://medium.com/written-in-code/aligning-type-to-baseline-the-right-way-using-sass-e258fce47a9b#.lck2lgbni
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generic sugar function can return multiple settings types like:
+ * - any settings : s('settings.{path}')
+ * - look and feel : s('look-and-feel.{property}', $size)
+ *  	- s('lnf.{property}', $size)
+ * - space : s('space.{size}')
+ * - color : s('color.{name}', $modifier)
+ * - transition : s('transition.{name}')
+ * - filter : s('filter.{name}')
+ *
+ * @example
+ * $my-color : s('color.primary');
+ * $my-transition : s('transition.fast');
+ * $my-font-size : s('settings.typo.font.size')
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print out the animation property calculated with the passed arguments
+ * This mixin support all the standard css animation properties like name, duration, delay, ease, direction and fill-mode.
+ * The $animations argument will be parsed with the [../functions/_s-parse-properties.scss] function.
+ * If you specify multiple animations at a time, this mixin will take care
+ * of the delay calculation for each animations and make them play one after another
+ *
+ * @param 			{List} 				$animations 			The animations wanted like : coco .2s ease-in-out reverse
+ *
+ * @example
+ * .my-cool-element {
+ * 		@include s-animation(my-animation 1s ease-in-out, another-animation 4s);
+ * 		// animation : my-animation 1s 0s ease-in-out 1 normal forwards, another-animation 4s 1s ease-in-out 1 normal forwards;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...
+ * Available namespaces
+ * - `sugar.filter.{name}` : .fi-{name}
+ * - `sugar.transition.{name}` : .tr-{name}
+ * - `sugar.font.family.{name}` : .f-{name}
+ * - `sugar.margin.bottom.{size}` : .m-b-{size}
+ * - `sugar.margin.top.{size}` : .m-t-{size}
+ * - `sugar.margin.left.{size}` : .m-l-{size}
+ * - `sugar.margin.right.{size}` : .m-r-{size}
+ * - `sugar.margin.side.{size}` : .m-s-{size}
+ * - `sugar.padding.all.{size}` : .p-{size}
+ * - `sugar.padding.top.{size}` : .p-t-{size}
+ * - `sugar.padding.bottom.{size}` : .p-b-{size}
+ * - `sugar.padding.left.{size}` : .p-l-{size}
+ * - `sugar.padding.right.{size}` : .p-r-{size}
+ * - `sugar.padding.side.{size}` : .p-s-{size}
+ * - `sugar.size.{size}` : .s-{size}
+ * - `sugar.size.rel.{size}` : .s-{size}-rel
+ * - `sugar.padding.no.top` : .no-p-t
+ * - `sugar.padding.no.bottom` : .no-p-b
+ * - `sugar.padding.no.left` : .no-p-l
+ * - `sugar.padding.no.right` : .no-p-r
+ * - `sugar.padding.no.side` : .no-p-s
+ * - `sugar.margin.no.top` : .no-m-t
+ * - `sugar.margin.no.bottom` : .no-m-b
+ * - `sugar.margin.no.left` : .no-m-l
+ * - `sugar.margin.no.right` : .no-m-r
+ * - `sugar.margin.no.side` : .no-m-s
+ * - `sugar.color.{name}.color` .c-{name}
+ * - `sugar.color.{name}.bkg` : .bkg-{name}
+ * - `sugar.color.{name}.modifier.{mod-name}.color` : .c-{name}--{mod-name}
+ * - `sugar.color.{name}.modifier.{mod-name}.bkg` : .bkg-{name}--{mod-name}
+ * - `sugar.pull.left` : .pull-left
+ * - `sugar.pull.right` : .pull-right
+ * - `sugar.position.relative` : .relative
+ * - `sugar.position.absolute` : .absolute
+ * - `sugar.clear.left` : .clear-left
+ * - `sugar.clear.right` : .clear-right
+ * - `sugar.clear.both` : .clear
+ * - `sugar.display.show` : .show
+ * - `sugar.display.show-inline` : .show-inline
+ * - `sugar.display.hidden` : .hidden
+ * - `sugar.display.hide` : .hide
+ * - `sugar.display.visible` : .visible
+ * - `sugar.display.invisible` : .invisible
+ * - `sugar.display.visually-hidden` : .visually-hidden
+ * - `sugar.text.hidden` : .t-hidden
+ * - `sugar.text.truncate` : .t-truncate
+ * - `sugar.text.align.left` : .t-left
+ * - `sugar.text.align.right` : .t-right
+ * - `sugar.text.align.center` : .t-center
+ * - `sugar.text.align.justify` : .t-justify
+ * - `sugar.text.transform.lowercase` : .t-lowercase
+ * - `sugar.text.transform.uppercase` : .t-uppercase
+ * - `sugar.text.transform.capitalize` : .t-capitalize
+ * - `sugar.font.weight.bold` : .f-bold
+ * - `sugar.font.weight.lighter` : .f-lighter
+ * - `sugar.font.weight.bolder` : .f-bolder
+ * - `sugar.font.weight.normal` : .f-normal
+ * - `sugar.font.style.italic` : .f-italic
+ * - `sugar.font.style.oblique` : .f-oblique
+ * - `sugar.font.variant.small-caps` : .f-small-caps
+ * - `sugar.block.align.center` : .block-center
+ * - `sugar.clearfix.default` : .clearfix
+ * - `sugar.clearfix.float` : .clearfix-float
+ * - `sugar.clearfix.micro` : .clearfix-micro
+ * - `sugar.clearfix.overflow` : .clearfix-overflow
+ * - `sugar.clearfix.facebook` : .clearfix-facebook
+ * - `sugar.no-transitions` : .no-transitions
+ * - `sugar.clear-transitions` : .clear-transitions
+ * - `sugar.no-animations` : .no-animations
+ * - `sugar.clear-animations` : .clear-animations
+ * - `sugar.no-transmations` : .no-transmations
+ * - `sugar.clear-transmations` : .clear-transmations
+ *
+ * @param 			{List}<string> 			$namespaces 		The classes namespaces wanted
+ *
+ * @example
+ * \@include s-classes(); // will print out all the classes
+ * \@include s-classes('sugar.font'); // will print all the font classes
+ * \@include s-classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes
+ * // etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print out the scoped color schema css
+ *
+ * @param 		{String} 			$name 			The color schema name
+ *
+ * @example
+ * \@include s-color-schema(light) {
+ * 		h1, h2 {
+ * 			color : white;
+ * 		}
+ * }
+ * // will print
+ * .cs-light h1,
+ * .cs-light h2 {
+ * 		color : white;
+ * }
+ *
+ * h1, h2 {
+ * 		\@include s-color-schema(light) {
+ * 			color : white;
+ * 		}
+ * }
+ * // will print
+ * .cs-light h1, h1.cs-light,
+ * .cs-light h2, h2.cs-light {
+ * 		color : white;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set the name of the component that will be handled inside the mixin
+ *
+ * @param 			{String} 			[$name=null] 			The name of the component to set
+ * @param 			{String}{Map} 		[$context=null] 		A context name or map to use inside the mixin
+ *
+ * @example
+ * \@include s-component('my-component') {
+ * 		s-component('hello') // => 'my-component'
+ * 		\@include s-component('another-component') {
+ * 			s-component('hello') // => 'my-component'
+ * 		}
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>;
+ */
+/**
+ * Register a context with a name to use it later
+ *
+ * @param 			{String} 		$name 			The context name
+ * @param 			{Map} 			$settings 		The settings to override for this context
+ *
+ * @example
+ * \@include s-context-setup(my-cool-context, (
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : 0.6em
+ * 			)
+ * 		)
+ * ));
+ *
+ * // using your context
+ * \@include s-context(my-cool-context) {
+ * 		s-look-and-feel(padding-vertical); // => 0.6em
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set a context to be used inside the mixin
+ *
+ * @param 			{String}{Map} 			$name-or-map 		The name of a registered context or a map
+ *
+ * @example
+ * // register a context
+ * \@include s-context-setup(my-cool-context, (
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : 0.6em
+ * 			)
+ * 		)
+ * ));
+ *
+ * // registered context
+ * \@include s-context(my-cool-context) {
+ * 		// your code here...
+ * }
+ *
+ * // inline context
+ * \@include s-context((
+ * 		look-and-feel : (
+ * 			padding-vertical : (
+ * 				default : .3em
+ * 			)
+ * 		)
+ * )) {
+ * 		// your code here...
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print out a list with all the filters that are passed as argument
+ * This will use the [../functions/_s-filter-map.scss] function to parse the filters
+ *
+ * @param 	 	{List}<String> 			$filters 			The registered filter(s) name(s) or the filter(s) string(s) to transform into list
+ *
+ * @example
+ * // register a filter
+ * \@include s-setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * .my-cool-elememt {
+ * 		\@include s-filter(myCoolFilter);
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px);
+ * }
+ *
+ * // custom filter
+ * .my-cool-element {
+ * 		\@include s-filter(myCoolFilter invert(100%));
+ * 		// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Helper to print a font-face
+ *
+ * @param 			{String} 		$font-family 			The font-family
+ * @param 			{String} 		$src 					The source url (only 1 extension)
+ * @param 			{List} 			[$extensions=woff2] 	The extensions list that you have available
+ * @param 			{String} 		[$font-weight=normal] 	The font-weight property
+ * @param 			{String} 		[$font-style=normal] 	The font-style property
+ *
+ * @example
+ * // if you have these extensions files : .woff .eot .woff2
+ * \@include s-font-face(
+ * 		$name : my-cool-font,
+ * 		$src : '/fonts/my-font.eot',
+ * 		$extensions : eot woff woff2
+ * )
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print all the fonts properties that correspond to the passed arguments
+ *
+ * @param 		{String} 			[$family=null] 			The font family wanted (can be a registered font name)
+ * @param 		{Color} 			[$color=null] 			The color wanted (can be a registered color name)
+ * @param 		{Number} 			[$size=null] 			The font-size wanted
+ * @param 		{String} 			[$style=null] 			The font-style wanted
+ * @param 		{String} 			[$variant=null] 		The font-variant wanted
+ * @param 		{String}{Number} 	[$weight=null] 			The font-weight wanted
+ * @param 		{String} 			[$decoration=null] 		The text-decoration wanted
+ * @param 		{String} 			[$align=null] 			The text-align wanted
+ * @param 		{String} 			[$transform=null] 		The text-transform wanted
+ * @param 		{String} 			[$stretch=null] 		The font-stretch wanted
+ * @param 		{String} 			[$white-space=null] 	The white-space wanted
+ * @param 		{Number} 			[$height=null] 			The line-height wanted
+ * @param 		{Number} 			[$spacing=null] 		The letter-spacing wanted
+ * @param 		{Number} 			[$indent=null] 			The text-indent wanted
+ * @param 		{String} 			[$break=null] 			The line-break wanted
+ * @param 		{String} 			[$wrap=null] 			The word-wrap wanted
+ * @return 		{Map} 										The corresponding font map
+ *
+ * @example
+ * .my-cool-elememt {
+ * 		\@include s-font(
+ * 			$family : 'Helvetica Neue',
+ * 		 	$size : 12px,
+ * 		  	$wrap : norwap
+ *      );
+ *      // print
+ * 		font-family : 'Helvetica Neue',
+ * 		font-size : 12px,
+ * 		word-wrap : nowrap
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Init the sugar toolkit.
+ * This has to be called **AFTER** all the [./_s-setup.scss] mixin call
+ * and **BEFORE** all the others sugar mixins and functions calls
+ *
+ * @example
+ * \@include s-init();
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Register all the dynamic helper classes that depends on the settings, etc...
+ * This is used internaly
+ *
+ * @example
+ * \@include s-init-classes();
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Register a helper class under a certain namespace
+ *
+ * @param 			{String} 		$classname 		The classname that will be printed out
+ * @param 			{String} 		$namespace 		The dots separated namespace under which the class will live
+ *
+ * @example
+ * \@include s-register-class(my-cool-class, 'my.cool.namespace') {
+ * 		background : pink;
+ * }
+ * \@include s-register-class(another-cool-class, 'my.another.namespace') {
+ * 		background : red;
+ * }
+ *
+ * // print out my helpers classes
+ * \@include s-classes('my');
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set the selector method that will be handled inside the mixin
+ * [See here](../_selector-methods.scss) for available selector methods
+ *
+ * @param 			{String} 			[$method=null] 			The selector method to set
+ *
+ * @example
+ * \@include s-selector-method(SMACCS) {
+ * 		s-selector-method(BEM) // => SMACCS
+ * 		\@include s-selector-method(WEBCOMPONENT) {
+ * 			s-selector-method() // => 'SMACCS'
+ * 		}
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>;
+ */
+/**
+ * Setup sugar toolkit by overriding the default [settings](../_settings.scss)
+ * This has to be called **BEFORE** the [s-init mixin](./_s-init.scss)
+ *
+ * @param 			{Map} 			$settings 		The settings to override
+ *
+ * @example
+ * \@include s-setup((
+ * 		typo : (
+ * 			font-size : 12px
+ * 		),
+ * 		sizes : (
+ * 			small : 0.5,
+ * 			big : 1.5
+ * 		)
+ * ));
+ * // this mixin can be called as many times as you need
+ * // this allows you to separate your configs setup into multiple
+ * // files...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Display the vertical rhythme
+ *
+ * @param 			{Color} 		The color wanted
+ *
+ * @example
+ * body {
+ * 		@include s-show-vertical-rhythme();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Take a transition as parameter and print the corresponding transition property
+ * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s
+ * The $transitions argument will be parsed with the [./_s-parse-properties.scss] function.
+ *
+ * @param 			{List} 				$transitions 			The registered transition(s) name(s) or the transition(s) strings(s) to transform into list
+ * @return 			{List} 										The corresponding transition list properties
+ *
+ * @example
+ * // register a transition
+ * \@include s-setup((
+ * 		transitions : (
+ * 			fast : all .2s ease-in-out 0s,
+ * 			// other transitions...
+ * 		)
+ * ));
+ *
+ * // registered transition
+ * .my-cool-element {
+ * 		\@include s-transition(fast>);
+ * 		// transition : all .2s ease-in-out 0s;
+ * }
+ *
+ * // custom transition
+ * .my-cool-element {
+ * 		\@include s-transition(fast -delay .5s, fase width ease-in);
+ *  	// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set the unit context to use inside the mixin.
+ * This mean that if you set a unit context, then get a number setting through the [s-setting function](../functions/_s-setting.scss),
+ * The value that will be returned will be converted into the unit context if possible
+ *
+ * @param 			{String} 			$unit 			The unit wanted
+ *
+ * @example
+ * // if settings.typo.font-size == 16px
+ * s-setting('typo.font-size'); // => 16px
+ * \@incluse s-unit-context(rem) {
+ * 		s-setting('typo.font-size'); // => 1rem
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Print out the vertical rhythme properties map calculated depending on the passed arguments
+ *
+ * @param 			{Number} 				[$font-size=settings.typo.font-size] 			The font size wanted
+ * @param 			{String} 				[$font-family=settings.typo.font-family] 		The font family to use
+ * @param 			{Number} 				[$line-height=null] 							The line height to use
+ * @param 			{Number} 				[$margin-top=0] 								The targeted margin-top
+ * @param 			{Number} 				[$margin-bottom=0] 								The targeted margin-bottom
+ * @param 			{Number} 				[$padding-top=0] 								The targeted padding-top
+ * @param 			{Number} 				[$padding-bottom=0] 							The targeted padding-bottom
+ * @param 			{List} 					[$margin=null] 									The targeted margin property
+ * @param 			{List} 					[$padding=null] 								The targeted padding property
+ * @param 			{List} 					[$border-top=null] 								The targeted border-top property
+ * @param 			{List} 					[$border-bottom=null] 							The targeted border-bottom property
+ * @param 			{Number} 				[$border-top-width=0] 							The targeted border-top-width property
+ * @param 			{Number} 				[$border-bottom-width=0] 						The targeted border-bottom-width property
+ * @param 			{Number} 				[$border=null] 									The targeted border property
+ * @param 			{Number} 				[$cap-height=null] 								The font cap-height used to calculate the vertical ryhthme
+ * @param 			{Boolean}{String} 		[$calculate-height=false] 						If true|min-height|max-height|height, will return the corresponding absolute height value in the map
+ *
+ * @TODO example
+ *
+ * @see 			https://medium.com/written-in-code/aligning-type-to-baseline-the-right-way-using-sass-e258fce47a9b#.lck2lgbni
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * This file is responsible to register the static helper classes like pull-right, clear, etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 .pull-left {
   float: left;
@@ -185,6 +1439,10 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
   display: none;
 }
 
+.hide {
+  display: none;
+}
+
 .visible {
   visibility: visible;
 }
@@ -212,9 +1470,15 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
 
 .t-truncate {
   display: inline-block;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.t-truncate > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .t-left {
@@ -307,19 +1571,230 @@ Load compass and all files of level : 01_setup folder (variables, colors vars, g
 }
 
 /**
+ * This file contains all the default settings that can be overrided by the [s-setup mixin](./mixins/_s-setup.scss).
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Create an arrow bubble effect
+ *
+ * @param 		{String} 			[$side=bottom] 				The side (top,right,bottom,left)
+ * @param 		{String} 			[$align=center] 			The alignement (left,center,right,top,middle,bottom)
+ * @param 		{Number} 			[$size=10px] 				The size of the arrow
+ * @param 		{Color} 			[$color=s-color(primary)] 	The color of the bubble
+ * @param 		{Number} 			[$arrow-offset=10px] 		The arrow offset from the side of the bubble
+ * @param 		{Number} 			[$border-width=0] 			The border width of the bubble
+ * @param 		{Color} 			[$border-color=null] 		The border color of the bubble
+ *
+ * @example
+ * .my-cool-bubble {
+ * 		\@include s-bubble(
+ * 			$color : s-color(secondary)
+ * 		);
+ * 		color : white;
+ * }
+ *
+ * @see 			https://codepen.io/kirkas/pen/otqyJ
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a drop shadow depending on the depth specified
+ *
+ * @param 		{Integer} 			$depth 							The depth wanted (1,2,3,4,etc...)
+ * @param 		{Color} 			[$color=rgba(0,0,0,.2)] 		The drop shadow color
+ *
+ * @example
+ * .my-cool-element {
+ * 		\@include s-depth(2);
+ * }
+ *
+ * @author 	 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Create a poping dot effect to catch user attention on a particular item
+ * This mixin affect the :before and :after pseudo selector of the item
+ *
+ * @param 		{String} 		[$vertical-align=top] 			Where to put the dot verticaly (top,middle,bottom)
+ * @param 		{String} 		[$align=left] 					Where to put the dot horizontaly (left,center,right)
+ * @param 		{Number} 		[$size=20px] 					The size of the dot
+ * @param 		{Color} 		[$color=primary] 				The color of the dot
+ * @param 		{Number} 		[$offset-top=0] 				The offset top
+ * @param 		{Number} 		[$offset-right=0] 				The offset right
+ * @param 		{Number} 		[$offset-bottom=0] 				The offset bottom
+ * @param 		{Number} 		[$offset-left=0] 				The offset left
+ *
+ * @example
+ * .my-cool-element {
+ * 		\@include s-hey(
+ * 			$align : right,
+ * 			$color : secondary,
+ * 			$size : 10px,
+ * 			$offset-top : -10px,
+ * 			$offset-right : -10px
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a full animated, single element, bars loader
+ *
+ * @param 			{String} 			[$shape=rect] 				The shape of the bars (rect,circle)
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$width=.5em] 				The width of each bars
+ * @param 			{Number} 			[$height=2em] 				The height of each bars
+ * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$gap=.5em] 				The gap between each bars
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ * @param 			{Number} 			[$a-offset=null] 			The offset to move the animated bar
+ * @param 			{String} 			[$a-direction=both] 		The direction in which to move the bars (up,down,both)
+ * @param 			{Boolean} 			[$a-continuous=true] 		If true, the first bars will be animated at same time at the last ones
+ *
+ * @example
+ * .my-cool-loader {
+ * 		\@include s-loader-bars(
+ * 			$color : primary,
+ * 			$a-offset : .5em
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a full animated, single element, circle loader
+ *
+ * @param 			{Color} 			[$color=primary] 			The color(s) of the loader. Can be a list of colors
+ * @param 			{Number} 			[$size=.33em] 				The size of each dot
+ * @param 			{Number} 			[$radius=1em] 				The distance of each dot from the center of the loader
+ * @param 			{Integer} 			[$count=5] 					How many bars you want
+ * @param 			{Number} 			[$opacity=1] 				The initial opacity of each bars
+ * @param 			{Number} 			[$a-opacity=null] 			The opacity of the animated bars
+ * @param 			{Second} 			[$a-duration=1s] 			The overall animation duration
+ * @param 			{Second} 			[$a-delay=0s] 				The delay between two animation cycle
+ * @param 			{Integer} 			[$a-near=1] 				How many bars are affected by the animated one
+ * @param 			{String} 			[$a-ease=ease-in-out] 		The ease to use to animate each bars
+ *
+ * @TODO finish documentation
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a full animated, single element, couch-potato style loader
+ *
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
+ * @param 		{Number} 		[$a-scale=.7] 				The animation scale
+ *
+ * @example
+ * .my-cool-loader {
+ * 		\@include s-loader-couch-potato();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a full animated, single element, flip ball style loader
+ *
+ * @param 		{String} 		[$shape=circle] 			The shape of the loader (circle,rect)
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader. Can be a list of colors
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ *
+ * @example
+ * .my-cool-loader {
+ * 		\@include s-loader-flip-ball();
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
+ *
+ * @param 		{Color} 		[$color=rgba(0,0,0,.3)] 			The shadow color
+ * @param 		{String} 		[$type=text] 						The shadow type (text,box)
+ * @param 		{Degree} 		[$angle=135deg] 					The shadow angle
+ * @param 		{Integer} 		[$depth=20] 						The shadow depth
+ * @param 		{Boolean} 		[$fade=false] 						If true, the shadow will fade itself
+ * @param 		{Number} 		[$blur=0] 							The blur amount of the shadow
+ * @param 		{Number} 		[$blur-ratio=0] 					The ratio to blur each depth more
+ *
+ * @example
+ * .my-cool-title {
+ * 		\@include s-long-shadow(
+ * 			$depth : 10
+ * 		);
+ * }
+ * .my-cool-box {
+ * 		\@include s-long-shadow(
+ * 			$type : box
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Create side lines around an item
+ *
+ * @param 			{String} 		[$style=solid] 			The line style, same possible values as the border-style property
+ * @param 			{String} 		[$side=both] 			The side where to put lines (left,right,both)
+ * @param 			{Number} 		[$height=1px] 			The lines height
+ * @param 			{Number} 		[$width=50%] 			The width of the lines
+ * @param 			{Color} 		[$color=text]			The color of the lines
+ * @param 			{Number} 		[$padding=0] 			The padding between the lines and the content
+ * @param 			{Number} 		[$offset-top=null] 		The line offset top
+ *
+ * @example
+ * h1 {
+ * 		\@include s-side-lined(
+ * 			$padding : 20px,
+ * 			$side : right,
+ * 			$width : 100%
+ * 		);
+ * }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
  * Load all components
  */
-@keyframes s-pagination {
-  0% {
-    opacity: 1;
-    width: 0;
-  }
-  100% {
-    opacity: 0;
-    width: 150%;
-  }
+.btn, .btn--block {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  outline-width: 0;
+  -webkit-appearance: none;
+  line-height: 0;
+  text-decoration: none;
+  font-size: 1em;
+  user-select: none;
 }
 
+.btn:not(button):not(input), .btn--block:not(button):not(input) {
+  line-height: 1;
+}
+
+.btn > *, .btn--block > * {
+  vertical-align: middle;
+}
+
+button {
+  line-height: 1;
+}
+
+/**
+ * Load all components
+ */
 @keyframes s-ripple {
   0% {
     opacity: 1;
@@ -387,7 +1862,7 @@ table {
 }
 
 .s-settings:after {
-  content: '{"unit": "rem", "reset": true, "border-box": true, "sizes": {"smaller": 0.6, "small": 0.8, "default": 1, "medium": 1.5, "big": 2, "bigger": 3}, "typo": {"font-family": "helvetica-neue", "font-size": "14px", "font-sizes": null, "line-letters-count": 55, "font-format": {"eot": "embedded-opentype", "woff2": "woff2", "woff": "woff", "ttf": "truetype", "otf": "opentype", "svg": "svg", "svgz": "svgz"}}, "look-and-feel": {"border-radius": {"default": "0em"}, "padding-vertical": {"default": "1.6em"}, "padding-horizontal": {"default": "1.2em"}, "font-size": {"default": "1em", "smaller": "0.6em", "small": "0.8em", "medium": "1.5em", "big": "2em", "bigger": "3em"}}, "spaces": {"default": "20px"}, "colors": {"default": "#f8f8f9", "text": "#333", "link": {"color": "primary"}, "primary": {"color": "#f2bc2b"}, "secondary": {"color": "#777"}, "success": {"color": "#5cb85c"}, "warning": {"color": "#f0ad4e"}, "error": {"color": "#d9534f"}, "info": {"color": "#2199e8"}, "lightgrey": {"color": "#f8f8f9", "modifiers": {"dark": "#eaeaed", "light": "white"}}}, "vertical-rhythme": {"enabled": true, "scope-class": "vr", "no-vertical-rhythme-class": "no-vr"}, "selector": {"method": "BEM"}, "BEM": {"standelone-modifier": false, "element-separator": "__", "modifier-separator": "--"}, "modular-scale": {"base": "1rem", "ratio": 1.618034, "range": null, "fluid": false}, "fonts": {"default": {"font-family": ["Helvetica Neue", "Helvetica", "Verdana", "Arial", "sans-serif"], "font-weight": "normal", "cap-height": 0.65}, "code": {"font-family": ["Menlo", "Monaco", "Consolas", "Courier New", "monospace"], "font-weight": "normal", "cap-height": 0.65}, "helvetica-neue": {"font-family": "Helvetica Neue"}}, "filters": {"shadow": "box-shadow(#text 0 0 32px)", "shadowed-text": "text-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px)"}, "transitions": {"default": ["all", "0.2s", "ease-in-out", "0s"], "fast": ["all", "0.1s", "ease-in-out", "0s"], "slow": ["all", "0.4s", "ease-in-out", "0s"]}}';
+  content: '{"unit": "rem", "reset": true, "border-box": true, "sizes": {"smaller": 0.6, "small": 0.8, "default": 1, "medium": 1.5, "big": 2, "bigger": 3}, "typo": {"font-family": "helvetica-neue", "font-size": "14px", "font-sizes": null, "line-letters-count": 55, "font-format": {"eot": "embedded-opentype", "woff2": "woff2", "woff": "woff", "ttf": "truetype", "otf": "opentype", "svg": "svg", "svgz": "svgz"}}, "look-and-feel": {"border-radius": {"default": "0em"}, "padding-vertical": {"default": "1.6em"}, "padding-horizontal": {"default": "1.2em"}, "font-size": {"default": "1em", "smaller": "0.6em", "small": "0.8em", "medium": "1.5em", "big": "2em", "bigger": "3em"}, "disabled-opacity": {"default": 0.5}}, "spaces": {"default": "20px"}, "colors": {"default": "#f8f8f9", "text": "#333", "link": {"color": "primary"}, "primary": {"color": "#f2bc2b"}, "secondary": {"color": "#777"}, "success": {"color": "#5cb85c"}, "warning": {"color": "#f0ad4e"}, "error": {"color": "#d9534f"}, "info": {"color": "#2199e8"}, "lightgrey": {"color": "#f8f8f9", "modifiers": {"dark": "#eaeaed", "light": "white"}}}, "vertical-rhythme": {"enabled": true, "scope-class": "vr", "no-vertical-rhythme-class": "no-vr"}, "selector": {"method": "BEM"}, "BEM": {"standelone-modifier": false, "element-separator": "__", "modifier-separator": "--"}, "modular-scale": {"base": "1rem", "ratio": 1.618034, "range": null, "fluid": false}, "fonts": {"default": {"font-family": ["Helvetica Neue", "Helvetica", "Verdana", "Arial", "sans-serif"], "font-weight": "normal", "cap-height": 0.65}, "code": {"font-family": ["Menlo", "Monaco", "Consolas", "Courier New", "monospace"], "font-weight": "normal", "cap-height": 0.65}, "helvetica-neue": {"font-family": "Helvetica Neue"}}, "filters": {"shadow": "box-shadow(#text 0 0 32px)", "shadowed-text": "text-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px)"}, "transitions": {"default": ["all", "0.2s", "ease-in-out", "0s"], "fast": ["all", "0.1s", "ease-in-out", "0s"], "slow": ["all", "0.4s", "ease-in-out", "0s"]}}';
   display: none;
 }
 
@@ -974,31 +2449,17 @@ body {
  * Button base styling
  */
 .btn {
-  display: inline-block;
-  border: none;
-  cursor: pointer;
-  outline-width: 0;
-  -webkit-appearance: none;
-  line-height: 1;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.btn > * {
-  vertical-align: middle;
-}
-
-.btn {
   border-radius: 0em;
   padding: 1.21428571em 1.57142857em;
   height: 3.42857143em;
-}
-
-button {
-  line-height: 1 !important;
+  text-align: left;
 }
 
 .btn--block {
+  border-radius: 0em;
+  padding: 1.21428571em 1.57142857em;
+  height: 3.42857143em;
+  text-align: left;
   display: block;
   width: 100%;
 }
@@ -1008,36 +2469,67 @@ button {
   outline-color: black;
 }
 
-button {
-  line-height: 1 !important;
-}
-
 .btn--primary {
   background-color: #f2bc2b;
   border: 1px solid #f2bc2b;
   color: white;
 }
 
-.btn--primary:active:not(:disabled), .btn--primary:hover:not(:disabled), .btn--primary.active:not(:disabled), .btn--primary.btn--active:not(:disabled) {
+.btn--primary[active]:not(:disabled), .btn--primary.active:not(:disabled), .btn--primary:active:not(:disabled), .btn--primary:hover:not(:disabled) {
   background-color: #c4920c;
   border-color: #c4920c;
 }
 
-:checked + .btn--primary:not(:disabled) {
-  background-color: #946f09;
-  border-color: #946f09;
-}
-
 .btn--primary.btn--outline {
   color: #f2bc2b;
+  background-color: transparent;
+  border: 1px solid #f2bc2b;
 }
 
 .btn--primary.btn--outline:active:not(:disabled), .btn--primary.btn--outline:hover:not(:disabled), .btn--primary.btn--outline.active:not(:disabled),
-:checked + .btn--primary.btn--outline:not(:disabled),
-.btn--primary.btn--outline .btn--active:not(:disabled) {
+:checked + .btn--primary.btn--outline:not(:disabled) {
   background-color: #f2bc2b;
   border-color: #f2bc2b;
   color: white;
+}
+
+.btn--primary.btn--link {
+  background-color: transparent !important;
+  color: #f2bc2b !important;
+  border: none !important;
+  position: relative;
+}
+
+.btn--primary.btn--link:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 0.60714286em;
+  left: 50%;
+  height: .2em;
+  width: 0;
+  transform: translateX(-50%) translateY(0) translateZ(0);
+  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+  background: #f2bc2b;
+}
+
+.btn--primary.btn--link[active]:not(:disabled):after, .btn--primary.btn--link.active:not(:disabled):after, .btn--primary.btn--link:active:not(:disabled):after, .btn--primary.btn--link:hover:not(:disabled):after {
+  width: calc(100% - 3.14285714em);
+}
+
+.btn--primary.btn[disabled], .btn--primary.btn--disabled {
+  background-color: #f2bc2b;
+  border: 1px solid #f2bc2b;
+  color: white;
+  opacity: 0.25;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.btn--primary.btn[disabled][active]:not(:disabled), .btn--primary.btn[disabled].active:not(:disabled), .btn--primary.btn[disabled]:active:not(:disabled), .btn--primary.btn[disabled]:hover:not(:disabled), .btn--primary.btn--disabled[active]:not(:disabled), .btn--primary.btn--disabled.active:not(:disabled), .btn--primary.btn--disabled:active:not(:disabled), .btn--primary.btn--disabled:hover:not(:disabled) {
+  background-color: #c4920c;
+  border-color: #c4920c;
 }
 
 .btn--secondary {
@@ -1046,65 +2538,61 @@ button {
   color: white;
 }
 
-.btn--secondary:active:not(:disabled), .btn--secondary:hover:not(:disabled), .btn--secondary.active:not(:disabled), .btn--secondary.btn--active:not(:disabled) {
+.btn--secondary[active]:not(:disabled), .btn--secondary.active:not(:disabled), .btn--secondary:active:not(:disabled), .btn--secondary:hover:not(:disabled) {
   background-color: #515151;
   border-color: #515151;
 }
 
-:checked + .btn--secondary:not(:disabled) {
-  background-color: #373737;
-  border-color: #373737;
-}
-
 .btn--secondary.btn--outline {
   color: #777;
+  background-color: transparent;
+  border: 1px solid #777;
 }
 
 .btn--secondary.btn--outline:active:not(:disabled), .btn--secondary.btn--outline:hover:not(:disabled), .btn--secondary.btn--outline.active:not(:disabled),
-:checked + .btn--secondary.btn--outline:not(:disabled),
-.btn--secondary.btn--outline .btn--active:not(:disabled) {
+:checked + .btn--secondary.btn--outline:not(:disabled) {
   background-color: #777;
   border-color: #777;
   color: white;
 }
 
-.btn--link {
-  background: transparent !important;
-  color: #f2bc2b !important;
+.btn--secondary.btn--link {
+  background-color: transparent !important;
+  color: #777 !important;
   border: none !important;
+  position: relative;
 }
 
-.btn--outline {
-  background-color: transparent;
+.btn--secondary.btn--link:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 0.60714286em;
+  left: 50%;
+  height: .2em;
+  width: 0;
+  transform: translateX(-50%) translateY(0) translateZ(0);
+  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
+  outline-color: black;
+  background: #777;
 }
 
-.btn[disabled],
-.btn--disabled {
-  opacity: 0.65;
+.btn--secondary.btn--link[active]:not(:disabled):after, .btn--secondary.btn--link.active:not(:disabled):after, .btn--secondary.btn--link:active:not(:disabled):after, .btn--secondary.btn--link:hover:not(:disabled):after {
+  width: calc(100% - 3.14285714em);
+}
+
+.btn--secondary.btn[disabled], .btn--secondary.btn--disabled {
+  background-color: #777;
+  border: 1px solid #777;
+  color: white;
+  opacity: 0.25;
   cursor: not-allowed !important;
+  pointer-events: none;
 }
 
-.btn-group > input[type="checkbox"],
-.btn-group > input[type="radio"] {
-  display: none;
-}
-
-.btn-group .btn {
-  float: left;
-}
-
-.btn-group .btn:not(:first-of-type):not(:last-of-type) {
-  border-radius: 0;
-}
-
-.btn-group .btn:first-of-type {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.btn-group .btn:last-of-type {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.btn--secondary.btn[disabled][active]:not(:disabled), .btn--secondary.btn[disabled].active:not(:disabled), .btn--secondary.btn[disabled]:active:not(:disabled), .btn--secondary.btn[disabled]:hover:not(:disabled), .btn--secondary.btn--disabled[active]:not(:disabled), .btn--secondary.btn--disabled.active:not(:disabled), .btn--secondary.btn--disabled:active:not(:disabled), .btn--secondary.btn--disabled:hover:not(:disabled) {
+  background-color: #515151;
+  border-color: #515151;
 }
 
 /**
@@ -1131,15 +2619,16 @@ button {
   background-size: 100% auto;
 }
 
-.s-corner-badge {
+s-corner-badge {
   position: absolute;
+  display: block;
 }
 
-.s-corner-badge > * {
+s-corner-badge > * {
   position: relative;
 }
 
-.s-corner-badge:before {
+s-corner-badge:before {
   content: '';
   display: block;
   position: absolute;
@@ -1147,23 +2636,23 @@ button {
   border-color: transparent;
 }
 
-.s-corner-badge {
+s-corner-badge {
   font-size: 1em;
   width: 4.14285714em;
   height: 4.14285714em;
   padding: 0.62857143em;
 }
 
-.s-corner-badge:before {
+s-corner-badge:before {
   border-width: 2.07142857em;
 }
 
-.s-corner-badge--tl {
+s-corner-badge[align="tl"] {
   top: 0;
   left: 0;
 }
 
-.s-corner-badge--tl:before {
+s-corner-badge[align="tl"]:before {
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
   border-left-color: transparent !important;
@@ -1171,25 +2660,25 @@ button {
   left: 0;
 }
 
-.s-corner-badge--tr {
+s-corner-badge[align="tr"] {
   top: 0;
   right: 0;
   text-align: right;
 }
 
-.s-corner-badge--tr:before {
+s-corner-badge[align="tr"]:before {
   border-bottom-color: transparent !important;
   border-left-color: transparent !important;
   top: 0;
   right: 0;
 }
 
-.s-corner-badge--bl {
+s-corner-badge[align="bl"] {
   bottom: 0;
   left: 0;
 }
 
-.s-corner-badge--bl:before {
+s-corner-badge[align="bl"]:before {
   border-top-color: transparent !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
@@ -1197,12 +2686,12 @@ button {
   left: 0;
 }
 
-.s-corner-badge--br {
+s-corner-badge[align="br"] {
   bottom: 0;
   right: 0;
 }
 
-.s-corner-badge--br:before {
+s-corner-badge[align="br"]:before {
   border-top-color: transparent !important;
   border-right-color: transparent !important;
   border-left-color: transparent !important;
@@ -1210,19 +2699,19 @@ button {
   right: 0;
 }
 
-.s-corner-badge--primary {
+s-corner-badge[color="primary"] {
   color: white;
 }
 
-.s-corner-badge--primary:before {
+s-corner-badge[color="primary"]:before {
   border-color: #f2bc2b;
 }
 
-.s-corner-badge--secondary {
+s-corner-badge[color="secondary"] {
   color: white;
 }
 
-.s-corner-badge--secondary:before {
+s-corner-badge[color="secondary"]:before {
   border-color: #777;
 }
 
@@ -1245,6 +2734,10 @@ button {
   visibility: visible;
   opacity: 1;
   pointer-events: all;
+}
+
+.dropdown {
+  position: relative;
 }
 
 .dropdown:hover, .dropdown.active, .dropdown.dropdown--active {
@@ -1299,15 +2792,17 @@ button {
   background-color: white;
   left: 0;
   position: relative;
+  color: #333;
   transition: left 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
 }
 
-.dropdown__item:hover, .dropdown__item.active, .dropdown__item.dropdown__item--active {
+.dropdown__item:hover, .dropdown__item.active, .dropdown__item.dropdown--active {
   left: 5px;
 }
 
 .dropdown__item > a {
+  color: #333;
   display: block;
   width: 100%;
 }
@@ -1323,7 +2818,7 @@ button {
 /**
  * Input
  */
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select.input {
+.input, .s-select.input {
   display: inline-block;
   font-family: "Helvetica Neue";
   -webkit-appearance: none;
@@ -1331,13 +2826,14 @@ button {
   border: none;
   outline: none;
   width: 100%;
+  font-size: 1em;
 }
 
-.input:not(.input-addon):not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select.input:not(.input-addon) {
+.input:not(.input-addon):not(textarea) {
   line-height: 1 !important;
 }
 
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select {
+.input, .s-select {
   border-width: 1px;
   border-bottom-width: 3px;
   border-style: solid;
@@ -1346,19 +2842,19 @@ button {
   outline-color: black;
 }
 
-.input:not(.noUi-target):not([type="radio"]):not([type="checkbox"])::-webkit-input-placeholder, .s-select::-webkit-input-placeholder {
+.input::-webkit-input-placeholder, .s-select::-webkit-input-placeholder {
   color: rgba(51, 51, 51, 0.4);
 }
 
-.input:-moz-placeholder:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select:-moz-placeholder {
+.input:-moz-placeholder, .s-select:-moz-placeholder {
   color: rgba(51, 51, 51, 0.4);
 }
 
-.input:not(.noUi-target):not([type="radio"]):not([type="checkbox"])::-moz-placeholder, .s-select::-moz-placeholder {
+.input::-moz-placeholder, .s-select::-moz-placeholder {
   color: rgba(51, 51, 51, 0.4);
 }
 
-.input:-ms-input-placeholder:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select:-ms-input-placeholder {
+.input:-ms-input-placeholder, .s-select:-ms-input-placeholder {
   color: rgba(51, 51, 51, 0.4);
 }
 
@@ -1366,29 +2862,34 @@ button {
   color: rgba(51, 51, 51, 0.4);
 }
 
-[data-input-activator]:focus ~ .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), [data-input-activator]:focus ~ .s-select, .input:focus:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select:focus {
+[data-input-activator]:focus ~ .input, [data-input-activator]:focus ~ .s-select, .input:focus, .s-select:focus {
   border-left-width: 5px;
 }
 
-.input:disabled:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .s-select:disabled {
-  opacity: .65;
+.input:disabled, .s-select:disabled {
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) {
+.input {
   border-radius: 0em;
-  padding: 1.21428571em 1.57142857em;
+  padding: 0 1.57142857em;
   height: 3.42857143em;
 }
 
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).vr:not(.no-vr),
-.vr .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):not(.no-vr), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) ~  span.vr:not(.no-vr),
-.vr .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) ~  span:not(.no-vr) {
+.input:not(input) {
+  padding: 1.21428571em 1.57142857em;
+}
+
+.input.vr:not(.no-vr),
+.vr .input:not(.no-vr), .input ~  span.vr:not(.no-vr),
+.vr .input ~  span:not(.no-vr) {
   margin-bottom: 1rem;
 }
 
 textarea.input {
   height: auto !important;
+  line-height: 1.5;
   padding: 1.21428571em 1.57142857em;
   display: inline-block;
 }
@@ -1398,23 +2899,22 @@ textarea.input.vr:not(.no-vr),
   margin-bottom: 1rem;
 }
 
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) {
+.input {
   background-color: white !important;
 }
 
-.input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) {
+.input {
   border-color: rgba(248, 248, 249, 0.1);
   border-bottom-color: rgba(248, 248, 249, 0.3);
 }
 
-[data-input-activator]:focus ~ .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):hover:not(:disabled):not(.input--disabled):not(.is-disabled), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input,
+[data-input-activator]:checked ~ .input, .input:hover:not(:disabled), .input:focus:not(:disabled), .input.active:not(:disabled) {
   border-bottom-color: rgba(248, 248, 249, 0.6);
-  box-shadow: rgba(248, 248, 249, 0.3) 0 6px 9px;
 }
 
-[data-input-activator]:focus ~ .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input,
+[data-input-activator]:checked ~ .input, .input:focus:not(:disabled), .input.active:not(:disabled) {
   border-left-color: rgba(248, 248, 249, 0.6);
 }
 
@@ -1422,19 +2922,18 @@ select.input {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill%3A%23f8f8f9"></polygon></svg>');
 }
 
-.input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) {
+.input--primary {
   border-color: rgba(242, 188, 43, 0.1);
   border-bottom-color: rgba(242, 188, 43, 0.3);
 }
 
-[data-input-activator]:focus ~ .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):hover:not(:disabled):not(.input--disabled):not(.is-disabled), .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input--primary,
+[data-input-activator]:checked ~ .input--primary, .input--primary:hover:not(:disabled), .input--primary:focus:not(:disabled), .input--primary.active:not(:disabled) {
   border-bottom-color: rgba(242, 188, 43, 0.6);
-  box-shadow: rgba(242, 188, 43, 0.3) 0 6px 9px;
 }
 
-[data-input-activator]:focus ~ .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input--primary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input--primary,
+[data-input-activator]:checked ~ .input--primary, .input--primary:focus:not(:disabled), .input--primary.active:not(:disabled) {
   border-left-color: rgba(242, 188, 43, 0.6);
 }
 
@@ -1442,19 +2941,18 @@ select.input--primary {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill%3A%23f2bc2b"></polygon></svg>');
 }
 
-.input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target) {
+.input--secondary {
   border-color: rgba(119, 119, 119, 0.1);
   border-bottom-color: rgba(119, 119, 119, 0.3);
 }
 
-[data-input-activator]:focus ~ .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):hover:not(:disabled):not(.input--disabled):not(.is-disabled), .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input--secondary,
+[data-input-activator]:checked ~ .input--secondary, .input--secondary:hover:not(:disabled), .input--secondary:focus:not(:disabled), .input--secondary.active:not(:disabled) {
   border-bottom-color: rgba(119, 119, 119, 0.6);
-  box-shadow: rgba(119, 119, 119, 0.3) 0 6px 9px;
 }
 
-[data-input-activator]:focus ~ .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target),
-[data-input-activator]:checked ~ .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target), .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target):focus:not(:disabled):not(.input--disabled):not(.is-disabled), .input--secondary:not([type="checkbox"]):not([type="radio"]):not(.noUi-target).active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:focus ~ .input--secondary,
+[data-input-activator]:checked ~ .input--secondary, .input--secondary:focus:not(:disabled), .input--secondary.active:not(:disabled) {
   border-left-color: rgba(119, 119, 119, 0.6);
 }
 
@@ -1942,7 +3440,7 @@ pre[class*="language-"] {
   z-index: 99999;
 }
 
-.tooltip {
+tooltip {
   position: absolute !important;
   pointer-events: none;
   border-radius: 0em;
@@ -1952,12 +3450,12 @@ pre[class*="language-"] {
   outline-color: black;
 }
 
-:hover > .tooltip,
-.active > .tooltip {
+:hover > tooltip,
+.active > tooltip {
   opacity: 1;
 }
 
-.tooltip {
+tooltip {
   box-shadow: rgba(0, 0, 0, 0.2) 0 10px 15px;
 }
 
@@ -1988,26 +3486,25 @@ pre[class*="language-"] {
   }
 }
 
-.tooltip {
+tooltip {
   background-color: #f8f8f9;
   color: #a6a6b2;
 }
 
-.tooltip.tooltip--c {
+tooltip[align="c"] {
   left: 50%;
   top: 50%;
   transform-origin: 0 0;
   transform: translateX(-50%) translateY(-50%) translateZ(0);
 }
 
-.tooltip--active > .tooltip.tooltip--c,
-.tooltip--hover > .tooltip.tooltip--c,
-.active > .tooltip.tooltip--c,
-:hover > .tooltip.tooltip--c {
+[active] > tooltip[align="c"],
+.active > tooltip[align="c"],
+:hover > tooltip[align="c"] {
   animation: s-tooltip-component--c 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip.tooltip--tr {
+tooltip[align="tr"] {
   transform-origin: 100% 100%;
   right: 0;
   bottom: calc(100% + 1em);
@@ -2017,7 +3514,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip.tooltip--tr:after, .tooltip.tooltip--tr:before {
+tooltip[align="tr"]:after, tooltip[align="tr"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2027,27 +3524,26 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip.tooltip--tr:after {
+tooltip[align="tr"]:after {
   border-width: 0.5em;
   border-top-color: #f8f8f9;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip.tooltip--tr:before {
+tooltip[align="tr"]:before {
   border-width: 0.5em;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip.tooltip--tr,
-.tooltip--hover > .tooltip.tooltip--tr,
-.active > .tooltip.tooltip--tr,
-:hover > .tooltip.tooltip--tr {
+[active] > tooltip[align="tr"],
+.active > tooltip[align="tr"],
+:hover > tooltip[align="tr"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip.tooltip--b {
+tooltip[align="b"] {
   transform-origin: 0 -1em;
   left: 50%;
   top: calc(100% + 1em);
@@ -2058,7 +3554,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip.tooltip--b:after, .tooltip.tooltip--b:before {
+tooltip[align="b"]:after, tooltip[align="b"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2068,7 +3564,7 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip.tooltip--b:after {
+tooltip[align="b"]:after {
   border-width: 0.5em;
   border-bottom-color: #f8f8f9;
   top: -1em;
@@ -2076,21 +3572,20 @@ pre[class*="language-"] {
   margin-right: -0.5em;
 }
 
-.tooltip.tooltip--b:before {
+tooltip[align="b"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 50%;
   margin-right: -0.5em;
 }
 
-.tooltip--active > .tooltip.tooltip--b,
-.tooltip--hover > .tooltip.tooltip--b,
-.active > .tooltip.tooltip--b,
-:hover > .tooltip.tooltip--b {
+[active] > tooltip[align="b"],
+.active > tooltip[align="b"],
+:hover > tooltip[align="b"] {
   animation: s-tooltip-component--b 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip.tooltip--br {
+tooltip[align="br"] {
   transform-origin: calc(100% - 1em) -1em;
   right: 0;
   top: calc(100% + 1em);
@@ -2100,7 +3595,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip.tooltip--br:after, .tooltip.tooltip--br:before {
+tooltip[align="br"]:after, tooltip[align="br"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2110,46 +3605,44 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip.tooltip--br:after {
+tooltip[align="br"]:after {
   border-width: 0.5em;
   border-bottom-color: #f8f8f9;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip.tooltip--br:before {
+tooltip[align="br"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip.tooltip--br,
-.tooltip--hover > .tooltip.tooltip--br,
-.active > .tooltip.tooltip--br,
-:hover > .tooltip.tooltip--br {
+[active] > tooltip[align="br"],
+.active > tooltip[align="br"],
+:hover > tooltip[align="br"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--primary {
+tooltip[color="primary"] {
   background-color: #f2bc2b;
   color: white;
 }
 
-.tooltip--primary.tooltip--c {
+tooltip[color="primary"][align="c"] {
   left: 50%;
   top: 50%;
   transform-origin: 0 0;
   transform: translateX(-50%) translateY(-50%) translateZ(0);
 }
 
-.tooltip--active > .tooltip--primary.tooltip--c,
-.tooltip--hover > .tooltip--primary.tooltip--c,
-.active > .tooltip--primary.tooltip--c,
-:hover > .tooltip--primary.tooltip--c {
+[active] > tooltip[color="primary"][align="c"],
+.active > tooltip[color="primary"][align="c"],
+:hover > tooltip[color="primary"][align="c"] {
   animation: s-tooltip-component--c 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--primary.tooltip--tr {
+tooltip[color="primary"][align="tr"] {
   transform-origin: 100% 100%;
   right: 0;
   bottom: calc(100% + 1em);
@@ -2159,7 +3652,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--primary.tooltip--tr:after, .tooltip--primary.tooltip--tr:before {
+tooltip[color="primary"][align="tr"]:after, tooltip[color="primary"][align="tr"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2169,27 +3662,26 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--primary.tooltip--tr:after {
+tooltip[color="primary"][align="tr"]:after {
   border-width: 0.5em;
   border-top-color: #f2bc2b;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip--primary.tooltip--tr:before {
+tooltip[color="primary"][align="tr"]:before {
   border-width: 0.5em;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip--primary.tooltip--tr,
-.tooltip--hover > .tooltip--primary.tooltip--tr,
-.active > .tooltip--primary.tooltip--tr,
-:hover > .tooltip--primary.tooltip--tr {
+[active] > tooltip[color="primary"][align="tr"],
+.active > tooltip[color="primary"][align="tr"],
+:hover > tooltip[color="primary"][align="tr"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--primary.tooltip--b {
+tooltip[color="primary"][align="b"] {
   transform-origin: 0 -1em;
   left: 50%;
   top: calc(100% + 1em);
@@ -2200,7 +3692,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--primary.tooltip--b:after, .tooltip--primary.tooltip--b:before {
+tooltip[color="primary"][align="b"]:after, tooltip[color="primary"][align="b"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2210,7 +3702,7 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--primary.tooltip--b:after {
+tooltip[color="primary"][align="b"]:after {
   border-width: 0.5em;
   border-bottom-color: #f2bc2b;
   top: -1em;
@@ -2218,21 +3710,20 @@ pre[class*="language-"] {
   margin-right: -0.5em;
 }
 
-.tooltip--primary.tooltip--b:before {
+tooltip[color="primary"][align="b"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 50%;
   margin-right: -0.5em;
 }
 
-.tooltip--active > .tooltip--primary.tooltip--b,
-.tooltip--hover > .tooltip--primary.tooltip--b,
-.active > .tooltip--primary.tooltip--b,
-:hover > .tooltip--primary.tooltip--b {
+[active] > tooltip[color="primary"][align="b"],
+.active > tooltip[color="primary"][align="b"],
+:hover > tooltip[color="primary"][align="b"] {
   animation: s-tooltip-component--b 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--primary.tooltip--br {
+tooltip[color="primary"][align="br"] {
   transform-origin: calc(100% - 1em) -1em;
   right: 0;
   top: calc(100% + 1em);
@@ -2242,7 +3733,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--primary.tooltip--br:after, .tooltip--primary.tooltip--br:before {
+tooltip[color="primary"][align="br"]:after, tooltip[color="primary"][align="br"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2252,46 +3743,44 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--primary.tooltip--br:after {
+tooltip[color="primary"][align="br"]:after {
   border-width: 0.5em;
   border-bottom-color: #f2bc2b;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip--primary.tooltip--br:before {
+tooltip[color="primary"][align="br"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip--primary.tooltip--br,
-.tooltip--hover > .tooltip--primary.tooltip--br,
-.active > .tooltip--primary.tooltip--br,
-:hover > .tooltip--primary.tooltip--br {
+[active] > tooltip[color="primary"][align="br"],
+.active > tooltip[color="primary"][align="br"],
+:hover > tooltip[color="primary"][align="br"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--secondary {
+tooltip[color="secondary"] {
   background-color: #777;
   color: white;
 }
 
-.tooltip--secondary.tooltip--c {
+tooltip[color="secondary"][align="c"] {
   left: 50%;
   top: 50%;
   transform-origin: 0 0;
   transform: translateX(-50%) translateY(-50%) translateZ(0);
 }
 
-.tooltip--active > .tooltip--secondary.tooltip--c,
-.tooltip--hover > .tooltip--secondary.tooltip--c,
-.active > .tooltip--secondary.tooltip--c,
-:hover > .tooltip--secondary.tooltip--c {
+[active] > tooltip[color="secondary"][align="c"],
+.active > tooltip[color="secondary"][align="c"],
+:hover > tooltip[color="secondary"][align="c"] {
   animation: s-tooltip-component--c 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--secondary.tooltip--tr {
+tooltip[color="secondary"][align="tr"] {
   transform-origin: 100% 100%;
   right: 0;
   bottom: calc(100% + 1em);
@@ -2301,7 +3790,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--secondary.tooltip--tr:after, .tooltip--secondary.tooltip--tr:before {
+tooltip[color="secondary"][align="tr"]:after, tooltip[color="secondary"][align="tr"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2311,27 +3800,26 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--secondary.tooltip--tr:after {
+tooltip[color="secondary"][align="tr"]:after {
   border-width: 0.5em;
   border-top-color: #777;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip--secondary.tooltip--tr:before {
+tooltip[color="secondary"][align="tr"]:before {
   border-width: 0.5em;
   bottom: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip--secondary.tooltip--tr,
-.tooltip--hover > .tooltip--secondary.tooltip--tr,
-.active > .tooltip--secondary.tooltip--tr,
-:hover > .tooltip--secondary.tooltip--tr {
+[active] > tooltip[color="secondary"][align="tr"],
+.active > tooltip[color="secondary"][align="tr"],
+:hover > tooltip[color="secondary"][align="tr"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--secondary.tooltip--b {
+tooltip[color="secondary"][align="b"] {
   transform-origin: 0 -1em;
   left: 50%;
   top: calc(100% + 1em);
@@ -2342,7 +3830,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--secondary.tooltip--b:after, .tooltip--secondary.tooltip--b:before {
+tooltip[color="secondary"][align="b"]:after, tooltip[color="secondary"][align="b"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2352,7 +3840,7 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--secondary.tooltip--b:after {
+tooltip[color="secondary"][align="b"]:after {
   border-width: 0.5em;
   border-bottom-color: #777;
   top: -1em;
@@ -2360,21 +3848,20 @@ pre[class*="language-"] {
   margin-right: -0.5em;
 }
 
-.tooltip--secondary.tooltip--b:before {
+tooltip[color="secondary"][align="b"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 50%;
   margin-right: -0.5em;
 }
 
-.tooltip--active > .tooltip--secondary.tooltip--b,
-.tooltip--hover > .tooltip--secondary.tooltip--b,
-.active > .tooltip--secondary.tooltip--b,
-:hover > .tooltip--secondary.tooltip--b {
+[active] > tooltip[color="secondary"][align="b"],
+.active > tooltip[color="secondary"][align="b"],
+:hover > tooltip[color="secondary"][align="b"] {
   animation: s-tooltip-component--b 0.1s 0s ease-in-out 1 normal forwards;
 }
 
-.tooltip--secondary.tooltip--br {
+tooltip[color="secondary"][align="br"] {
   transform-origin: calc(100% - 1em) -1em;
   right: 0;
   top: calc(100% + 1em);
@@ -2384,7 +3871,7 @@ pre[class*="language-"] {
   border-width: 0;
 }
 
-.tooltip--secondary.tooltip--br:after, .tooltip--secondary.tooltip--br:before {
+tooltip[color="secondary"][align="br"]:after, tooltip[color="secondary"][align="br"]:before {
   border: solid transparent;
   content: " ";
   height: 0;
@@ -2394,23 +3881,22 @@ pre[class*="language-"] {
   visibility: visible;
 }
 
-.tooltip--secondary.tooltip--br:after {
+tooltip[color="secondary"][align="br"]:after {
   border-width: 0.5em;
   border-bottom-color: #777;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip--secondary.tooltip--br:before {
+tooltip[color="secondary"][align="br"]:before {
   border-width: 0.5em;
   top: -1em;
   right: 0.5em;
 }
 
-.tooltip--active > .tooltip--secondary.tooltip--br,
-.tooltip--hover > .tooltip--secondary.tooltip--br,
-.active > .tooltip--secondary.tooltip--br,
-:hover > .tooltip--secondary.tooltip--br {
+[active] > tooltip[color="secondary"][align="br"],
+.active > tooltip[color="secondary"][align="br"],
+:hover > tooltip[color="secondary"][align="br"] {
   animation: s-tooltip-component 0.1s 0s ease-in-out 1 normal forwards;
 }
 
@@ -2462,11 +3948,25 @@ pre[class*="language-"] {
   left: 0;
   transform: translateX(0) translateY(-50%) translateZ(0);
   width: 100%;
-  height: 0;
+  height: 100%;
   transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
-  mix-blend-mode: darken;
+  border-width: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-top-width: 0.07142857rem;
+  border-bottom-width: 0.07142857rem;
   pointer-events: none;
+}
+
+.s-table .th:last-child:before, .markdown table .th:last-child:before, .s-table th:last-child:before, .markdown table th:last-child:before,
+.s-table .td:last-child:before, .markdown table .td:last-child:before, .s-table td:last-child:before, .markdown table td:last-child:before {
+  border-right-width: 1px;
+}
+
+.s-table .th:first-child:before, .markdown table .th:first-child:before, .s-table th:first-child:before, .markdown table th:first-child:before,
+.s-table .td:first-child:before, .markdown table .td:first-child:before, .s-table td:first-child:before, .markdown table td:first-child:before {
+  border-left-width: 1px;
 }
 
 .s-table .th, .markdown table .th, .s-table th, .markdown table th {
@@ -2515,22 +4015,17 @@ pre[class*="language-"] {
   box-shadow: #333 0 0 32px;
 }
 
-.s-table.s-table--hover > tbody > .tr:hover td:before, .markdown table > tbody > .tr:hover td:before, .s-table.s-table--hover > tbody > .tr:hover .td:before, .markdown table > tbody > .tr:hover .td:before,
-.s-table.s-table--hover > tbody > .tr:hover th:before, .markdown table > tbody > .tr:hover th:before, .s-table.s-table--hover > tbody > .tr:hover .th:before, .markdown table > tbody > .tr:hover .th:before,
-.s-table.s-table--hover > tbody > tr:hover td:before, .markdown table > tbody > tr:hover td:before,
-.s-table.s-table--hover > tbody > tr:hover .td:before, .markdown table > tbody > tr:hover .td:before,
-.s-table.s-table--hover > tbody > tr:hover th:before, .markdown table > tbody > tr:hover th:before,
-.s-table.s-table--hover > tbody > tr:hover .th:before, .markdown table > tbody > tr:hover .th:before {
-  height: 100%;
-}
-
-.s-table.s-table.s-table--striped > thead > .tr:nth-of-type(odd), .markdown table > thead > .tr:nth-of-type(odd),
-.s-table.s-table.s-table--striped > thead > tr:nth-of-type(odd), .markdown table > thead > tr:nth-of-type(odd) {
+.s-table.s-table.s-table--striped > thead > .tr:nth-of-type(odd) > td, .markdown table > thead > .tr:nth-of-type(odd) > td,
+.s-table.s-table.s-table--striped > thead > .tr:nth-of-type(odd) > th, .markdown table > thead > .tr:nth-of-type(odd) > th,
+.s-table.s-table.s-table--striped > thead > tr:nth-of-type(odd) > td, .markdown table > thead > tr:nth-of-type(odd) > td,
+.s-table.s-table.s-table--striped > thead > tr:nth-of-type(odd) > th, .markdown table > thead > tr:nth-of-type(odd) > th {
   background-color: #f8f8f9;
 }
 
-.s-table.s-table.s-table--striped > tbody > .tr:nth-of-type(even), .markdown table > tbody > .tr:nth-of-type(even),
-.s-table.s-table.s-table--striped > tbody > tr:nth-of-type(even), .markdown table > tbody > tr:nth-of-type(even) {
+.s-table.s-table.s-table--striped > tbody > .tr:nth-of-type(even) > td, .markdown table > tbody > .tr:nth-of-type(even) > td,
+.s-table.s-table.s-table--striped > tbody > .tr:nth-of-type(even) > th, .markdown table > tbody > .tr:nth-of-type(even) > th,
+.s-table.s-table.s-table--striped > tbody > tr:nth-of-type(even) > td, .markdown table > tbody > tr:nth-of-type(even) > td,
+.s-table.s-table.s-table--striped > tbody > tr:nth-of-type(even) > th, .markdown table > tbody > tr:nth-of-type(even) > th {
   background-color: rgba(248, 248, 249, 0.6);
 }
 
@@ -2543,31 +4038,35 @@ pre[class*="language-"] {
   border-right: 1px solid rgba(248, 248, 249, 0.8);
 }
 
-.s-table.s-table.s-table--hover td:before, .markdown table td:before, .s-table.s-table.s-table--hover .td:before, .markdown table .td:before,
-.s-table.s-table.s-table--hover th:before, .markdown table th:before, .s-table.s-table.s-table--hover .th:before, .markdown table .th:before {
-  background-color: #eaeaed;
-}
-
-.s-table.s-table.s-table--hover > tbody > .tr, .markdown table > tbody > .tr,
-.s-table.s-table.s-table--hover > tbody > tr, .markdown table > tbody > tr {
-  transform: scale(1, 1);
-}
-
-.s-table.s-table.s-table--hover > tbody > .tr:hover, .markdown table > tbody > .tr:hover,
-.s-table.s-table.s-table--hover > tbody > tr:hover, .markdown table > tbody > tr:hover {
+.s-table.s-table.s-table--hover > tbody > .tr:hover td, .markdown table > tbody > .tr:hover td, .s-table.s-table.s-table--hover > tbody > .tr:hover .td, .markdown table > tbody > .tr:hover .td,
+.s-table.s-table.s-table--hover > tbody > .tr:hover th, .markdown table > tbody > .tr:hover th, .s-table.s-table.s-table--hover > tbody > .tr:hover .th, .markdown table > tbody > .tr:hover .th,
+.s-table.s-table.s-table--hover > tbody > tr:hover td, .markdown table > tbody > tr:hover td,
+.s-table.s-table.s-table--hover > tbody > tr:hover .td, .markdown table > tbody > tr:hover .td,
+.s-table.s-table.s-table--hover > tbody > tr:hover th, .markdown table > tbody > tr:hover th,
+.s-table.s-table.s-table--hover > tbody > tr:hover .th, .markdown table > tbody > tr:hover .th {
   background-color: #f8f8f9;
-  transform: scale(1.01, 1.01);
-  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
-  outline-color: black;
 }
 
-.s-table.s-table--primary.s-table--striped > thead > .tr:nth-of-type(odd), .markdown table.s-table--primary > thead > .tr:nth-of-type(odd),
-.s-table.s-table--primary.s-table--striped > thead > tr:nth-of-type(odd), .markdown table.s-table--primary > thead > tr:nth-of-type(odd) {
+.s-table.s-table.s-table--hover > tbody > .tr:hover td:before, .markdown table > tbody > .tr:hover td:before, .s-table.s-table.s-table--hover > tbody > .tr:hover .td:before, .markdown table > tbody > .tr:hover .td:before,
+.s-table.s-table.s-table--hover > tbody > .tr:hover th:before, .markdown table > tbody > .tr:hover th:before, .s-table.s-table.s-table--hover > tbody > .tr:hover .th:before, .markdown table > tbody > .tr:hover .th:before,
+.s-table.s-table.s-table--hover > tbody > tr:hover td:before, .markdown table > tbody > tr:hover td:before,
+.s-table.s-table.s-table--hover > tbody > tr:hover .td:before, .markdown table > tbody > tr:hover .td:before,
+.s-table.s-table.s-table--hover > tbody > tr:hover th:before, .markdown table > tbody > tr:hover th:before,
+.s-table.s-table.s-table--hover > tbody > tr:hover .th:before, .markdown table > tbody > tr:hover .th:before {
+  border-color: #dddde1;
+}
+
+.s-table.s-table--primary.s-table--striped > thead > .tr:nth-of-type(odd) > td, .markdown table.s-table--primary > thead > .tr:nth-of-type(odd) > td,
+.s-table.s-table--primary.s-table--striped > thead > .tr:nth-of-type(odd) > th, .markdown table.s-table--primary > thead > .tr:nth-of-type(odd) > th,
+.s-table.s-table--primary.s-table--striped > thead > tr:nth-of-type(odd) > td, .markdown table.s-table--primary > thead > tr:nth-of-type(odd) > td,
+.s-table.s-table--primary.s-table--striped > thead > tr:nth-of-type(odd) > th, .markdown table.s-table--primary > thead > tr:nth-of-type(odd) > th {
   background-color: #f2bc2b;
 }
 
-.s-table.s-table--primary.s-table--striped > tbody > .tr:nth-of-type(even), .markdown table.s-table--primary > tbody > .tr:nth-of-type(even),
-.s-table.s-table--primary.s-table--striped > tbody > tr:nth-of-type(even), .markdown table.s-table--primary > tbody > tr:nth-of-type(even) {
+.s-table.s-table--primary.s-table--striped > tbody > .tr:nth-of-type(even) > td, .markdown table.s-table--primary > tbody > .tr:nth-of-type(even) > td,
+.s-table.s-table--primary.s-table--striped > tbody > .tr:nth-of-type(even) > th, .markdown table.s-table--primary > tbody > .tr:nth-of-type(even) > th,
+.s-table.s-table--primary.s-table--striped > tbody > tr:nth-of-type(even) > td, .markdown table.s-table--primary > tbody > tr:nth-of-type(even) > td,
+.s-table.s-table--primary.s-table--striped > tbody > tr:nth-of-type(even) > th, .markdown table.s-table--primary > tbody > tr:nth-of-type(even) > th {
   background-color: rgba(242, 188, 43, 0.6);
 }
 
@@ -2580,31 +4079,35 @@ pre[class*="language-"] {
   border-right: 1px solid rgba(242, 188, 43, 0.8);
 }
 
-.s-table.s-table--primary.s-table--hover td:before, .markdown table.s-table--primary td:before, .s-table.s-table--primary.s-table--hover .td:before, .markdown table.s-table--primary .td:before,
-.s-table.s-table--primary.s-table--hover th:before, .markdown table.s-table--primary th:before, .s-table.s-table--primary.s-table--hover .th:before, .markdown table.s-table--primary .th:before {
-  background-color: #f1b413;
-}
-
-.s-table.s-table--primary.s-table--hover > tbody > .tr, .markdown table.s-table--primary > tbody > .tr,
-.s-table.s-table--primary.s-table--hover > tbody > tr, .markdown table.s-table--primary > tbody > tr {
-  transform: scale(1, 1);
-}
-
-.s-table.s-table--primary.s-table--hover > tbody > .tr:hover, .markdown table.s-table--primary > tbody > .tr:hover,
-.s-table.s-table--primary.s-table--hover > tbody > tr:hover, .markdown table.s-table--primary > tbody > tr:hover {
+.s-table.s-table--primary.s-table--hover > tbody > .tr:hover td, .markdown table.s-table--primary > tbody > .tr:hover td, .s-table.s-table--primary.s-table--hover > tbody > .tr:hover .td, .markdown table.s-table--primary > tbody > .tr:hover .td,
+.s-table.s-table--primary.s-table--hover > tbody > .tr:hover th, .markdown table.s-table--primary > tbody > .tr:hover th, .s-table.s-table--primary.s-table--hover > tbody > .tr:hover .th, .markdown table.s-table--primary > tbody > .tr:hover .th,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover td, .markdown table.s-table--primary > tbody > tr:hover td,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover .td, .markdown table.s-table--primary > tbody > tr:hover .td,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover th, .markdown table.s-table--primary > tbody > tr:hover th,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover .th, .markdown table.s-table--primary > tbody > tr:hover .th {
   background-color: #f2bc2b;
-  transform: scale(1.01, 1.01);
-  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
-  outline-color: black;
 }
 
-.s-table.s-table--secondary.s-table--striped > thead > .tr:nth-of-type(odd), .markdown table.s-table--secondary > thead > .tr:nth-of-type(odd),
-.s-table.s-table--secondary.s-table--striped > thead > tr:nth-of-type(odd), .markdown table.s-table--secondary > thead > tr:nth-of-type(odd) {
+.s-table.s-table--primary.s-table--hover > tbody > .tr:hover td:before, .markdown table.s-table--primary > tbody > .tr:hover td:before, .s-table.s-table--primary.s-table--hover > tbody > .tr:hover .td:before, .markdown table.s-table--primary > tbody > .tr:hover .td:before,
+.s-table.s-table--primary.s-table--hover > tbody > .tr:hover th:before, .markdown table.s-table--primary > tbody > .tr:hover th:before, .s-table.s-table--primary.s-table--hover > tbody > .tr:hover .th:before, .markdown table.s-table--primary > tbody > .tr:hover .th:before,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover td:before, .markdown table.s-table--primary > tbody > tr:hover td:before,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover .td:before, .markdown table.s-table--primary > tbody > tr:hover .td:before,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover th:before, .markdown table.s-table--primary > tbody > tr:hover th:before,
+.s-table.s-table--primary.s-table--hover > tbody > tr:hover .th:before, .markdown table.s-table--primary > tbody > tr:hover .th:before {
+  border-color: #dca40e;
+}
+
+.s-table.s-table--secondary.s-table--striped > thead > .tr:nth-of-type(odd) > td, .markdown table.s-table--secondary > thead > .tr:nth-of-type(odd) > td,
+.s-table.s-table--secondary.s-table--striped > thead > .tr:nth-of-type(odd) > th, .markdown table.s-table--secondary > thead > .tr:nth-of-type(odd) > th,
+.s-table.s-table--secondary.s-table--striped > thead > tr:nth-of-type(odd) > td, .markdown table.s-table--secondary > thead > tr:nth-of-type(odd) > td,
+.s-table.s-table--secondary.s-table--striped > thead > tr:nth-of-type(odd) > th, .markdown table.s-table--secondary > thead > tr:nth-of-type(odd) > th {
   background-color: #777;
 }
 
-.s-table.s-table--secondary.s-table--striped > tbody > .tr:nth-of-type(even), .markdown table.s-table--secondary > tbody > .tr:nth-of-type(even),
-.s-table.s-table--secondary.s-table--striped > tbody > tr:nth-of-type(even), .markdown table.s-table--secondary > tbody > tr:nth-of-type(even) {
+.s-table.s-table--secondary.s-table--striped > tbody > .tr:nth-of-type(even) > td, .markdown table.s-table--secondary > tbody > .tr:nth-of-type(even) > td,
+.s-table.s-table--secondary.s-table--striped > tbody > .tr:nth-of-type(even) > th, .markdown table.s-table--secondary > tbody > .tr:nth-of-type(even) > th,
+.s-table.s-table--secondary.s-table--striped > tbody > tr:nth-of-type(even) > td, .markdown table.s-table--secondary > tbody > tr:nth-of-type(even) > td,
+.s-table.s-table--secondary.s-table--striped > tbody > tr:nth-of-type(even) > th, .markdown table.s-table--secondary > tbody > tr:nth-of-type(even) > th {
   background-color: rgba(119, 119, 119, 0.6);
 }
 
@@ -2617,22 +4120,22 @@ pre[class*="language-"] {
   border-right: 1px solid rgba(119, 119, 119, 0.8);
 }
 
-.s-table.s-table--secondary.s-table--hover td:before, .markdown table.s-table--secondary td:before, .s-table.s-table--secondary.s-table--hover .td:before, .markdown table.s-table--secondary .td:before,
-.s-table.s-table--secondary.s-table--hover th:before, .markdown table.s-table--secondary th:before, .s-table.s-table--secondary.s-table--hover .th:before, .markdown table.s-table--secondary .th:before {
-  background-color: #6a6a6a;
-}
-
-.s-table.s-table--secondary.s-table--hover > tbody > .tr, .markdown table.s-table--secondary > tbody > .tr,
-.s-table.s-table--secondary.s-table--hover > tbody > tr, .markdown table.s-table--secondary > tbody > tr {
-  transform: scale(1, 1);
-}
-
-.s-table.s-table--secondary.s-table--hover > tbody > .tr:hover, .markdown table.s-table--secondary > tbody > .tr:hover,
-.s-table.s-table--secondary.s-table--hover > tbody > tr:hover, .markdown table.s-table--secondary > tbody > tr:hover {
+.s-table.s-table--secondary.s-table--hover > tbody > .tr:hover td, .markdown table.s-table--secondary > tbody > .tr:hover td, .s-table.s-table--secondary.s-table--hover > tbody > .tr:hover .td, .markdown table.s-table--secondary > tbody > .tr:hover .td,
+.s-table.s-table--secondary.s-table--hover > tbody > .tr:hover th, .markdown table.s-table--secondary > tbody > .tr:hover th, .s-table.s-table--secondary.s-table--hover > tbody > .tr:hover .th, .markdown table.s-table--secondary > tbody > .tr:hover .th,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover td, .markdown table.s-table--secondary > tbody > tr:hover td,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover .td, .markdown table.s-table--secondary > tbody > tr:hover .td,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover th, .markdown table.s-table--secondary > tbody > tr:hover th,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover .th, .markdown table.s-table--secondary > tbody > tr:hover .th {
   background-color: #777;
-  transform: scale(1.01, 1.01);
-  transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
-  outline-color: black;
+}
+
+.s-table.s-table--secondary.s-table--hover > tbody > .tr:hover td:before, .markdown table.s-table--secondary > tbody > .tr:hover td:before, .s-table.s-table--secondary.s-table--hover > tbody > .tr:hover .td:before, .markdown table.s-table--secondary > tbody > .tr:hover .td:before,
+.s-table.s-table--secondary.s-table--hover > tbody > .tr:hover th:before, .markdown table.s-table--secondary > tbody > .tr:hover th:before, .s-table.s-table--secondary.s-table--hover > tbody > .tr:hover .th:before, .markdown table.s-table--secondary > tbody > .tr:hover .th:before,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover td:before, .markdown table.s-table--secondary > tbody > tr:hover td:before,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover .td:before, .markdown table.s-table--secondary > tbody > tr:hover .td:before,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover th:before, .markdown table.s-table--secondary > tbody > tr:hover th:before,
+.s-table.s-table--secondary.s-table--hover > tbody > tr:hover .th:before, .markdown table.s-table--secondary > tbody > tr:hover .th:before {
+  border-color: #5e5e5e;
 }
 
 /* BLOCKS
@@ -2650,21 +4153,22 @@ html, body {
   height: 100%;
 }
 
-s-component-item("toggle") {
+input[is="s-drawer-toggle"] {
   position: fixed;
   top: 0;
   left: 0;
   opacity: 0;
 }
 
-[s-drawer="team"] {
+s-drawer[name="team"] {
   position: fixed;
+  display: block;
   left: auto;
   right: -500px;
   height: 100%;
   width: 500px;
   top: 0;
-  z-index: 0;
+  z-index: 1;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -2673,7 +4177,7 @@ s-component-item("toggle") {
 }
 
 /* actual page content pane */
-s-component-item("content") {
+s-drawer-content {
   transform: translateX(0) translateY(0) translateZ(0);
   width: 100%;
   min-height: 100vh;
@@ -2681,16 +4185,16 @@ s-component-item("content") {
   outline-color: black;
   background-color: white;
   position: relative;
-  z-index: 3;
+  display: block;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
 }
 
-s-component-item("overlay")s-component-item("team") {
+label[is="s-drawer-overlay"][for="team"] {
   position: fixed;
-  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
@@ -2705,19 +4209,20 @@ s-component-item("overlay")s-component-item("team") {
   z-index: 4;
 }
 
-s-component-item("bkg")s-component-item("team") {
+s-drawer-bkg[for="team"] {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 0;
   visibility: hidden;
   transition: all, 0.2s, ease-in-out, 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
 }
 
-s-component-item("toggle")s-component-item("team"):checked ~ s-component-item("overlay")s-component-item("team") {
+input[is="s-drawer-toggle"][name="team"]:checked ~ label[is="s-drawer-overlay"][for="team"] {
   opacity: 1;
   pointer-events: all;
   left: auto;
@@ -2725,23 +4230,20 @@ s-component-item("toggle")s-component-item("team"):checked ~ s-component-item("o
   cursor: pointer;
 }
 
-s-component-item("toggle")s-component-item("team"):checked ~ s-component-item("bkg")s-component-item("team") {
+input[is="s-drawer-toggle"][name="team"]:checked ~ s-drawer-bkg[for="team"] {
   visibility: visible;
-  z-index: 2;
   transition: visibility 0s linear 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
 }
 
-s-component-item("toggle")s-component-item("team"):checked ~ [s-drawer="team"] {
-  z-index: 3;
+input[is="s-drawer-toggle"][name="team"]:checked ~ s-drawer[name="team"] {
   left: auto;
   right: 0;
 }
 
-s-component-item("toggle")s-component-item("team"):checked ~ s-component-item("content") {
+input[is="s-drawer-toggle"][name="team"]:checked ~ s-drawer-content {
   left: auto;
   right: 500px;
-  z-index: 3;
 }
 
 /**
@@ -2773,25 +4275,21 @@ body.s-drawer-menu {
 
 .s-form-group input[type="submit"], .s-form-group button,
 .s-form-group .s-form-addon {
-  flex: 0;
-}
-
-.s-form-group > * {
-  margin-top: 0 !important;
+  flex: 0 auto;
 }
 
 .s-form-group > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
-.s-form-group > label {
+.s-form-group > label:first-of-type:last-of-type {
   flex: 1 !important;
   margin-top: 0 !important;
 }
 
-.label {
+[is="label"] {
   position: relative;
   display: block;
 }
 
-.label > input {
+[is="label"] > input {
   transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
   padding-left: 0;
@@ -2800,7 +4298,7 @@ body.s-drawer-menu {
   border-top: none !important;
 }
 
-.label > span {
+[is="label"] > span {
   display: inline-block;
   padding: 1.21428571em 1.57142857em;
   padding-left: 0;
@@ -2817,14 +4315,14 @@ body.s-drawer-menu {
   outline-color: black;
 }
 
-.label > input[value]:not([value=""]) ~ span,
-.label > input:focus ~ span {
+[is="label"] > input[has-value] ~ span,
+[is="label"] > input:focus ~ span {
   font-size: 0.7em;
   padding: 0;
 }
 
-.label > input[value]:not([value=""]),
-.label > input:focus {
+[is="label"] > input[has-value],
+[is="label"] > input:focus {
   padding-left: 0 !important;
   padding-top: 1.615em !important;
   padding-bottom: 0.80952381em !important;
@@ -2832,11 +4330,13 @@ body.s-drawer-menu {
 
 .s-select {
   position: relative;
+  cursor: pointer;
 }
 
 select:disabled + .s-select {
-  opacity: .65;
+  opacity: 0.25;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .s-select__dropdown {
@@ -2884,7 +4384,7 @@ select:disabled + .s-select {
 }
 
 .s-select__option--disabled {
-  opacity: .65;
+  opacity: 0.25;
   pointer-events: none;
 }
 
@@ -2896,8 +4396,37 @@ select:disabled + .s-select {
   display: inline-block;
 }
 
+.s-select__reset {
+  display: none;
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+}
+
+:hover > .s-select__reset {
+  display: inline-block;
+}
+
 .s-select__selection-tag-close {
   background-size: 100% 100%;
+}
+
+.s-select__selection-tag-close {
+  height: 0.8em;
+  width: 0.8em;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.s-select__reset {
+  right: 3.64285714em;
+  top: 1.57142857em;
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 .s-select__search-field {
@@ -2911,8 +4440,12 @@ select:disabled + .s-select {
   background-origin: content-box;
   background-repeat: no-repeat;
   border-radius: 0em;
-  padding: 1.21428571em 1.57142857em;
+  padding: 0 1.57142857em;
   height: 3.42857143em;
+}
+
+.s-select.input:not(input) {
+  padding: 1.21428571em 1.57142857em;
 }
 
 .s-select.input.s-select__multiple {
@@ -2934,9 +4467,13 @@ select:disabled + .s-select {
 
 .s-select.input .s-select__search-field {
   border-radius: 0em;
-  padding: 1.21428571em 1.57142857em;
+  padding: 0 1.57142857em;
   height: 3.42857143em;
   border-radius: 0em;
+}
+
+.s-select.input .s-select__search-field:not(input) {
+  padding: 1.21428571em 1.57142857em;
 }
 
 .s-select.input .s-select__selection-tag {
@@ -2969,13 +4506,12 @@ select:disabled + .s-select {
 }
 
 [data-input-activator]:focus ~ .s-select,
-[data-input-activator]:checked ~ .s-select, .s-select:hover:not(:disabled):not(.input--disabled):not(.is-disabled), .s-select:focus:not(:disabled):not(.input--disabled):not(.is-disabled), .s-select.active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:checked ~ .s-select, .s-select:hover:not(:disabled), .s-select:focus:not(:disabled), .s-select.active:not(:disabled) {
   border-bottom-color: rgba(51, 51, 51, 0.6);
-  box-shadow: rgba(51, 51, 51, 0.3) 0 6px 9px;
 }
 
 [data-input-activator]:focus ~ .s-select,
-[data-input-activator]:checked ~ .s-select, .s-select:focus:not(:disabled):not(.input--disabled):not(.is-disabled), .s-select.active:not(:disabled):not(.input--disabled):not(.is-disabled) {
+[data-input-activator]:checked ~ .s-select, .s-select:focus:not(:disabled), .s-select.active:not(:disabled) {
   border-left-color: rgba(51, 51, 51, 0.6);
 }
 
@@ -3026,21 +4562,20 @@ select:disabled + .s-select {
   margin-top: 0;
 }
 
-.s-select__selection-tag-close {
-  height: 0.8em;
-  width: 0.8em;
-  vertical-align: middle;
-  cursor: pointer;
-  display: inline-block;
-}
-
 .s-select.input .s-select__optgroup:not(.s-select__optgroup--custom) {
   font-weight: bold;
 }
 
 .s-select__option {
+  color: #333;
   transition: all 0.1s ease-in-out 0s, outline-color 0.000001s linear 0s;
   outline-color: black;
+}
+
+select[required] + .s-select--placeholder .s-select__selection:after {
+  content: ' *';
+  color: #d9534f;
+  font-size: .7em;
 }
 
 .s-select .s-select__search-container {
@@ -3053,16 +4588,18 @@ select:disabled + .s-select {
   color: white;
 }
 
+.s-select .s-select__reset,
 .s-select .s-select__selection-tag-close {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><style>path{fill%3A%23333;}</style><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>');
   opacity: .65;
 }
 
+.s-select .s-select__reset:hover,
 .s-select .s-select__selection-tag-close:hover {
   opacity: 1;
 }
 
-.s-select .s-select__option.selected {
+.s-select .s-select__option--selected {
   background: rgba(51, 51, 51, 0.2);
 }
 
@@ -3090,16 +4627,18 @@ select:disabled + .s-select {
   color: white;
 }
 
+.s-select--primary .s-select__reset,
 .s-select--primary .s-select__selection-tag-close {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><style>path{fill%3A%23f2bc2b;}</style><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>');
   opacity: .65;
 }
 
+.s-select--primary .s-select__reset:hover,
 .s-select--primary .s-select__selection-tag-close:hover {
   opacity: 1;
 }
 
-.s-select--primary .s-select__option.selected {
+.s-select--primary .s-select__option--selected {
   background: rgba(242, 188, 43, 0.2);
 }
 
@@ -3232,8 +4771,7 @@ select:disabled + .s-select {
 .nav--inline > .nav__item {
   position: relative;
   display: inline-block;
-  padding-left: 1.21428571em;
-  padding-right: 1.21428571em;
+  padding-right: 3.14285714em;
 }
 
 .nav--inline > li:last-of-type,
@@ -3246,6 +4784,16 @@ select:disabled + .s-select {
   padding-left: 0 !important;
 }
 
+.nav--right {
+  text-align: right;
+}
+
+.nav--right > li,
+.nav--right > .nav__item {
+  padding-right: 0;
+  padding-left: 3.14285714em;
+}
+
 .nav--justify {
   display: table;
   width: 100%;
@@ -3255,9 +4803,18 @@ select:disabled + .s-select {
 .nav--justify > .nav__item {
   display: table-cell;
   vertical-align: middle;
-  padding-left: 1.57142857em;
-  padding-right: 1.57142857em;
+  padding-right: 3.14285714em;
   text-align: center;
+}
+
+.nav--right {
+  text-align: right;
+}
+
+.nav--right > li,
+.nav--right > .nav__item {
+  padding-right: 0;
+  padding-left: 3.14285714em;
 }
 
 [s-activate-target] {
@@ -4626,10 +6183,6 @@ body {
 
 .s-bigger-rel {
   font-size: 3em;
-}
-
-.s-reset {
-  font-size: 1rem;
 }
 
 .no-p-t {
