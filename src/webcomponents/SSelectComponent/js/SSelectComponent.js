@@ -35,7 +35,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			resetAllowed : true,
 			searchPlaceholder : 'Search...',
 			internalSearch : true,
-			minCharactersForSearch : 3,
+			minCharactersForSearch : 1,
 			screenMargin : 50
 		}
 	}
@@ -308,7 +308,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		}
 		// check if already an item is selected
 		if ( ! this._currentActiveOption) {
-			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')}):first-child`);
+			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
 		} else {
 			// try to get the next sibling
 			const next = __next(this._currentActiveOption, `${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
@@ -338,7 +338,10 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		}
 		// check if already an item is selected
 		if ( ! this._currentActiveOption) {
-			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')}):last-child`);
+			const elements =  this.optionsContainerElm.querySelectorAll(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
+			if(elements.length) {
+				this._currentActiveOption = elements[elements.length - 1];
+			}
 		} else {
 			// try to get the next sibling
 			const previous = __previous(this._currentActiveOption, `${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
@@ -594,7 +597,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 	if ( ! areSomeSelectedItems) {
 	 		let placeholder = this.getAttribute('placeholder');
 	 		if (placeholder) {
-				if(selection == null) {		
+				if(selection == null) {
 					selection = document.createElement('div');
 					this.addComponentClass(selection, 'selection');
 				}

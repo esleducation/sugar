@@ -554,7 +554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 			// check if already an item is selected
 			if (!this._currentActiveOption) {
-				this._currentActiveOption = this.optionsContainerElm.querySelector(this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + '):first-child');
+				this._currentActiveOption = this.optionsContainerElm.querySelector(this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + ')');
 			} else {
 				// try to get the next sibling
 				var next = (0, _next2.default)(this._currentActiveOption, this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + ')');
@@ -586,7 +586,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 			// check if already an item is selected
 			if (!this._currentActiveOption) {
-				this._currentActiveOption = this.optionsContainerElm.querySelector(this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + '):last-child');
+				var elements = this.optionsContainerElm.querySelectorAll(this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + ')');
+				if (elements.length) {
+					this._currentActiveOption = elements[elements.length - 1];
+				}
 			} else {
 				// try to get the next sibling
 				var previous = (0, _previous2.default)(this._currentActiveOption, this.componentSelector('option') + ':not(' + this.componentSelector('option', 'disabled') + '):not(' + this.componentSelector('option', 'hidden') + ')');
@@ -792,6 +795,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		SSelectComponent.prototype._setSelected = function _setSelected() {
 			var _this6 = this;
 
+			// Initialize selection dom node
+			var selection = null;
+
 			// loop on selected option to activate them
 			var areSomeSelectedItems = false;
 			[].forEach.call(this.options, function (option) {
@@ -842,7 +848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				var selected_idx = this.options.selectedIndex;
 				if (selected_idx != -1) {
 					// set the selected
-					var selection = document.createElement('div');
+					selection = document.createElement('div');
 					this.addComponentClass(selection, 'selection');
 					selection.innerHTML = this.options[selected_idx].innerHTML;
 					this.selectionContainerElm.appendChild(selection);
@@ -852,12 +858,14 @@ return /******/ (function(modules) { // webpackBootstrap
 			if (!areSomeSelectedItems) {
 				var placeholder = this.getAttribute('placeholder');
 				if (placeholder) {
-					var _selection = document.createElement('div');
-					this.addComponentClass(_selection, 'selection');
-					_selection.classList.add('input--placeholder');
-					_selection.innerHTML = placeholder;
+					if (selection == null) {
+						selection = document.createElement('div');
+						this.addComponentClass(selection, 'selection');
+					}
+					selection.classList.add('input--placeholder');
+					selection.innerHTML = placeholder;
 					this.addComponentClass(this._containerElm, null, 'placeholder');
-					this.selectionContainerElm.appendChild(_selection);
+					this.selectionContainerElm.appendChild(selection);
 				}
 			} else {
 				this.removeComponentClass(this._containerElm, null, 'placeholder');
@@ -1171,7 +1179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					resetAllowed: true,
 					searchPlaceholder: 'Search...',
 					internalSearch: true,
-					minCharactersForSearch: 3,
+					minCharactersForSearch: 1,
 					screenMargin: 50
 				};
 			}
