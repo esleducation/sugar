@@ -260,7 +260,9 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		}
 
 		// set position
-		this._setPosition();
+		setTimeout(() => {
+			this._setPosition();
+		}, 50);
 
 	}
 
@@ -657,17 +659,25 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			this.addComponentClass(this._containerElm, null, 'dropup');
 			// console.log(top + h, window.innerHeight);
 			if (containerTop - dropdownFullHeight - screenMargin < 0) {
-				this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				});
 			} else {
-				this.optionsContainerElm.style.height = 'auto';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = 'auto';
+				});
 			}
 		} else {
 			this.removeComponentClass(this._containerElm, null, 'dropup');
 			// console.log(top + h, window.innerHeight);
 			if (dropdownTop + dropdownFullHeight + screenMargin > window.innerHeight) {
-				this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				});
 			} else {
-				this.optionsContainerElm.style.height = 'auto';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = 'auto';
+				});
 			}
 		}
 	}

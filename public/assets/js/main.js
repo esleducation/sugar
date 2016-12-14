@@ -495,7 +495,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 
 			// set position
-			this._setPosition();
+			setTimeout(function () {
+				_this4._setPosition();
+			}, 50);
 		};
 
 		/**
@@ -904,6 +906,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 		SSelectComponent.prototype._setPosition = function _setPosition() {
+			var _this7 = this;
+
 			// get the position of the container
 			var dropdownOffset = (0, _offset2.default)(this._dropdownElm);
 			var dropdownTop = dropdownOffset.top - (0, _scrollTop2.default)();
@@ -920,17 +924,25 @@ return /******/ (function(modules) { // webpackBootstrap
 				this.addComponentClass(this._containerElm, null, 'dropup');
 				// console.log(top + h, window.innerHeight);
 				if (containerTop - dropdownFullHeight - screenMargin < 0) {
-					this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+					this.mutate(function () {
+						_this7.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - _this7._searchContainerElm.offsetHeight - screenMargin + 'px';
+					});
 				} else {
-					this.optionsContainerElm.style.height = 'auto';
+					this.mutate(function () {
+						_this7.optionsContainerElm.style.height = 'auto';
+					});
 				}
 			} else {
 				this.removeComponentClass(this._containerElm, null, 'dropup');
 				// console.log(top + h, window.innerHeight);
 				if (dropdownTop + dropdownFullHeight + screenMargin > window.innerHeight) {
-					this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+					this.mutate(function () {
+						_this7.optionsContainerElm.style.height = window.innerHeight - dropdownTop - _this7._searchContainerElm.offsetHeight - screenMargin + 'px';
+					});
 				} else {
-					this.optionsContainerElm.style.height = 'auto';
+					this.mutate(function () {
+						_this7.optionsContainerElm.style.height = 'auto';
+					});
 				}
 			}
 		};
@@ -973,7 +985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 		SSelectComponent.prototype._handleOption = function _handleOption(_option) {
-			var _this7 = this;
+			var _this8 = this;
 
 			var in_optgroup = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -982,7 +994,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			if (_option.nodeName.toLowerCase() == 'optgroup') {
 				this._handleOptgroup(_option);
 				[].forEach.call(_option.querySelectorAll(':scope > option'), function (option) {
-					_this7._handleOption(option, true);
+					_this8._handleOption(option, true);
 				});
 				return;
 			}
@@ -1033,12 +1045,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			// add a click event on the option
 			option.addEventListener('click', function (e) {
-				_this7._handleOptionClick(e.currentTarget, e);
+				_this8._handleOptionClick(e.currentTarget, e);
 			});
 
 			// add the listener for the hover
 			option.addEventListener('mouseover', function (e) {
-				_this7._currentActiveOption = option;
+				_this8._currentActiveOption = option;
 			});
 
 			// append new choice
@@ -1051,7 +1063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 		SSelectComponent.prototype.refresh = function refresh() {
-			var _this8 = this;
+			var _this9 = this;
 
 			// empty the options
 			var options_parent = this.optionsContainerElm.parentNode;
@@ -1061,7 +1073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			// create the options tree
 			[].forEach.call(this.querySelectorAll(':scope > option, :scope > optgroup'), function (elm) {
 				// handle option
-				_this8._handleOption(elm);
+				_this9._handleOption(elm);
 			}, this);
 
 			// set selected the first time
@@ -1147,7 +1159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 		SSelectComponent.prototype.close = function close() {
-			var _this9 = this;
+			var _this10 = this;
 
 			this.removeComponentClass(this._containerElm, null, null, 'opened');
 
@@ -1157,7 +1169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 			// remove the dropup class
 			this._clearDropupTimeout = setTimeout(function () {
-				_this9.removeComponentClass(_this9._containerElm, null, 'dropup');
+				_this10.removeComponentClass(_this10._containerElm, null, 'dropup');
 			}, 500);
 			// dispatch close event
 			var event = new _SEvent2.default('close');
