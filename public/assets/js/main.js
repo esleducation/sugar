@@ -452,6 +452,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		SSelectComponent.prototype._search = function _search() {
 			var _this4 = this;
 
+			var firstOption = null;
+			var i = 0;
+
 			// loop on each options
 			[].forEach.call(this.optionsContainerElm.querySelectorAll(this.componentSelector('option')), function (option) {
 				// check if is a value in the search field
@@ -462,9 +465,18 @@ return /******/ (function(modules) { // webpackBootstrap
 					var replace = option._s_innerHTML.replace(regexp, '<span class="' + _this4.componentClassName('search-result') + '">$1</span>');
 					if (option._s_innerHTML.match(regexp)) {
 						option.innerHTML = replace;
+						_this4.removeComponentClass(option, 'option', null, 'hidden');
+
+						// Save the first displayed options
+						if (i == 0) {
+							firstOption = option;
+						}
+						i++;
 					} else {
 						// reset the activate item if need to be hided
 						if (option == _this4._currentActiveOption) {
+							_this4.removeComponentClass(_this4._currentActiveOption, 'option', null, 'active');
+							_this4._currentActiveOption.classList.remove('active');
 							_this4._currentActiveOption = null;
 						}
 						_this4.addComponentClass(option, 'option', null, 'hidden');
@@ -474,6 +486,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					_this4.removeComponentClass(option, 'option', null, 'hidden');
 				}
 			});
+
+			// Select the first option if no selection exists
+			if (firstOption != null && this._currentActiveOption == null) {
+				this._currentActiveOption = firstOption;
+				this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
+				this._currentActiveOption.classList.add('active');
+			}
 
 			// set position
 			this._setPosition();

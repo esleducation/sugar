@@ -217,6 +217,9 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 * Search
 	 */
 	_search() {
+		let firstOption = null;
+		let i = 0;
+
 		// loop on each options
 		[].forEach.call(this.optionsContainerElm.querySelectorAll(this.componentSelector('option')), (option) => {
 			// check if is a value in the search field
@@ -227,9 +230,18 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 				let replace = option._s_innerHTML.replace(regexp, `<span class="${this.componentClassName('search-result')}">$1</span>`);
 				if (option._s_innerHTML.match(regexp)) {
 					option.innerHTML = replace;
+					this.removeComponentClass(option, 'option', null, 'hidden');
+
+					// Save the first displayed options
+					if(i == 0) {
+						firstOption = option;
+					}
+					i++;
 				} else {
 					// reset the activate item if need to be hided
 					if (option == this._currentActiveOption) {
+						this.removeComponentClass(this._currentActiveOption, 'option', null, 'active');
+						this._currentActiveOption.classList.remove('active');
 						this._currentActiveOption = null;
 					}
 					this.addComponentClass(option, 'option', null, 'hidden');
@@ -239,6 +251,13 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 				this.removeComponentClass(option, 'option', null, 'hidden');
 			}
 		});
+
+		// Select the first option if no selection exists
+		if(firstOption != null && this._currentActiveOption == null) {
+			this._currentActiveOption = firstOption;
+			this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
+			this._currentActiveOption.classList.add('active');
+		}
 
 		// set position
 		this._setPosition();
