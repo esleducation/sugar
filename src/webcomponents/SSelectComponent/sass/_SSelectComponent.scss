@@ -45,6 +45,7 @@ $_s-select-component-inited : false;
 			overflow-x: hidden;
 			height: 100%;
 			max-height: 100vh;
+			position: relative;
 		}
 		%s-select__option {
 			list-style: none;

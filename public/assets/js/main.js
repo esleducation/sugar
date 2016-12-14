@@ -530,6 +530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					// enter
 					this._selectActivated();
 					e.preventDefault();
+					e.stopPropagation();
 					break;
 				case 8:
 					// backspace
@@ -567,8 +568,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				// scroll view
 				var currentScroll = this._currentActiveOption.parentNode.scrollTop;
 				var optionHeight = this._currentActiveOption.offsetHeight;
-				if (currentScroll + optionHeight <= this._currentActiveOption.parentNode.scrollHeight) {
-					this._currentActiveOption.parentNode.scrollTop += optionHeight;
+				var optionTop = this._currentActiveOption.offsetTop;
+				var optionsContainerHeight = this.optionsContainerElm.getBoundingClientRect().height;
+
+				if (optionTop > currentScroll + optionsContainerHeight - optionHeight) {
+					this._currentActiveOption.parentNode.scrollTop = optionTop;
 				}
 			}
 		};
@@ -599,11 +603,12 @@ return /******/ (function(modules) { // webpackBootstrap
 			if (this._currentActiveOption) {
 				this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
 				this._currentActiveOption.classList.add('active');
-				// scroll to item
+				// scroll view
 				var currentScroll = this._currentActiveOption.parentNode.scrollTop;
-				var optionHeight = this._currentActiveOption.offsetHeight;
-				if (currentScroll - optionHeight >= 0) {
-					this._currentActiveOption.parentNode.scrollTop -= optionHeight;
+				var optionTop = this._currentActiveOption.offsetTop;
+
+				if (optionTop < currentScroll) {
+					this._currentActiveOption.parentNode.scrollTop = optionTop;
 				}
 			}
 		};
@@ -785,6 +790,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			// trigger change event
 			(0, _dispatchEvent2.default)(this, 'change');
+
+			e && e.stopPropagation();
 		};
 
 		/**

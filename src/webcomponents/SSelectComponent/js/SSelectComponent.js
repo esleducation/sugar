@@ -287,6 +287,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			case 13: // enter
 				this._selectActivated();
 				e.preventDefault();
+				e.stopPropagation();
 			break;
 			case 8: // backspace
 				if (this._searchFieldElm.focus && this._searchFieldElm.value == '') {
@@ -321,8 +322,11 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			// scroll view
 			const currentScroll = this._currentActiveOption.parentNode.scrollTop;
 			const optionHeight = this._currentActiveOption.offsetHeight;
-			if (currentScroll + optionHeight <= this._currentActiveOption.parentNode.scrollHeight) {
-				this._currentActiveOption.parentNode.scrollTop += optionHeight;
+			const optionTop = this._currentActiveOption.offsetTop;
+			const optionsContainerHeight = this.optionsContainerElm.getBoundingClientRect().height;
+
+			if(optionTop > (currentScroll + optionsContainerHeight - optionHeight)) {
+				this._currentActiveOption.parentNode.scrollTop = optionTop;
 			}
 		}
 	}
@@ -351,11 +355,12 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		if (this._currentActiveOption) {
 			this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
 			this._currentActiveOption.classList.add('active');
-			// scroll to item
+			// scroll view
 			const currentScroll = this._currentActiveOption.parentNode.scrollTop;
-			const optionHeight = this._currentActiveOption.offsetHeight;
-			if (currentScroll - optionHeight >= 0) {
-				this._currentActiveOption.parentNode.scrollTop -= optionHeight;
+			const optionTop = this._currentActiveOption.offsetTop;
+
+			if(optionTop < currentScroll) {
+				this._currentActiveOption.parentNode.scrollTop = optionTop;
 			}
 		}
 	}
@@ -528,6 +533,8 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 
 		// trigger change event
 		__dispatchEvent(this, 'change');
+
+		e && e.stopPropagation();
 	}
 
 	/**
