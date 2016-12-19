@@ -1,4 +1,6 @@
-# Sugar (v1.0.4)
+# Sugar (v1.1.0)
+
+**This is a fork from the original repo**
 
 The goal of Sugar is certainly not to tells you how to organize your project. It's just like a **sugar in the coffee, you choose the coffee, Sugar enhance it with a nice touch!**
 
@@ -31,7 +33,7 @@ This will give:
 ```
 
 ## Quick start
-	
+
 Importing sugar
 
 ```scss
