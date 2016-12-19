@@ -35,7 +35,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			resetAllowed : true,
 			searchPlaceholder : 'Search...',
 			internalSearch : true,
-			minCharactersForSearch : 3,
+			minCharactersForSearch : 1,
 			screenMargin : 50
 		}
 	}
@@ -217,6 +217,9 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 * Search
 	 */
 	_search() {
+		let firstOption = null;
+		let i = 0;
+
 		// loop on each options
 		[].forEach.call(this.optionsContainerElm.querySelectorAll(this.componentSelector('option')), (option) => {
 			// check if is a value in the search field
@@ -227,9 +230,18 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 				let replace = option._s_innerHTML.replace(regexp, `<span class="${this.componentClassName('search-result')}">$1</span>`);
 				if (option._s_innerHTML.match(regexp)) {
 					option.innerHTML = replace;
+					this.removeComponentClass(option, 'option', null, 'hidden');
+
+					// Save the first displayed options
+					if(i == 0) {
+						firstOption = option;
+					}
+					i++;
 				} else {
 					// reset the activate item if need to be hided
 					if (option == this._currentActiveOption) {
+						this.removeComponentClass(this._currentActiveOption, 'option', null, 'active');
+						this._currentActiveOption.classList.remove('active');
 						this._currentActiveOption = null;
 					}
 					this.addComponentClass(option, 'option', null, 'hidden');
@@ -240,8 +252,17 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			}
 		});
 
+		// Select the first option if no selection exists
+		if(firstOption != null && this._currentActiveOption == null) {
+			this._currentActiveOption = firstOption;
+			this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
+			this._currentActiveOption.classList.add('active');
+		}
+
 		// set position
-		this._setPosition();
+		setTimeout(() => {
+			this._setPosition();
+		}, 50);
 
 	}
 
@@ -287,6 +308,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			case 13: // enter
 				this._selectActivated();
 				e.preventDefault();
+				e.stopPropagation();
 			break;
 			case 8: // backspace
 				if (this._searchFieldElm.focus && this._searchFieldElm.value == '') {
@@ -308,7 +330,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		}
 		// check if already an item is selected
 		if ( ! this._currentActiveOption) {
-			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')}):first-child`);
+			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
 		} else {
 			// try to get the next sibling
 			const next = __next(this._currentActiveOption, `${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
@@ -321,8 +343,11 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			// scroll view
 			const currentScroll = this._currentActiveOption.parentNode.scrollTop;
 			const optionHeight = this._currentActiveOption.offsetHeight;
-			if (currentScroll + optionHeight <= this._currentActiveOption.parentNode.scrollHeight) {
-				this._currentActiveOption.parentNode.scrollTop += optionHeight;
+			const optionTop = this._currentActiveOption.offsetTop;
+			const optionsContainerHeight = this.optionsContainerElm.getBoundingClientRect().height;
+
+			if(optionTop > (currentScroll + optionsContainerHeight - optionHeight)) {
+				this._currentActiveOption.parentNode.scrollTop = optionTop;
 			}
 		}
 	}
@@ -338,7 +363,10 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		}
 		// check if already an item is selected
 		if ( ! this._currentActiveOption) {
-			this._currentActiveOption = this.optionsContainerElm.querySelector(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')}):last-child`);
+			const elements =  this.optionsContainerElm.querySelectorAll(`${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
+			if(elements.length) {
+				this._currentActiveOption = elements[elements.length - 1];
+			}
 		} else {
 			// try to get the next sibling
 			const previous = __previous(this._currentActiveOption, `${this.componentSelector('option')}:not(${this.componentSelector('option', 'disabled')}):not(${this.componentSelector('option', 'hidden')})`);
@@ -348,11 +376,12 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		if (this._currentActiveOption) {
 			this.addComponentClass(this._currentActiveOption, 'option', null, 'active');
 			this._currentActiveOption.classList.add('active');
-			// scroll to item
+			// scroll view
 			const currentScroll = this._currentActiveOption.parentNode.scrollTop;
-			const optionHeight = this._currentActiveOption.offsetHeight;
-			if (currentScroll - optionHeight >= 0) {
-				this._currentActiveOption.parentNode.scrollTop -= optionHeight;
+			const optionTop = this._currentActiveOption.offsetTop;
+
+			if(optionTop < currentScroll) {
+				this._currentActiveOption.parentNode.scrollTop = optionTop;
 			}
 		}
 	}
@@ -525,12 +554,17 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 
 		// trigger change event
 		__dispatchEvent(this, 'change');
+
+		e && e.stopPropagation();
 	}
 
 	/**
 	 * Set selected elements
 	 */
 	 _setSelected() {
+		// Initialize selection dom node
+		let selection = null;
+
 	 	// loop on selected option to activate them
 	 	let areSomeSelectedItems = false;
 	 	[].forEach.call(this.options, (option) => {
@@ -581,7 +615,7 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 		let selected_idx = this.options.selectedIndex;
 	 		if (selected_idx != -1) {
 	 			// set the selected
-	 			let selection = document.createElement('div');
+	 			selection = document.createElement('div');
 				this.addComponentClass(selection, 'selection');
 	 			selection.innerHTML = this.options[selected_idx].innerHTML;
 	 			this.selectionContainerElm.appendChild(selection);
@@ -591,8 +625,10 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 	 	if ( ! areSomeSelectedItems) {
 	 		let placeholder = this.getAttribute('placeholder');
 	 		if (placeholder) {
-	 			let selection = document.createElement('div');
-				this.addComponentClass(selection, 'selection');
+				if(selection == null) {
+					selection = document.createElement('div');
+					this.addComponentClass(selection, 'selection');
+				}
 	 			selection.classList.add('input--placeholder');
 	 			selection.innerHTML = placeholder;
 				this.addComponentClass(this._containerElm, null, 'placeholder');
@@ -623,17 +659,25 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 			this.addComponentClass(this._containerElm, null, 'dropup');
 			// console.log(top + h, window.innerHeight);
 			if (containerTop - dropdownFullHeight - screenMargin < 0) {
-				this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = window.innerHeight - (window.innerHeight - containerTop) - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				});
 			} else {
-				this.optionsContainerElm.style.height = 'auto';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = 'auto';
+				});
 			}
 		} else {
 			this.removeComponentClass(this._containerElm, null, 'dropup');
 			// console.log(top + h, window.innerHeight);
 			if (dropdownTop + dropdownFullHeight + screenMargin > window.innerHeight) {
-				this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = window.innerHeight - dropdownTop - this._searchContainerElm.offsetHeight - screenMargin + 'px';
+				});
 			} else {
-				this.optionsContainerElm.style.height = 'auto';
+				this.mutate(() => {
+					this.optionsContainerElm.style.height = 'auto';
+				});
 			}
 		}
 	}

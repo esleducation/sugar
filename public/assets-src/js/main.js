@@ -1,18 +1,18 @@
 require('prismjs');
 require('prismjs/components/prism-scss');
 
-import SSelectComponent from '../../../src/components/SSelectComponent';
-import SActivateComponent from '../../../src/components/SActivateComponent';
-import SValidateComponent from '../../../src/components/SValidateComponent';
+import SSelectComponent from '../../../src/webcomponents/SSelectComponent';
+import SActivateComponent from '../../../src/webcomponents/SActivateComponent';
+import SValidateComponent from '../../../src/webcomponents/SValidatorComponent';
 import STrianglifyComponent from '../../../src/components/STrianglifyComponent';
-import SAddthisComponent from '../../../src/components/SAddthisComponent';
-import SDrawerComponent from '../../../src/components/SDrawerComponent';
-import SRippleComponent from '../../../src/components/SRippleComponent';
+import SAddthisComponent from '../../../src/webcomponents/SAddthisComponent';
+import SDrawerComponent from '../../../src/webcomponents/SDrawerComponent';
+import SRippleComponent from '../../../src/webcomponents/SRippleComponent';
 
 import __querySelectorLive from '../../../src/js/dom/querySelectorLive';
 import sSettings from '../../../src/js/core/sSettings';
 import __domReady from '../../../src/js/dom/domReady';
-import SColor from '../../../src/js/core/SColor';
+import SColor from '../../../src/js/classes/SColor';
 
 __domReady().then(() => {
 

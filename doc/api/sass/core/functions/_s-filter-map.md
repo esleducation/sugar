@@ -5,7 +5,7 @@
 ## API
 -----------------------------
 
-### s-filter-map({List}<String> $filters) : {Map}
+### s-filter-map({List}<String> $filter) : {Map}
 Take a filter as parameter and parse it to return the {Map} corresponding
 The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`
 
@@ -15,7 +15,7 @@ The $filter parameter can be either a registered filter name or a filter formate
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
-$filters | **{List}<String>** | The registered filter(s) name(s) or the filter(s) string(s) to transform into map | required | 
+$filter | **{List}<String>** | The registered filter name or the filter string to transform into map | required | 
 
 
 #### Sample

@@ -7,7 +7,7 @@
 
 ### s-filter( {List}<String>) : {List}
 Return a list with all the filters that are passed as argument
-This will use the [._s-filter-map.scss] function to parse the filters
+This will use the [./_s-filter-map.scss] function to parse the filters
 
 - Privacy : **Public**
 

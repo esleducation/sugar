@@ -11,7 +11,7 @@
 
 			input[type="submit"], button,
 			#{s-component-selector()}-addon {
-				flex:0;
+				flex:0 auto;
 			}
 
 			// make input flex

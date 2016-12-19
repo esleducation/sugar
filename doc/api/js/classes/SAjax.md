@@ -1,4 +1,4 @@
-# SAjax <span class="s-smaller-rel">extends { [SObject](/data/web/sugar/repo/src/js/core/SObject.js) }</span>
+# SAjax <span class="s-smaller-rel">extends { [SObject](/data/web/sugar/src/js/core/SObject.js) }</span>
 Class that allows to simply handle ajax requests with ease.
 This class give some useful features like :
 - Promise support
@@ -12,10 +12,10 @@ This class give some useful features like :
 
 Name | Type | Description | Status | Default
 ------------ | ------------ | ------------ | ------------ | ------------
-request | **{ [SAjaxRequest](/data/web/sugar/repo/src/js/classes/SAjaxRequest.js) }** | The request object used to make ajax call | required | 
+request | **{ [SAjaxRequest](/data/web/sugar/src/js/classes/SAjaxRequest.js) }** | The request object used to make ajax call | required | 
 settings | **{ <a class="link" href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object" target="_blank" title="Object">Object</a> }** | Some settings around the request | optional | {}
 
-- Extends **{ [SObject](/data/web/sugar/repo/src/js/core/SObject.js) }**
+- Extends **{ [SObject](/data/web/sugar/src/js/core/SObject.js) }**
 - Author **Olivier Bossel<olivier.bossel@gmail.com>**
 
 #### Sample
@@ -66,6 +66,9 @@ Set how many times the request has to be sent
 A function that will be called before each requests to have a change to update some request params
 Must return the new request params
 Will recieve the actual request params and the request count as parameter
+
+### { [SCache](/data/web/sugar/src/js/classes/SCache.js) } cache = null
+A cache instance that will be used
 
 -----------------------------
 ## Properties
