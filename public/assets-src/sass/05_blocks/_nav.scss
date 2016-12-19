@@ -1,0 +1,5 @@
+// inline nav
+@include s-component('nav') {
+	@include s-nav-component-inline-bare();
+	@include s-nav-component-justify-bare();
+}

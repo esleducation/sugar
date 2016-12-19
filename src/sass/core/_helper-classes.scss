@@ -1,0 +1,190 @@
+/**
+ * This file is responsible to register the static helper classes like pull-right, clear, etc...
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>
+ */
+
+//
+// Pull
+//
+@include s-register-class(pull-left, 'sugar.pull.left') {
+	float: left;
+}
+@include s-register-class(pull-right, 'sugar.pull.right') {
+	float: right;
+}
+
+
+//
+// Position
+//
+@include s-register-class(relative, 'sugar.position.relative') {
+	position: relative;
+}
+@include s-register-class(absolute, 'sugar.position.absolute') {
+	position: absolute;
+}
+
+
+//
+// Clear
+//
+@include s-register-class(clear-left, 'sugar.clear.left') {
+	clear: left;
+}
+@include s-register-class(clear-right, 'sugar.clear.right') {
+	clear: right;
+}
+@include s-register-class(clear, 'sugar.clear.both') {
+	clear: both;
+}
+
+
+//
+// Show / hide
+//
+@include s-register-class(show, 'sugar.display.show') {
+	display : block;
+}
+@include s-register-class(show-inline, 'sugar.display.show-inline') {
+	display: inline-block;
+}
+@include s-register-class(hidden, 'sugar.display.hidden') {
+	display: none;
+}
+@include s-register-class(hide, 'sugar.display.hide') {
+	display: none;
+}
+@include s-register-class(visible, 'sugar.display.visible') {
+	visibility: visible;
+}
+@include s-register-class(invisible, 'sugar.display.invisible') {
+	visibility: hidden;
+}
+@include s-register-class(visually-hidden, 'sugar.display.visually-hidden') {
+	@include s-visually-hidden();
+}
+
+//
+// Text
+//
+@include s-register-class(t-hidden, 'sugar.text.hidden') {
+	@include s-hide-text();
+}
+@include s-register-class(t-truncate, 'sugar.text.truncate') {
+	@include s-truncate-text();
+}
+@include s-register-class(t-left, 'sugar.text.align.left') {
+	text-align: left;
+}
+@include s-register-class(t-right, 'sugar.text.align.right') {
+	text-align: right;
+}
+@include s-register-class(t-center, 'sugar.text.align.center') {
+	text-align: center;
+}
+@include s-register-class(t-justify, 'sugar.text.align.justify') {
+	text-align: justify;
+}
+@include s-register-class(t-lowercase, 'sugar.text.transform.lowercase') {
+	text-transform: lowercase;
+}
+@include s-register-class(t-uppercase, 'sugar.text.transform.uppercase') {
+	text-transform: uppercase;
+}
+@include s-register-class(t-capitalize, 'sugar.text.transform.capitalize') {
+	text-transform: capitalize;
+}
+
+//
+// Fonts
+//
+@include s-register-class(f-bold, 'sugar.font.weight.bold') {
+	font-weight: bold;
+}
+@include s-register-class(f-lighter, 'sugar.font.weight.lighter') {
+	font-weight: lighter;
+}
+@include s-register-class(f-bolder, 'sugar.font.weight.bolder') {
+	font-weight: bolder;
+}
+@include s-register-class(f-normal, 'sugar.font.weight.normal') {
+	font-weight: normal;
+	font-style: normal;
+}
+@include s-register-class(f-italic, 'sugar.font.style.italic') {
+	font-style: italic;
+}
+@include s-register-class(f-oblique, 'sugar.font.style.oblique') {
+	font-weight: oblique;
+}
+@include s-register-class(f-small-caps, 'sugar.font.variant.small-caps') {
+	font-variant: small-caps;
+}
+
+//
+// Blocks
+//
+@include s-register-class(block-center, 'sugar.block.align.center') {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+//
+// Clearfix
+//
+@include s-register-class(clearfix, 'sugar.clearfix.default') {
+	@include s-clearfix(micro);
+}
+@include s-register-class(clearfix-float, 'sugar.clearfix.float') {
+	@include s-clearfix(float);
+}
+@include s-register-class(clearfix-micro, 'sugar.clearfix.micro') {
+	@include s-clearfix(micro);
+}
+@include s-register-class(clearfix-overflow, 'sugar.clearfix.overflow') {
+	@include s-clearfix(overflow);
+}
+@include s-register-class(clearfix-facebook, 'sugar.clearfix.facebook') {
+	@include s-clearfix(facebook);
+}
+
+//
+// Transition / Animation
+//
+@include s-register-class(no-transitions, 'sugar.no-transitions') {
+	&, &:before, &:after {
+		transition: none !important;
+	}
+}
+@include s-register-class(clear-transitions, 'sugar.clear-transitions') {
+	&, &:before, &:after,
+	& *, & *:before, & *:after {
+		transition: none !important;
+	}
+}
+@include s-register-class(no-animations, 'sugar.no-animations') {
+	&, &:before, &:after {
+		animation: none !important;
+	}
+}
+@include s-register-class(clear-animations, 'sugar.clear-animations') {
+	&, &:before, &:after,
+	& *, & *:before, & *:after {
+		animation: none !important;
+	}
+}
+@include s-register-class(no-transmations, 'sugar.no-transmations') {
+	&, &:before, &:after {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+@include s-register-class(clear-transmations, 'sugar.clear-transmations') {
+	&, &:before, &:after,
+	& *, & *:before, & *:after {
+		transition: none !important;
+		animation: none !important;
+	}
+}
