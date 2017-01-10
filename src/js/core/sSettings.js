@@ -21,6 +21,8 @@ domReady(() => {
 	).getPropertyValue('content');
 	if (_settings) {
 		_settings = _settings.replace(/\\"/g, '"');
+		_settings = _settings.replace(/: (\.[0-9]+)/g, ': 0$1');
+		_settings = _settings.replace(/:(\.[0-9]+)/g, ': 0$1');
 		// _settings = _settings.replace(/\\\'\\"/g,'"').replace(/\\"\\\'/g,'"');
 		// _settings = _settings.replace(/\'\\"/g,'"').replace(/\\"\'/g,'"');
 		// _settings = _settings.replace(/'"/g,'"').replace(/"'/g,'"');
