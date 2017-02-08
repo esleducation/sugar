@@ -129,6 +129,9 @@ export default class SReadMoreComponent extends SWebComponent {
 	 */
 	_onClick(e) {
 		if (e.target !== this) return;
+		// We re calculate the real height, because with some weird cases, there is unknow troubles...
+		// For me information contact Olivier.... 😵 
+		this._updateTargetedAndOriginalHeight(); 
 		// toggle the active state
 		if (this.isActive()) this.unactivate();
 		else this.activate();
