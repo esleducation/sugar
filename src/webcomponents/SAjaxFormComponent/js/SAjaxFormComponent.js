@@ -72,7 +72,21 @@ export default class SAjaxFormComponent extends SWebSTemplateComponent {
 			 * @prop
 			 * @type 		{String}
 			 */
-			enctype : 'application/x-www-form-urlencoded'
+			enctype : 'application/x-www-form-urlencoded',
+			
+			/**
+			 * Gtm event to fire
+			 * @prop
+			 * @type 		{String}
+			 */
+			gtmEvent: null,
+			
+			/**
+			 * Gtm virtual url associate to the gtm event
+			 * @prop
+			 * @type 		{String}
+			 */
+			gtmVirtualUrl: null
 		}
 	}
 
@@ -174,6 +188,14 @@ export default class SAjaxFormComponent extends SWebSTemplateComponent {
 				formField.removeAttribute('value');
 			}
 		});
+		
+		// Fire gtm event
+		if(dataLayer && this.props.gtmEvent !== null && this.props.gtmVirtualUrl !== null) {
+			dataLayer.push({
+				'event': this.props.gtmEvent,
+				'virtualUrl': this.props.gtmVirtualUrl
+			});
+		}
 
 		// check the response type
 		if (typeof(response) === 'string') {
