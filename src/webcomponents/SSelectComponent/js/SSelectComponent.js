@@ -420,22 +420,18 @@ export default class SSelectComponent extends mix(HTMLSelectElement).with(SWebCo
 		this.addComponentClass(dropdown, 'dropdown');
 		dropdown.style.fontSize = '1rem';
 
-		if(this.props.internalSearch) {
-			// search
-			let search_container = document.createElement('div');
-			this.addComponentClass(search_container, 'search-container');
-			
-			// search field
-			let search_field = document.createElement('input');
-			search_field.setAttribute('type', 'search');
-			if (search_field.type != 'search') {
-				search_field.type = 'text';
-			}
-			search_field.setAttribute('placeholder', this.props.searchPlaceholder);
-			this.addComponentClass(search_field, 'search-field');
-			
-		}
+		// search
+		let search_container = document.createElement('div');
+		this.addComponentClass(search_container, 'search-container');
 
+		// search field
+		let search_field = document.createElement('input');
+		search_field.setAttribute('type', 'search');
+		if (search_field.type != 'search') {
+			search_field.type = 'text';
+		}
+		search_field.setAttribute('placeholder', this.props.searchPlaceholder);
+		this.addComponentClass(search_field, 'search-field');
 
 		// reset
 		let resetElm = null;
