@@ -28,7 +28,7 @@ export default class SActivateComponent extends SAnchorWebComponent {
 			history : true,
 			anchor : true,
 			toggle : false,
-			trigger : 'click',
+			trigger : 'click,touchstart',
 			disabled : false,
 			unactivateTrigger : null,
 			activateTimeout : 0,
@@ -115,7 +115,9 @@ export default class SActivateComponent extends SAnchorWebComponent {
 		}
 
 		// listen for trigger (click, mouseover, etc...)
-		this.addEventListener(this.props.trigger, this._onTriggerElement.bind(this));
+		this.props.trigger.split(',').forEach((trigger) => {
+			this.addEventListener(trigger, this._onTriggerElement.bind(this));
+		});
 
 		// listen for the activate event on the body to check if we need to unactivate
 		// this
@@ -181,7 +183,10 @@ export default class SActivateComponent extends SAnchorWebComponent {
 	componentUnmount() {
 		super.componentUnmount();
 		// listen for trigger (click, mouseover, etc...)
-		this.removeEventListener(this.props.trigger, this._onTriggerElement);
+		this.props.trigger.split(',').forEach((trigger) => {
+			this.removeEventListener(trigger, this._onTriggerElement);
+		});
+
 		// remove all the classes
 		this.classList.remove(this.props.activeClass);
 		[].forEach.call(this._sActivateTargets, (target) => {
