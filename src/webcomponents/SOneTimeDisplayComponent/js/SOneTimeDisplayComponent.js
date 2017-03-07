@@ -70,6 +70,7 @@ export default class SOneTimeDisplayComponent extends SWebComponent {
 
 		// get the dismiss element
 		this.addEventListener('click', this._onClick.bind(this));
+		this.addEventListener('touchstart', this._onClick.bind(this));
 
 		// set as block
 		this.style.display = 'block';
