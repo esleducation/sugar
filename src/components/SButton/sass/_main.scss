@@ -1,3 +1,16 @@
+/**
+ * 04-03-2017
+ * Xavier
+ *
+ * As I have better thing to do than fix a f*cking poorly designed architecture
+ * just know that the no-touch classname is injected in the Alpadia template (in the main JS file)
+ * That allows to detect no touch device and set the hover style only on this case.
+ * Because there is a trouble with link on iOS devices: 
+ * The first touch is for the hover, the second for the link's actions... Youhouhou
+ *
+ * Have fun with Sugar..
+ */
+
 %s-button-bare {
 	display: inline-block;
 	border: none;
@@ -60,7 +73,7 @@ button {
 		border: 1px solid s-color($color);
 
 		&:active,
-		&:hover,
+		.no-touch &:hover,
 		&.active,
 		:checked + & {
 			&:not(:disabled) {
@@ -94,7 +107,7 @@ button {
 		&[active],
 		&.active,
 		&:active,
-		&:hover {
+		.no-touch &:hover, {
 			&:not(:disabled) {
 				&:after {
 					width:unquote("calc(100% - #{s-lnf(padding-vertical) * 2})");
@@ -112,7 +125,7 @@ button {
 		&[active],
 		&.active,
 		&:active,
-		&:hover {
+		.no-touch &:hover, {
 			&:not(:disabled) {
 				background-color : s-color($color, -darken 15%);
 				border-color: s-color($color, -darken 15%);
