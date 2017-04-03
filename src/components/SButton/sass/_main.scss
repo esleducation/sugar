@@ -72,7 +72,7 @@ button {
 		background-color: transparent;
 		border: 1px solid s-color($color);
 
-		&:active,
+		.no-touch &:active,
 		.no-touch &:hover,
 		&.active,
 		:checked + & {
@@ -106,7 +106,7 @@ button {
 
 		&[active],
 		&.active,
-		&:active,
+		.no-touch &:active,
 		.no-touch &:hover, {
 			&:not(:disabled) {
 				&:after {
@@ -124,7 +124,7 @@ button {
 		}
 		&[active],
 		&.active,
-		&:active,
+		.no-touch &:active,
 		.no-touch &:hover, {
 			&:not(:disabled) {
 				background-color : s-color($color, -darken 15%);
