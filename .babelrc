@@ -7,6 +7,5 @@
 			"loose": true,
 		}],
 		"stage-0"
-	],
-	"plugins": ["transform-proto-to-assign"]
+	]
 }

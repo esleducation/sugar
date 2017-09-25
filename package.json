@@ -6,7 +6,7 @@
   "scripts": {
     "install": "./scripts/install.sh",
     "grunt": "grunt",
-    "gulp": "gulp",
+    "doc": "gulp",
     "watch": "gulp watch"
   },
   "repository": {
