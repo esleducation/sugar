@@ -25,5 +25,4 @@ then
 	rm -rf .DS_Store
 	rm -rf *.coffee
 	rm -rf scripts
-	rm -rf bower.json
 fi
