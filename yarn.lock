@@ -3309,7 +3309,7 @@ install@~0.10.1:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/install/-/install-0.10.1.tgz#1c7b53c8dd7335ef534c2648de28f599df1bdd97"
 
-"interact@https://github.com/taye/interact.js.git#1.2.6":
+"interact.js@https://github.com/taye/interact.js.git#1.2.6", "interact@https://github.com/taye/interact.js.git#1.2.6":
   version "1.2.6"
   resolved "https://github.com/taye/interact.js.git#9bc2445db99c34a8be8e19ddbd086f73ea4ed483"
 
@@ -4301,7 +4301,7 @@ mocha@^3.2.0, mocha@~3.5.3:
     mkdirp "0.5.1"
     supports-color "3.1.2"
 
-"modular-scale@https://github.com/modularscale/modularscale-sass.git#2.1.1":
+"modular-scale@https://github.com/modularscale/modularscale-sass.git#2.1.1", "modularscale-sass@https://github.com/modularscale/modularscale-sass.git#2.1.1":
   version "2.1.0"
   resolved "https://github.com/modularscale/modularscale-sass.git#57d6df3c3b318ff86eea38653e8d1f8f6640b105"
 
