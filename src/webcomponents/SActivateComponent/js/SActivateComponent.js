@@ -485,9 +485,11 @@ export default class SActivateComponent extends SAnchorWebComponent {
 	 * Update targets, etc...
 	 */
 	update(scope = document.body) {
-
 		// target
 		let targetsSelector = this.props.activate || this.props.href;
+		
+		// FIX: Avoid wrong href, and get the last ID in href
+		targetsSelector = targetsSelector.split('#').pop();
 
 		// remove # at start of targetsSelector
 		if (targetsSelector && targetsSelector.substr(0,1) === '#') {
@@ -497,8 +499,10 @@ export default class SActivateComponent extends SAnchorWebComponent {
 		// if the targetsSelector is an id
 		// and the setting "id" is not set
 		// set the setting with the targetsSelector id
-		if ( ! this.props.id
-			&& (typeof(targetsSelector) === 'string')
+		if (
+			!this.props.id
+			&& 
+			(typeof(targetsSelector) === 'string')
 		) {
 			this.setProp('id', targetsSelector);
 		} else if ( ! this.props.id) {
