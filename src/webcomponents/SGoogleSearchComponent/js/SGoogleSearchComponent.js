@@ -25,21 +25,21 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 			/**
 			 * Keywords to search
 			 */
-			keywords : null,
+			keywords: null,
 
 			/**
 			 * Google api key used to reach the google services
 			 * @prop
 			 * @type 		{String}
 			 */
-			apiKey : null,
+			apiKey: null,
 
 			/**
 			 * Google context to reach the proper custom search instance
 			 * @prop
 			 * @type 		{String}
 			 */
-			cx : null
+			cx: null
 		}
 	}
 
@@ -54,21 +54,21 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 			 * @templateData
 			 * @type 		{String}
 			 */
-			keywords : '@props.keywords',
+			keywords: '@props.keywords',
 
 			/**
 			 * Store the results array
 			 * @templateData
 			 * @type 		{Array}
 			 */
-			results : [],
+			results: [],
 
 			/**
 			 * Flag if there's more results to show or not
 			 * @templateData
 			 * @type 		{Boolean}
 			 */
-			noMoreResults : false,
+			noMoreResults: false,
 
 			/**
 			 * Next function that can be loaded from the template
@@ -76,14 +76,14 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 			 * @templateData
 			 * @type 		{Function}
 			 */
-			next : '@next',
+			next: '@next',
 
 			/**
 			 * Flag is the search is busy
 			 * @templateData
 			 * @type 		{Boolean}
 			 */
-			isBusy : false
+			isBusy: false
 		}
 	}
 
@@ -100,7 +100,7 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 	 * @definition 		SWebComponent.requiredProps
 	 */
 	static get requiredProps() {
-		return ['apiKey','cx'];
+		return ['apiKey', 'cx'];
 	}
 
 	/**
@@ -125,13 +125,16 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 	 * @return 	{Promise} 				A promise object
 	 */
 	search(keywords, settings) {
+		// mark on analytics that a search has been done
+		window.dataLayer = window.dataLayer || [];
+		dataLayer.push({ event: 'search_results', searchQuery: keywords });
 
 		// busy
 		this.templateData.isBusy = true;
 
 		// process the search
 		const search = this._googleSearch.search(keywords, {
-			num : 10
+			num: 10
 		});
 		// listen for end of search to set data
 		// into template
@@ -140,7 +143,7 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 			// budy status
 			this.templateData.isBusy = false;
 
-			if ( ! response.queries || ! response.queries.nextPage) {
+			if (!response.queries || !response.queries.nextPage) {
 				this.templateData.noMoreResults = true;
 			} else {
 				this.templateData.noMoreResults = false;
@@ -163,14 +166,14 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 	next() {
 		const search = this._googleSearch.next();
 		search.then((response) => {
-			if ( ! response.queries || ! response.queries.nextPage) {
+			if (!response.queries || !response.queries.nextPage) {
 				this.templateData.noMoreResults = true;
 			} else {
 				this.templateData.noMoreResults = false;
 			}
 			if (response.items && response.items.length) {
 				// add the results into data
-		    	this.templateData.results = this.templateData.results.concat(response.items);
+				this.templateData.results = this.templateData.results.concat(response.items);
 			}
 		});
 		return search;
@@ -182,13 +185,13 @@ export default class SGoogleSearchComponent extends STemplateWebComponent {
 	 */
 	templateWillReceiveData(name, newVal, oldVal) {
 		// if we have any keywords
-		switch(name) {
+		switch (name) {
 			case 'keywords':
 				this.templateData.results = [];
 				if (newVal) {
 					this.search(newVal);
 				}
-			break;
+				break;
 		}
 	}
 

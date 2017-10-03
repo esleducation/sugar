@@ -17,8 +17,8 @@ export default class SEqualizeComponent extends SWebComponent {
 	 */
 	static get defaultProps() {
 		return {
-			group : null,
-			resizeTimeout : 200,
+			group: null,
+			resizeTimeout: 200,
 		}
 	}
 
@@ -52,11 +52,11 @@ export default class SEqualizeComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
-		if ( ! SEqualizeComponent.groups[this.props.group]) {
+		if (!SEqualizeComponent.groups[this.props.group]) {
 			SEqualizeComponent.groups[this.props.group] = {
-				refreshLinesInProgress : false,
-				elements : [],
-				lines : []
+				refreshLinesInProgress: false,
+				elements: [],
+				lines: []
 			};
 		}
 		SEqualizeComponent.groups[this.props.group].elements = document.querySelectorAll(`${this._componentNameDash}[group="${this.props.group}"]`);
@@ -64,11 +64,8 @@ export default class SEqualizeComponent extends SWebComponent {
 		// init lines
 		this.lines = [];
 
-		// refresh lines first time
-		this.refreshLines();
-
 		// equalize
-		this.equalize();
+		this.equalizeLineByLine();
 
 		// listen for resizing window
 		let resizeWindowTimeout;
@@ -76,7 +73,7 @@ export default class SEqualizeComponent extends SWebComponent {
 			clearTimeout(resizeWindowTimeout);
 			resizeWindowTimeout = setTimeout(() => {
 				this.equalize();
-			},this.props.resizeTimeout);
+			}, this.props.resizeTimeout);
 		});
 	}
 
@@ -87,61 +84,85 @@ export default class SEqualizeComponent extends SWebComponent {
 	}
 
 	/**
-	 * Get the line from an element
+	 * Group one line, equalize it and then go for the next one.
+	 * This way you make sure next line is not messed with displaced objects
 	 */
-	refreshLines() {
-		if (SEqualizeComponent.groups[this.props.group].refreshLinesInProgress) return;
-		SEqualizeComponent.groups[this.props.group].refreshLinesInProgress = true;
-		setTimeout(() => {
-			SEqualizeComponent.groups[this.props.group].refreshLinesInProgress = false;
-		}, 100);
-		// loop on all the columns
-		let offsetTop;
-		this.lines = [];
-		let line = {
-			inProgress : false,
-			height : 0,
-			elements : []
-		};
-		[].forEach.call(SEqualizeComponent.groups[this.props.group].elements, (elm) => {
+	equalizeLineByLine(force = false) {
+		if (!force && SEqualizeComponent.groups[this.props.group].refreshLinesInProgress) return;
+		else {
+			SEqualizeComponent.groups[this.props.group].refreshLinesInProgress = true;
 
-			// reset the equalizer or element min-height
-			// to get the real height of the element
-			if (elm.equalizerElm) {
-				elm.equalizerElm.style.minHeight = 0;
-			} else {
-				elm.style.minHeight = 0;
-			}
+			const filteredAndSortedEls = [].filter.call(SEqualizeComponent.groups[this.props.group].elements, (elm) => {
+				return elm.clientHeight > 0;
+			})
+				.sort((elm1, elm2) => {
+					return __offset(elm1).top - __offset(elm2).top;
+				});
 
-			const elmHeight = elm.offsetHeight;
-			const elmOffset = __offset(elm);
+			this.lines = [];
+			this.checkLines(filteredAndSortedEls);
+		}
+	}
 
-			// check if is on new line
-			if (offsetTop !== elmOffset.top && line.height > 0) {
-				// add the new line to lines stack
-				this.lines.push(line);
-				// reset the line
-				line = {
-					inProgress : false,
-					height : 0,
-					elements : []
-				};
+	checkLines(elements) {
+		const currentLine = this.getNewLine();
+		let pendingElements = elements.slice(0);
+
+		// do some because it stops when new line is found
+		[].some.call(elements, (el) => {
+			this.resetEqualizer(el);
+
+			// console.log(pendingElements.length, el.innerText.slice(1, 10));
+			if (!this.checkIfElementInLine(el, currentLine)) {
+				this.lines.push(currentLine);
+				return true;
 			}
-			// add the element in the line
-			line.elements.push(elm);
-			// check if the element is higher that the highest of the line
-			if (elmHeight > line.height) {
-				line.height = elmHeight;
+			else {
+				currentLine.height = Math.max(currentLine.height, el.offsetHeight);
+				currentLine.elements.push(el);
+				pendingElements.shift();
+
+				return false;
 			}
-			// save the new offset
-			offsetTop = elmOffset.top;
 		});
 
-		// add the last line
-		this.lines.push(line);
+		this.equalizeLine(currentLine, this.checkNextLine.bind(this, pendingElements));
+	}
 
-		// save the lins in static stack
-		SEqualizeComponent.groups[this.props.group].lines = this.lines;
+	checkNextLine(pendingElements) {
+		if (pendingElements && pendingElements.length) {
+			this.checkLines(pendingElements);
+		} else {
+			SEqualizeComponent.groups[this.props.group].refreshLinesInProgress = false;
+		}
+	}
+
+	resetEqualizer(el) {
+		if (el.equalizerElm) {
+			el.equalizerElm.style.minHeight = 0;
+		} else {
+			el.style.minHeight = 0;
+		}
+	}
+
+	getNewLine() {
+		return {
+			inProgress: false,
+			height: 0,
+			elements: []
+		};
+	}
+
+	/**
+	 * Compare top position to decide whether they belong to the same line or not
+	 */
+	checkIfElementInLine(el, line) {
+		if (line.elements.length === 0) {
+			return true;
+		}
+		else {
+			return __offset(el).top === __offset(line.elements[0]).top;
+		}
 	}
 
 	/**
@@ -149,7 +170,7 @@ export default class SEqualizeComponent extends SWebComponent {
 	 */
 	getLineFromElm(elm) {
 		// loop on lines
-		for(let key in SEqualizeComponent.groups[this.props.group].lines) {
+		for (let key in SEqualizeComponent.groups[this.props.group].lines) {
 			const line = SEqualizeComponent.groups[this.props.group].lines[key];
 			if (line.elements.indexOf(elm) !== -1) return line;
 		}
@@ -159,17 +180,12 @@ export default class SEqualizeComponent extends SWebComponent {
 	/**
 	 * Equalize line
 	 */
-	equalizeLine(line) {
+	equalizeLine(line, callback) {
 
 		// do nothing if the line is already in progress
 		if (line.inProgress) return;
 		// flag the line as inProgress
 		line.inProgress = true;
-
-		// refresh lines
-		// don't worry, it will not do the work
-		// every time it is called but only 1 by group every 100ms
-		this.refreshLines();
 
 		setTimeout(() => {
 			// loop on each columns
@@ -177,11 +193,7 @@ export default class SEqualizeComponent extends SWebComponent {
 				element.classList.add('clear-transmations');
 				// reset the equalizer or element min-height
 				// to get the real height of the element
-				if (element.equalizerElm) {
-					element.equalizerElm.style.minHeight = 0;
-				} else {
-					element.style.minHeight = 0;
-				}
+				this.resetEqualizer(element);
 			});
 			// loop on each columns
 			[].forEach.call(line.elements, (element) => {
@@ -201,6 +213,10 @@ export default class SEqualizeComponent extends SWebComponent {
 			});
 			// reset the line progress status
 			line.inProgress = false;
+
+			if (callback) {
+				callback();
+			}
 		});
 	}
 
@@ -212,7 +228,7 @@ export default class SEqualizeComponent extends SWebComponent {
 		if (elmOrLine && elmOrLine.tagName) {
 			// equalize from an element
 			const line = this.getLineFromElm(elmOrLine);
-			if ( ! line) return;
+			if (!line) return;
 			this.equalizeLine(line);
 		} else if (elmOrLine && elmOrLine.elements) {
 			// equalize a line directly
@@ -233,11 +249,11 @@ export default class SEqualizeComponent extends SWebComponent {
 // STemplate integration
 sTemplateIntegrator.registerComponentIntegration(SEqualizeComponent, (component) => {
 	sTemplateIntegrator.ignore(component, {
-		style : true,
+		style: true,
 	});
 	if (component.equalizerElm) {
 		sTemplateIntegrator.ignore(component.equalizerElm, {
-			style : true
+			style: true
 		});
 	}
 });
