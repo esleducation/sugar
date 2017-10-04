@@ -5,7 +5,7 @@
   "main": "js/index.js",
   "scripts": {
     "postinstall": "./scripts/install.sh",
-    "grunt": "grunt",
+    "build": "grunt",
     "doc": "gulp",
     "watch": "gulp watch"
   },
