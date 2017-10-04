@@ -368,19 +368,19 @@ $_s-range-component-inited : false;
 	$state : null
 ) {
 	@if not $state {
-		.noUi-connect {
+		.noUi-horizontal {
 			@content;
 		}
-		.noUi-target.noUi-connect {
+		.noUi-target.noUi-horizontal {
 			.noUi-base {
 				@content;
 			}
 		}
 	} @else if $state == hover {
-		.noUi-target:hover .noUi-connect {
+		.noUi-target:hover .noUi-horizontal {
 			@content;
 		}
-		.noUi-target:hover.noUi-connect {
+		.noUi-target:hover.noUi-horizontal {
 			.noUi-base {
 				@content;
 			}
@@ -410,6 +410,10 @@ $_s-range-component-inited : false;
 	@if not $state {
 		.noUi-handle {
 			@content;
+
+			&:focus{
+				outline:0;
+			}
 		}
 	} @else if $state == hover {
 		.noUi-handle:hover {

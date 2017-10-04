@@ -1,4 +1,11 @@
 {
-  "presets": ["es2015-loose", "stage-0"],
-  "plugins": []
+	"presets": [
+		["env", {
+			"targets": {
+				"browsers": ["last 5 versions"]
+			},
+			"loose": true,
+		}],
+		"stage-0"
+	]
 }

@@ -1,17 +1,13 @@
-
 require('babel-core/register');
 const _ = require('lodash');
 const __gulp = require('gulp');
-const __gulpWebpack = require('gulp-webpack');
+const __gulpWebpack = require('webpack-stream');
 const __gulpRename = require('gulp-rename');
 const __gulpSass = require('gulp-sass');
 const __gulpUglify = require('gulp-uglify');
-const __gulpAutoprefixer = require('gulp-autoprefixer');
-const __gulpReplace = require('gulp-replace');
 const __fs = require('fs');
 const __path = require('path');
 const __gulpClean = require('gulp-clean');
-const __gulpCached = require('gulp-cached');
 const __gulpMochaPhantom = require('gulp-mocha-phantomjs');
 const __named = require('vinyl-named');
 const __gulpIconfont = require('gulp-iconfont');
@@ -30,16 +26,18 @@ let webpackParams = {
 		loaders: [
 			{
 				test: /\.coffee$/,
-				loader: 'coffee-loader'
+				use: ['coffee-loader']
 			}, {
 				test: /\.jsx?$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['es2015-loose', 'stage-0'],
-					plugins: ['transform-proto-to-assign'],
-					compact: false
-				}
+				exclude: /(node_modules)/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							plugins: ['transform-proto-to-assign'],
+						}
+					}
+				],
 			}
 		]
 	}
@@ -71,11 +69,11 @@ __gulp.task('clean-js', function() {
 	return __gulp.src(['dist/js/', 'assets/js']).pipe(__gulpClean());
 });
 
-__gulp.task('webpack-dist', ['clean-js'], function() {
-	return __gulp.src(['./src/components/**/*.js']).pipe(__gulpWebpack(webpackDistParams)).pipe(__gulp.dest('dist/js')).pipe(__gulpUglify()).pipe(__gulpRename({
-	extname: '.min.js'
-})).pipe(__gulp.dest('dist/js'));
-});
+// __gulp.task('webpack-dist', ['clean-js'], function() {
+// 	return __gulp.src(['./src/components/**/*.js']).pipe(__gulpWebpack(webpackDistParams)).pipe(__gulp.dest('dist/js')).pipe(__gulpUglify()).pipe(__gulpRename({
+// 	extname: '.min.js'
+// })).pipe(__gulp.dest('dist/js'));
+// });
 
 /**
  * Tests
