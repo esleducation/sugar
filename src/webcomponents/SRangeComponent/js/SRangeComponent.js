@@ -95,8 +95,7 @@ export default class SRangeComponent extends SInputWebComponent {
 
 		let connect = this.props.connect;
 		if (this.props.end === null && connect !== false) {
-			// connect = 'lower';
-			connect = true;
+			connect = 'lower';
 		} else if (connect === null) {
 			connect = false;
 		}
@@ -149,10 +148,6 @@ export default class SRangeComponent extends SInputWebComponent {
 			this.handleEndValueElm.classList.add('noUi-handle__value');
 			this.handleEndElm.appendChild(this.handleEndValueElm);
 		}
-
-		// remove background of bar after handle
-		this.baseElm.querySelector('.noUi-origin')
-			.classList.add('noUi-background');
 
 		// create new noUi-background.noUi-origin for the lower background
 		this.backgroundLowerElm = document.createElement('div');

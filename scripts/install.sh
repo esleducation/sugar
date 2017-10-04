@@ -7,17 +7,11 @@ fi
 
 if [[ $PWD == *"/node_modules/sugarcss"* ]]
 then
-	# cleanup before copy
-	rm -rf ./js/
-	rm -rf ./sass/
-	rm -rf ./components/
-	rm -rf ./webcomponents/
-
 	# move src
-	mv ./src/js/ ./js/
-	mv ./src/sass/ ./sass/
-	mv ./src/components/ ./components/
-	mv ./src/webcomponents/ ./webcomponents/
+	mv src/js/ js/
+	mv src/sass/ sass/
+	mv src/components/ components/
+	mv src/webcomponents/ webcomponents/
 
 	# clean repo
 	rm -rf src
@@ -31,4 +25,5 @@ then
 	rm -rf .DS_Store
 	rm -rf *.coffee
 	rm -rf scripts
+	rm -rf bower.json
 fi
