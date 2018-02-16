@@ -13,7 +13,7 @@ html {
 body {
 	@include s-font(helvetica-neue);
 	height: 100%;
-	color: s-color(text, -lighten 30%);
+	color: s-color(text, -lighten 15%);
 	line-height: 1.4;
 	letter-spacing: 0.02rem;
 }
