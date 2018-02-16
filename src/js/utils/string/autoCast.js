@@ -7,7 +7,8 @@ export default function autoCast(string) {
 		|| string === 'true'
 		|| string === 'undefined'
 		|| string === 'null'
-		|| ! isNaN(string)) {
+		|| !isNaN(string)) {
+		// console.log(string);
 		return eval(string);
 	}
 	// array
@@ -17,6 +18,7 @@ export default function autoCast(string) {
 	}
 	// parse json
 	if (typeof(string) === 'string' && string.substr(0,1) === '{') {
+		// console.log(string);
 		return eval('('+string+')');
 	}
 	// window. || document.
