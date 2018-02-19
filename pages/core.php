@@ -307,7 +307,7 @@ shadow : -box-shadow rgba(0,0,0,.3) 0 0 10px,
 @include s-font(22px helvetica uppercase underline);
 }
 p {
-@include s-font(14px capitalize nowrap keep-all);
+@include s-font(16px capitalize nowrap keep-all);
 }
 </code></pre>
 
