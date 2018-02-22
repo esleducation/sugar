@@ -390,7 +390,7 @@ bigger : 10rem // specify a special one for the bigger size
 @include s-font(22px helvetica uppercase underline);
 }
 p {
-@include s-font(14px capitalize nowrap keep-all);
+@include s-font(16px capitalize nowrap keep-all);
 }
 </code></pre>
 
