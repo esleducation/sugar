@@ -36,7 +36,7 @@ export default class SLeafletMapComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
-		console.log('mount leaflet', this.props.center.lat, this.props.center.lng, this.props.zoom);
+		// console.log('mount leaflet', this.props.center.lat, this.props.center.lng, this.props.zoom);
 
 
 		// create the map container
@@ -145,6 +145,12 @@ export default class SLeafletMapComponent extends SWebComponent {
 			center: [this.props.center.lat, this.props.center.lng],
 			zoom: this.props.zoom
 		});
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+			maxZoom: 18
+		}).addTo(mymap);
+
 		// set the component as inited
 		// used by the markers to init when the map is ok
 		this.setAttribute('inited', true);
