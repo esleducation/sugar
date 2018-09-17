@@ -1,10 +1,10 @@
 import SWebComponent from '../../../js/core/SWebComponent'
-import SLeafletComponentMixin from '../../mixins/SLeafletComponentMixin'
 import { mix } from '../../../js/vendors/mixwith'
 import __style from '../../../js/dom/style'
 import sTemplateIntegrator from '../../../js/core/sTemplateIntegrator'
+import * as L from 'leaflet';
 
-export default class SLeafletMapComponent extends mix(SWebComponent).with(SLeafletComponentMixin) {
+export default class SLeafletMapComponent extends SWebComponent {
 
 	/**
 	 * Default props
@@ -13,11 +13,12 @@ export default class SLeafletMapComponent extends mix(SWebComponent).with(SLeafl
 	static get defaultProps() {
 		return {
 
+
 			/**
 			 * Set the initial zoom of the map
 			 * @type 	{integer}
 			 */
-			zoom: 4,
+			zoom: 13,
 
 			/**
 			 * Set when to init the map if the placeholder setting is used
@@ -35,9 +36,26 @@ export default class SLeafletMapComponent extends mix(SWebComponent).with(SLeafl
 	componentMount() {
 		super.componentMount();
 
+		console.log('mount leaflet', this.props.center.lat, this.props.center.lng, this.props.zoom);
+
+
 		// create the map container
 		this._mapElm = document.createElement('div');
-		this._mapElm.setAttribute('s-leflet-map-map', true);
+		this._mapElm.setAttribute('s-leaflet-map-map', true);
+
+		const link = document.createElement('link');
+		link.type = 'text/css';
+		link.rel = 'stylesheet';
+		link.href = 'https://unpkg.com/leaflet@1.3.4/dist/leaflet.css';
+		link.integrity = 'sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==';
+		link.crossOrigin = '';
+		document.head.appendChild(link);
+
+		// const script = document.createElement('script');
+		// script.src = 'https://unpkg.com/leaflet@1.3.4/dist/leaflet.js';
+		// script.integrity = 'sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==';
+		// script.crossOrigin = '';
+		// document.body.appendChild(script);
 
 		// set the style to the map elm
 		__style(this._mapElm, {
@@ -123,15 +141,18 @@ export default class SLeafletMapComponent extends mix(SWebComponent).with(SLeafl
 	 * Init the map
 	 */
 	_initMap() {
-		this._map = new this._leflet.maps.Map(this._mapElm, this.props);
+		L.map(this._mapElm, {
+			center: [this.props.center.lat, this.props.center.lng],
+			zoom: this.props.zoom
+		});
 		// set the component as inited
 		// used by the markers to init when the map is ok
 		this.setAttribute('inited', true);
 	}
 
 	/**
-	 * Access the leflet map instance
-	 * @return 	{Map} 	The leflet map instance
+	 * Access the leaflet map instance
+	 * @return 	{Map} 	The leaflet map instance
 	 */
 	get map() {
 		return this._map;
@@ -139,15 +160,3 @@ export default class SLeafletMapComponent extends mix(SWebComponent).with(SLeafl
 
 }
 
-// STemplate integration
-sTemplateIntegrator.registerComponentIntegration(SLeafletMapComponent, (component) => {
-	if (component._mapElm) {
-		sTemplateIntegrator.ignore(component._mapElm);
-	}
-	if (component._placeholder) {
-		sTemplateIntegrator.ignore(component._placeholder);
-	}
-	component.ignore({
-		inited: true
-	});
-});
