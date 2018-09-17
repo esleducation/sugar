@@ -141,7 +141,7 @@ export default class SLeafletMapComponent extends SWebComponent {
 	 * Init the map
 	 */
 	_initMap() {
-		L.map(this._mapElm, {
+		const map = L.map(this._mapElm, {
 			center: [this.props.center.lat, this.props.center.lng],
 			zoom: this.props.zoom
 		});
@@ -149,7 +149,7 @@ export default class SLeafletMapComponent extends SWebComponent {
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 			maxZoom: 18
-		}).addTo(mymap);
+		}).addTo(map);
 
 		// set the component as inited
 		// used by the markers to init when the map is ok
