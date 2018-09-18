@@ -36,12 +36,13 @@ export default class SLeafletMapComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
-		// console.log('mount leaflet', this.props.center.lat, this.props.center.lng, this.props.zoom);
-
+		L.Icon.Default.prototype.options.iconUrl = 'assets/img/map-marker.svg';
+		L.Icon.Default.prototype.options.iconSize = [32, 32];
+		L.Icon.Default.prototype.options.shadowUrl = 'assets/img/map-marker-shadow.svg';
+		L.Icon.Default.prototype.options.shadowSize = [32, 32];
 
 		// create the map container
 		this._mapElm = document.createElement('div');
-		this._mapElm.setAttribute('s-leaflet-map-map', true);
 
 		const link = document.createElement('link');
 		link.type = 'text/css';
@@ -64,6 +65,9 @@ export default class SLeafletMapComponent extends SWebComponent {
 			left: 0,
 			width: '100%',
 			height: '100%'
+		});
+		__style(this, {
+			position: 'relative'
 		});
 
 		// try to get the placeholder
