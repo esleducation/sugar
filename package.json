@@ -1,7 +1,7 @@
 {
   "name": "sugarcss",
   "description": "Writing SCSS has never tasted better!",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "js/index.js",
   "scripts": {
     "postinstall": "./scripts/install.sh",
