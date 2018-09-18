@@ -1,1 +1,1 @@
-export default SGoogleMapComponent from './js/SGoogleMapComponent'
+export default SGoogleMapComponent from './js/SGoogleMapComponent';
