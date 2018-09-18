@@ -1,7 +1,7 @@
 {
   "name": "sugarcss",
   "description": "Writing SCSS has never tasted better!",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "js/index.js",
   "scripts": {
     "postinstall": "./scripts/install.sh",
@@ -24,6 +24,7 @@
     "form-serialize": "~0.7.1",
     "google-maps": "~3.2.1",
     "interact.js": "https://github.com/taye/interact.js.git#1.2.6",
+    "leaflet": "^1.3.4",
     "modularscale-sass": "https://github.com/modularscale/modularscale-sass.git#2.1.1",
     "morphdom": "~2.3.3",
     "nouislider": "~11.0.3",

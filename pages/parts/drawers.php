@@ -54,19 +54,19 @@
 	</p>
 
 	<a class="btn btn--block btn--orange--dark" href="http://olivierbossel.com" target="_blank">
-		<i class="fa-home"></i> &nbsp;&nbsp;Website
+		<i class="fa-home"></i> &nbsp;Website
 	</a>
 	<a class="btn btn--block btn--orange--dark" href="https://ch.linkedin.com/in/olivierbossel" target="_blank">
-		<i class="fa-linkedin"></i> &nbsp;&nbsp;Find me on linkedIn
+		<i class="fa-linkedin"></i> &nbsp;Find me on linkedIn
 	</a>
 	<a class="btn btn--block btn--orange--dark" href="https://github.com/olivierbossel/sugar" target="_blank">
-		<i class="fa-github"></i> &nbsp;&nbsp;Find me on github
+		<i class="fa-github"></i> &nbsp;Find me on github
 	</a>
 	<a class="btn btn--block btn--orange--dark" href="http://twitter.com/olivierbossel" target="_blank">
-		<i class="fa-twitter"></i> &nbsp;&nbsp;Follow me on twitter
+		<i class="fa-twitter"></i> &nbsp;Follow me on twitter
 	</a>
 	<a class="btn btn--block btn--orange--dark" href="http://sugarcss.io/#help" target="_blank">
-		<i class="fa-beer"></i> &nbsp;&nbsp;Offer me a beer!
+		<i class="fa-beer"></i> &nbsp;Offer me a beer!
 	</a>
 
 
