@@ -67,6 +67,7 @@ export default class SLeafletMapComponent extends SWebComponent {
 			height: '100%'
 		});
 		__style(this, {
+			display: 'block',
 			position: 'relative'
 		});
 
