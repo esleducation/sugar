@@ -38,8 +38,10 @@ export default class SLeafletMapComponent extends SWebComponent {
 
 		L.Icon.Default.prototype.options.iconUrl = 'assets/img/map-marker.svg';
 		L.Icon.Default.prototype.options.iconSize = [32, 32];
+		L.Icon.Default.prototype.options.iconAnchor = [16, 32];
 		L.Icon.Default.prototype.options.shadowUrl = 'assets/img/map-marker-shadow.svg';
 		L.Icon.Default.prototype.options.shadowSize = [32, 32];
+		L.Icon.Default.prototype.options.shadowAnchor = [16, 30];
 
 		// create the map container
 		this._mapElm = document.createElement('div');
@@ -155,6 +157,10 @@ export default class SLeafletMapComponent extends SWebComponent {
 		this.props.markers.forEach(marker => {
 			L.marker([marker.lat, marker.lng], { title: marker.title }).addTo(map);
 		});
+
+		setTimeout(function () {
+			map.invalidateSize();
+		}, 0);
 
 		// set the component as inited
 		// used by the markers to init when the map is ok
