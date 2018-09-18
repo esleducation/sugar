@@ -36,10 +36,10 @@ export default class SLeafletMapComponent extends SWebComponent {
 	componentMount() {
 		super.componentMount();
 
-		L.Icon.Default.prototype.options.iconUrl = 'assets/img/map-marker.svg';
+		L.Icon.Default.prototype.options.iconUrl = '/assets/img/map-marker.svg';
 		L.Icon.Default.prototype.options.iconSize = [32, 32];
 		L.Icon.Default.prototype.options.iconAnchor = [16, 32];
-		L.Icon.Default.prototype.options.shadowUrl = 'assets/img/map-marker-shadow.svg';
+		L.Icon.Default.prototype.options.shadowUrl = '/assets/img/map-marker-shadow.svg';
 		L.Icon.Default.prototype.options.shadowSize = [32, 32];
 		L.Icon.Default.prototype.options.shadowAnchor = [16, 30];
 
