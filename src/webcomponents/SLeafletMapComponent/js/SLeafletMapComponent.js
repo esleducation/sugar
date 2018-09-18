@@ -66,10 +66,6 @@ export default class SLeafletMapComponent extends SWebComponent {
 			width: '100%',
 			height: '100%'
 		});
-		__style(this, {
-			display: 'block',
-			position: 'relative'
-		});
 
 		// try to get the placeholder
 		this._placeholder = this.querySelector(`${this._componentNameDash}-placeholder`);
