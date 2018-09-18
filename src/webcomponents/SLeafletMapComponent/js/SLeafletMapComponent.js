@@ -151,6 +151,10 @@ export default class SLeafletMapComponent extends SWebComponent {
 			maxZoom: 18
 		}).addTo(map);
 
+		this.props.markers.forEach(marker => {
+			L.marker([marker.lat, marker.lng], { title: marker.title }).addTo(map);
+		});
+
 		// set the component as inited
 		// used by the markers to init when the map is ok
 		this.setAttribute('inited', true);
