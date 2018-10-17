@@ -1,8 +1,8 @@
 /**
  * Make a selector detectable when new element are pushed in the page
  */
-import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/operator/share'
+import { Observable } from 'rxjs/Observable'
+import { share } from 'rxjs/operators'
 import _isEqual from 'lodash/isEqual'
 import 'mutationobserver-shim'
 import 'classlist.js'
@@ -25,7 +25,7 @@ export default function querySelectorLive(selector, settings = {}) {
 	// check if already the same selector
 	let currentSelectors = selectorsStack[selector];
 	if (currentSelectors) {
-		for(let i=0; i<currentSelectors.length; i++) {
+		for (let i = 0; i < currentSelectors.length; i++) {
 			if (_isEqual(settings, currentSelectors[i].settings)) {
 				// return the same observer
 				return currentSelectors[i].observable;
@@ -38,17 +38,17 @@ export default function querySelectorLive(selector, settings = {}) {
 	// process onNodeRemoved setting
 	// to ensure that it's an array
 	if (settings.onNodeRemoved
-		&& typeof(settings.onNodeRemoved) === 'function') {
+		&& typeof (settings.onNodeRemoved) === 'function') {
 		settings.onNodeRemoved = [settings.onNodeRemoved];
 	}
 
 	// extend settings
 	settings = {
-		onNodeRemoved : [],
-		rootNode : document.body,
-		mutationObserverSettings : {
-			childList : true,
-			subtree : true
+		onNodeRemoved: [],
+		rootNode: document.body,
+		mutationObserverSettings: {
+			childList: true,
+			subtree: true
 		},
 		...settings
 	};
@@ -87,7 +87,7 @@ export default function querySelectorLive(selector, settings = {}) {
 				// emit the detached event
 				// that will be captured by
 				// any children that need this
-				if ( ! node._removedEventDispatched) {
+				if (!node._removedEventDispatched) {
 					if (node.querySelectorAll) {
 						[].forEach.call(node.querySelectorAll('[s-component]'), (elm) => {
 							const e = new SEvent('detached');
@@ -114,13 +114,13 @@ export default function querySelectorLive(selector, settings = {}) {
 			mutationSubscription = domObservable.subscribe((mutation) => {
 				// check if the mutation match the selector
 				if (mutation.addedNodes) {
-					for (let i=0; i<mutation.addedNodes.length; i++) {
+					for (let i = 0; i < mutation.addedNodes.length; i++) {
 						const node = mutation.addedNodes[i];
 						_processAddedNode(node);
 					}
 				}
 				if (settings.onNodeRemoved && mutation.removedNodes) {
-					for (let i=0; i<mutation.removedNodes.length; i++) {
+					for (let i = 0; i < mutation.removedNodes.length; i++) {
 						const node = mutation.removedNodes[i];
 						_processRemovedNode(node);
 					}
@@ -141,7 +141,7 @@ export default function querySelectorLive(selector, settings = {}) {
 		}
 	});
 	// share the observable
-	observable.share();
+	observable.pipe(share());
 
 	// inject operators
 	injectOperators(observable);

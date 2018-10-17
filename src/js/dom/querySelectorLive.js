@@ -1,9 +1,9 @@
-import {Observable} from 'rxjs/Observable'
-import 'rxjs/add/operator/share'
+import { Observable } from 'rxjs/Observable'
+// import { share } from 'rxjs/operators'
 import _isEqual from 'lodash/isEqual'
 // import 'mutationobserver-shim'
 import '../polyfills/queryselector-scope.js'
-import mutationObservable from './mutationObservable'
+// import mutationObservable from './mutationObservable'
 import injectOperators from '../utils/rxjs/querySelectorLiveOperators/injectOperators'
 import __matches from './matches'
 import __domReady from './domReady'
@@ -57,7 +57,7 @@ let domObserver = null;
 
 function _processAddedNode(observe, addedNode) {
 	// set the observerId flag to true
-	if ( ! addedNode._sQuerySelectorLive) addedNode._sQuerySelectorLive = {};
+	if (!addedNode._sQuerySelectorLive) addedNode._sQuerySelectorLive = {};
 
 	// Push the node downward the observable
 	// only if has not already been done for this particular node
@@ -75,7 +75,7 @@ function _processAddedNode(observe, addedNode) {
 }
 function processAdded(addedNode) {
 	// some nodes does not interesting us
-	if ( ! addedNode.nodeName
+	if (!addedNode.nodeName
 		|| addedNode.nodeName.toLowerCase() === '#text'
 		|| addedNode.nodeName.toLowerCase() === '#comment'
 	) {
@@ -84,12 +84,12 @@ function processAdded(addedNode) {
 
 	// check if the element match the selector
 	const keys = Object.keys(observeStack);
-	for(let i=0; i<keys.length; i++) {
+	for (let i = 0; i < keys.length; i++) {
 		const observe = observeStack[keys[i]];
 
 		// rootNode
 		if (observe.settings.rootNode) {
-			if ( ! observe.settings.rootNode.contains(addedNode)) {
+			if (!observe.settings.rootNode.contains(addedNode)) {
 				// this node is not interesting for us
 				continue;
 			}
@@ -117,8 +117,8 @@ function processAdded(addedNode) {
 function _processRemovedNode(observe, removedNode) {
 
 	// stop if the node is not marked with the observer id
-	if ( ! removedNode._sQuerySelectorLive
-		|| ! removedNode._sQuerySelectorLive[observe.observerId]) {
+	if (!removedNode._sQuerySelectorLive
+		|| !removedNode._sQuerySelectorLive[observe.observerId]) {
 		return false;
 	}
 
@@ -129,7 +129,7 @@ function _processRemovedNode(observe, removedNode) {
 
 	// if no onNodeRemoved
 	// continue to the next node
-	if ( ! observe.settings.onNodeRemoved || observe.settings.onNodeRemoved.length <= 0) {
+	if (!observe.settings.onNodeRemoved || observe.settings.onNodeRemoved.length <= 0) {
 		return false;
 	}
 
@@ -143,7 +143,7 @@ function _processRemovedNode(observe, removedNode) {
 }
 function processRemoved(removedNode) {
 	// some nodes does not interesting us
-	if ( ! removedNode.nodeName
+	if (!removedNode.nodeName
 		|| removedNode.nodeName.toLowerCase() === '#text'
 		|| removedNode.nodeName.toLowerCase() === '#comment'
 	) {
@@ -152,13 +152,13 @@ function processRemoved(removedNode) {
 
 	// check if the element match the selector
 	const keys = Object.keys(observeStack);
-	for(let i=0; i<keys.length; i++) {
+	for (let i = 0; i < keys.length; i++) {
 		const observe = observeStack[keys[i]];
 
 		// emit the detached event
 		// that will be captured by
 		// any children that need this
-		if ( ! removedNode._removedEventDispatched) {
+		if (!removedNode._removedEventDispatched) {
 			if (removedNode.querySelectorAll) {
 				[].forEach.call(removedNode.querySelectorAll('[s-component]'), (elm) => {
 					const e = new SEvent('detached');
@@ -172,7 +172,7 @@ function processRemoved(removedNode) {
 		}
 
 		// process the removed node
-		if ( ! _processRemovedNode(observe, removedNode)) {
+		if (!_processRemovedNode(observe, removedNode)) {
 			continue;
 		}
 	}
@@ -181,7 +181,7 @@ function processRemoved(removedNode) {
 
 function processAttributes(node) {
 	// some nodes does not interesting us
-	if ( ! node.nodeName
+	if (!node.nodeName
 		|| node.nodeName.toLowerCase() === '#text'
 		|| node.nodeName.toLowerCase() === '#comment'
 	) {
@@ -190,7 +190,7 @@ function processAttributes(node) {
 
 	// check if the element match the selector
 	const keys = Object.keys(observeStack);
-	for(let i=0; i<keys.length; i++) {
+	for (let i = 0; i < keys.length; i++) {
 		const observe = observeStack[keys[i]];
 
 		// match the selector
@@ -198,19 +198,19 @@ function processAttributes(node) {
 
 			// rootNode
 			if (observe.settings.rootNode) {
-				if ( ! observe.settings.rootNode.contains(node)) {
+				if (!observe.settings.rootNode.contains(node)) {
 					// this node is not interesting for us
 					continue;
 				}
 			}
 
 			// process the added node
-			if ( ! _processAddedNode(observe, node)) {
+			if (!_processAddedNode(observe, node)) {
 				continue;
 			}
 		} else {
 			// process the removedNode
-			if ( ! _processRemovedNode(observe, node)) {
+			if (!_processRemovedNode(observe, node)) {
 				continue;
 			}
 		}
@@ -223,13 +223,13 @@ __domReady(() => {
 	domObserver = new MutationObserver((mutations) => {
 
 		// loop on mutations
-		for (let i=0; i<mutations.length; i++) {
+		for (let i = 0; i < mutations.length; i++) {
 			const mutation = mutations[i];
 
 			if (mutation.type === 'attributes') {
 				// handle that node only once
 				// by loop
-				if ( ! mutation.target._handled) {
+				if (!mutation.target._handled) {
 					mutation.target._handled = true;
 					setTimeout(() => {
 						delete mutation.target._handled;
@@ -240,9 +240,9 @@ __domReady(() => {
 
 				// addedNodes
 				if (mutation.addedNodes && mutation.addedNodes.length) {
-					for(let j=0; j<mutation.addedNodes.length; j++) {
+					for (let j = 0; j < mutation.addedNodes.length; j++) {
 						const addedNode = mutation.addedNodes[j];
-						if ( ! processAdded(addedNode)) {
+						if (!processAdded(addedNode)) {
 							continue;
 						}
 					}
@@ -250,9 +250,9 @@ __domReady(() => {
 
 				// removedNodes
 				if (mutation.removedNodes && mutation.removedNodes.length) {
-					for(let j=0; j<mutation.removedNodes.length; j++) {
+					for (let j = 0; j < mutation.removedNodes.length; j++) {
 						const removedNode = mutation.removedNodes[j];
-						if ( ! processRemoved(removedNode)) {
+						if (!processRemoved(removedNode)) {
 							continue;
 						}
 					}
@@ -262,9 +262,9 @@ __domReady(() => {
 	});
 
 	domObserver.observe(document.body, {
-		childList : true,
-		subtree : true,
-		attributes : true
+		childList: true,
+		subtree: true,
+		attributes: true
 	});
 
 });
@@ -274,14 +274,14 @@ export default function querySelectorLive(selector, settings = {}) {
 	// process onNodeRemoved setting
 	// to ensure that it's an array
 	if (settings.onNodeRemoved
-		&& typeof(settings.onNodeRemoved) === 'function') {
+		&& typeof (settings.onNodeRemoved) === 'function') {
 		settings.onNodeRemoved = [settings.onNodeRemoved];
 	}
 
 	// extend settings
 	settings = {
-		onNodeRemoved : [],
-		rootNode : null,
+		onNodeRemoved: [],
+		rootNode: null,
 		...settings
 	};
 
@@ -290,7 +290,7 @@ export default function querySelectorLive(selector, settings = {}) {
 	const observerSettings = {
 		selector,
 		settings,
-		observerId : obsId
+		observerId: obsId
 	};
 
 	const observable = new Observable(observer => {
@@ -302,7 +302,7 @@ export default function querySelectorLive(selector, settings = {}) {
 
 		// select first time
 		__domReady(() => {
-			const rootNode = settings.rootNode || document.body;
+			const rootNode = settings.rootNode || document.body;
 			[].forEach.call(rootNode.querySelectorAll(selector), (node) => {
 				_processAddedNode(observerSettings, node);
 			});
