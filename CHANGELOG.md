@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org).
 ## Current
 
 
+## 1.3.1 - 2018-10-17
+### Changed
+- Change maps back to google
+- Update packages
+
 ## 1.2.1 - 2018-09-18
 ### Changed
 - Change maps to leaflet
