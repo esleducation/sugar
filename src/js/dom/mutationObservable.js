@@ -1,6 +1,6 @@
 import _isEqual from 'lodash/isEqual';
-import 'rxjs/add/operator/share'
-import {Observable} from 'rxjs/Observable'
+// import { share } from 'rxjs/operators'
+import { Observable } from 'rxjs/Observable'
 
 /**
  * Observe mutations on an HTMLElement and get them through the observable subscription
@@ -31,7 +31,7 @@ export default function mutationObservable(target, settings = {}) {
 	let currentObservers = nodesStack.get(target);
 	if (currentObservers) {
 		// loop on current observers
-		for (let i=0; i<currentObservers.length; i++) {
+		for (let i = 0; i < currentObservers.length; i++) {
 			const obs = currentObservers[i];
 			if (_isEqual(obs.settings, settings)) {
 				// return the same observer

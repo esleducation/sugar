@@ -1,4 +1,4 @@
-# Sugar (v1.1.1)
+# Sugar (v1.3.1)
 
 **This is a fork from the original repo**
 
