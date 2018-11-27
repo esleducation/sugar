@@ -15,6 +15,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 @function s-render-round($value) {
-	$value : call('s-#{unit($value)}',round(s-px($value)));
-	@return $value;
+    $value: call(get-function('s-#{unit($value)}'), round(s-px($value)));
+    @return $value;
 }

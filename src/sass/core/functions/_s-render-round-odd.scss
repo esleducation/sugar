@@ -15,6 +15,6 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com>
  */
 @function s-render-round-odd($value) {
-	$value : call('s-#{unit($value)}',s-odd(s-px($value)));
-	@return $value;
+    $value: call(get-function('s-#{unit($value)}'), s-odd(s-px($value)));
+    @return $value;
 }
