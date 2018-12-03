@@ -1,1 +1,1 @@
-export default SLeafletMapComponent from './js/SLeafletMapComponent';
+// export default SLeafletMapComponent from './js/SLeafletMapComponent';
