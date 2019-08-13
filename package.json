@@ -28,6 +28,7 @@
     "morphdom": "~2.3.3",
     "nouislider": "~12.0.0",
     "rxjs": "~6.3.0",
+    "rxjs-compat": "^6.5.2",
     "sharer.npm.js": "0.0.10",
     "simple-ajax": "~2.6.0"
   },
