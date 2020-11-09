@@ -84,7 +84,7 @@
     "gulp-rename": "~1.4.0",
     "gulp-sass": "~4.0.2",
     "gulp-uglify": "~3.0.1",
-    "handlebars": "~4.0.12",
+    "handlebars": "~4.5.3",
     "inline-style-prefixer": "~5.0.1",
     "install": "~0.12.2",
     "interact": "https://github.com/taye/interact.js.git#1.2.6",
