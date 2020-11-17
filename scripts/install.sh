@@ -30,5 +30,4 @@ then
 	rm -rf favicon.ico
 	rm -rf .DS_Store
 	rm -rf *.coffee
-	rm -rf scripts
 fi
