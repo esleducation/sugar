@@ -98,7 +98,7 @@
     "mocha-logger": "~1.0.6",
     "modular-scale": "https://github.com/modularscale/modularscale-sass.git#2.1.1",
     "mutationobserver-shim": "~0.3.2",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.0",
     "prismjs": "~1.15.0",
     "recursive-readdir": "~2.2.2",
     "sassdash": "~0.9.0",
